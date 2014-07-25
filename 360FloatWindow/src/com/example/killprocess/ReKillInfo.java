@@ -1,9 +1,9 @@
-//-----×÷Õß£ºÕÔÏþ±ë
-//-----¹¦ÄÜ:É±½ø³Ì
+//-----ï¿½ï¿½ï¿½ß£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+//-----ï¿½ï¿½ï¿½ï¿½:É±ï¿½ï¿½ï¿½
 
 package com.example.killprocess;
 
 public class ReKillInfo {
-	public int m_killpronum; //É±ËÀ½ø³ÌÊý
-	public long m_freememsize;//ÊÍ·ÅÄÚ´æÊý
+	public int m_killpronum; //É±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	public long m_freememsize;//ï¿½Í·ï¿½ï¿½Ú´ï¿½ï¿½ï¿½
 }

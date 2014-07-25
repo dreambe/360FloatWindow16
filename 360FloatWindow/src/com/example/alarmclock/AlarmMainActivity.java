@@ -40,7 +40,7 @@ public class AlarmMainActivity extends Activity {
 	private Button btn_alarm = null;
 
 	private AlarmManager alarmManager = null;
-	final int DIALOG_TIME = 0; // ÉèÖÃ¶Ô»°¿òid
+	final int DIALOG_TIME = 0; // ï¿½ï¿½ï¿½Ã¶Ô»ï¿½ï¿½ï¿½id
 	boolean hasAlarm = false;
 
 	String appName="weibo";
@@ -49,12 +49,23 @@ public class AlarmMainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.alarm_main);
 
+		TextView titleText = (TextView) findViewById(R.id.title_text);
+		titleText.setText("é—¹é’Ÿè®¾å®š");
+		View titleClose = findViewById(R.id.title_close_btn);
+		titleClose.setOnClickListener(new View.OnClickListener() {
+            
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
 		listview = (ListView) findViewById(R.id.listView1);
 		adapter = new MyAdapter(this);
 		listview.setAdapter(adapter);
 		alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 		adapter.notifyDataSetChanged();
-		/*/ É¾³ý°´Å¥£¬ÔÝÊ±ÎÞÓÃ£¬ÐèÒªÉ¾³ý
+		/*/ É¾ï¿½ï¿½Å¥ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½Ã£ï¿½ï¿½ï¿½ÒªÉ¾ï¿½ï¿½
 		btn_stop = (Button) findViewById(R.id.btn_stop);
 		btn_stop.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View view) {
@@ -72,7 +83,7 @@ public class AlarmMainActivity extends Activity {
 			}
 		});*/
 
-		// ÉèÖÃÄÖÖÓ
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		btn_alarm = (Button) findViewById(R.id.btn_alarm);
 		btn_alarm.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
@@ -91,7 +102,7 @@ public class AlarmMainActivity extends Activity {
 		if (requestCode == SET_ALARM) {
 			if (resultCode == RESULT_OK) {
 
-				// ÉèÖÃÄÖÖÓ
+				// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				Bundle bundle = intentData.getExtras();
 				int hour = bundle.getInt("hour");
 				int minute = bundle.getInt("minute");
@@ -115,7 +126,7 @@ public class AlarmMainActivity extends Activity {
 								+ set_vibrator + ",ring=" + set_ring,
 						Toast.LENGTH_SHORT).show();
 
-				// ¸üÐÂÄÖÖÓÁÐ±í
+				// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½
 				MyData data = new MyData();
 				data.hour = hour;
 				data.minute = minute;
@@ -130,7 +141,7 @@ public class AlarmMainActivity extends Activity {
 					// TODO Auto-generated catch block
 					//e.printStackTrace();
 					Toast.makeText(AlarmMainActivity.this,
-							"PutAlarmDatasToSharedPreferences()Òì³£", Toast.LENGTH_LONG).show();
+							"PutAlarmDatasToSharedPreferences()ï¿½ì³£", Toast.LENGTH_LONG).show();
 				}
 				adapter.notifyDataSetChanged();
 
@@ -161,12 +172,12 @@ public class AlarmMainActivity extends Activity {
 							// TODO Auto-generated catch block
 							//e.printStackTrace();
 							Toast.makeText(AlarmMainActivity.this,
-									"GetAlarmDatasFromSharedPreferences()Òì³£", Toast.LENGTH_LONG).show();
+									"GetAlarmDatasFromSharedPreferences()ï¿½ì³£", Toast.LENGTH_LONG).show();
 						}	
 			// arr2 = new ArrayList<String>();
-			// for(int i=0;i<3;i++){ //listview³õÊ¼»¯3¸ö×ÓÏî
-			// arr.add("Õâ¸öÊýÊÇ£º"+i*i);
-			// arr2.add("Õâ¸öÊýµÄ±àºÅÊÇ£º"+i);
+			// for(int i=0;i<3;i++){ //listviewï¿½ï¿½Ê¼ï¿½ï¿½3ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+			// arr.add("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç£ï¿½"+i*i);
+			// arr2.add("ï¿½ï¿½ï¿½ï¿½ï¿½Ä±ï¿½ï¿½ï¿½Ç£ï¿½"+i);
 			// }
 		}
 
@@ -205,17 +216,17 @@ public class AlarmMainActivity extends Activity {
 			openMsg = (TextView) view.findViewById(R.id.array_open);
 			button = (Button) view.findViewById(R.id.array_button);
 			MyData data = arr.get(position);
-			String msg = "¶¨Ê±";
+			String msg = "ï¿½ï¿½Ê±";
 			if (data.hour != 0) {
 				msg = msg + data.hour + "Ê±";
 			}
-			msg = msg + data.minute + "·Ö";
+			msg = msg + data.minute + "ï¿½ï¿½";
 			timeMsg.setText(msg);
 			if (data.open) {
-				openMsg.setText("ÒÑ¿ªÆô");
+				openMsg.setText("ï¿½Ñ¿ï¿½ï¿½ï¿½");
 
 			} else {
-				openMsg.setText("ÒÑ¹Ø±Õ");
+				openMsg.setText("ï¿½Ñ¹Ø±ï¿½");
 			}
 			switch_open.setChecked(data.open);
 			switch_open
@@ -232,7 +243,7 @@ public class AlarmMainActivity extends Activity {
 								// TODO Auto-generated catch block
 								//e.printStackTrace();
 								Toast.makeText(AlarmMainActivity.this,
-										"PutAlarmDatasToSharedPreferences()Òì³£", Toast.LENGTH_LONG).show();
+										"PutAlarmDatasToSharedPreferences()ï¿½ì³£", Toast.LENGTH_LONG).show();
 							}
 							if (isChecked) {
 								OpenAlarm(arr.get(position));
@@ -246,7 +257,7 @@ public class AlarmMainActivity extends Activity {
 				@Override
 				public void onClick(View arg0) {					
 					// TODO Auto-generated method stub
-					// ´Ó¼¯ºÏÖÐÉ¾³ýËùÉ¾³ýÏîµÄEditTextµÄÄÚÈÝ
+					// ï¿½Ó¼ï¿½ï¿½ï¿½ï¿½ï¿½É¾ï¿½ï¿½ï¿½ï¿½É¾ï¿½ï¿½ï¿½ï¿½ï¿½EditTextï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 					CloseAlarm(arr.get(position));
 					arr.remove(position);
 					try {
@@ -255,7 +266,7 @@ public class AlarmMainActivity extends Activity {
 						// TODO Auto-generated catch block
 						//e.printStackTrace();
 						Toast.makeText(AlarmMainActivity.this,
-								"PutAlarmDatasToSharedPreferences()Òì³£", Toast.LENGTH_LONG).show();
+								"PutAlarmDatasToSharedPreferences()ï¿½ì³£", Toast.LENGTH_LONG).show();
 					}
 					adapter.notifyDataSetChanged();
 
@@ -269,7 +280,7 @@ public class AlarmMainActivity extends Activity {
 	}
 
 	
-	// ¸ù¾Ý±àºÅ¹Ø±ÕÄÖÖÓ
+	// ï¿½ï¿½Ý±ï¿½Å¹Ø±ï¿½ï¿½ï¿½ï¿½ï¿½
 	public void CloseAlarm(MyData data) {
 		Bundle bundle = new Bundle();
 		bundle.putBoolean("set_vibrator", data.vibrator);
@@ -287,7 +298,7 @@ public class AlarmMainActivity extends Activity {
 				.show();
 	}
 
-	// ¿ªÆôÄÖÖÓ
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public void OpenAlarm(MyData data) {
 
 		Bundle bundle = new Bundle();
