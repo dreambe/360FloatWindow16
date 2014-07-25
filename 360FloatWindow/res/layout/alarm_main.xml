@@ -17,18 +17,10 @@
     </ListView>
 
     <Button
-        android:id="@+id/btn_stop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:text="取消闹钟" />
-
-    <Button
         android:id="@+id/btn_alarm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/btn_stop"
         android:text="添加闹钟" />
 
 </RelativeLayout>
