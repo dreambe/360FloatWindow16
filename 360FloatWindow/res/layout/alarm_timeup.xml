@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/textView_gameName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:text="游戏名称"
+        android:textSize="20sp" />
+    
+    <TextView
+        android:id="@+id/textView_timeUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView_gameName"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:text="时间到了"
+        android:textSize="20sp" />
+
+<LinearLayout
+    android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/layout_button" 
+        android:layout_below="@+id/textView_timeUp" 
+        android:layout_alignParentBottom="true" 
+        android:layout_centerHorizontal="true">
+     <Button
+        android:id="@+id/btn_game_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="进入游戏" 
+        android:layout_alignParentBottom="true"/>
+     <Button
+        android:id="@+id/btn_game_stop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="退出游戏"
+        android:layout_alignParentBottom="true" />
+
+    <Button
+        android:id="@+id/btn_game_ignore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="忽略提醒" 
+        android:layout_alignParentBottom="true"/>
+</LinearLayout>
+</RelativeLayout>
+
