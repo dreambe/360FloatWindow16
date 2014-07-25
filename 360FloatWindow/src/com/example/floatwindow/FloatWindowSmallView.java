@@ -4,6 +4,7 @@ import java.lang.reflect.Field;
 
 import com.example.alarmclock.AlarmMainActivity;
 import com.example.capture.CaptureService;
+import com.example.capture.CapturedImageActivity;
 import com.example.floatwindow.R;
 import com.example.floatwindow.MyAnimations;
 import com.example.killprocess.KillProcess;
@@ -252,9 +253,9 @@ public class FloatWindowSmallView extends LinearLayout {
 						FloatWindowSmallView.this.getContext().startActivity(intent);//开始界面的跳转函数  
 						Log.i("1", "------1-----");
 						break;
-					case 2:
-						intent = new Intent(FloatWindowSmallView.this.getContext(), CaptureService.class);
-						FloatWindowSmallView.this.getContext().startService(intent);
+					case 2: 
+						Intent intent2 = new Intent(FloatWindowSmallView.this.getContext(), CaptureService.class);
+						FloatWindowSmallView.this.getContext().startService(intent2);
 						Log.i("2", "------2----");
 						break;
 					case 3:

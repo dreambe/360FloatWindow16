@@ -10,6 +10,8 @@ import android.widget.ImageView;
 
 public class CapturedImageActivity extends Activity{
 	
+	private static Bitmap mBitmap;
+	
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -17,8 +19,12 @@ public class CapturedImageActivity extends Activity{
         setContentView(R.layout.capture_image);
               
         ImageView imgView = (ImageView)findViewById(R.id.imageView);
-        Bitmap img = (Bitmap) savedInstanceState.get("productImg");  
-        imgView.setImageBitmap(img);
+        imgView.setImageBitmap(mBitmap);
+    }
+    
+    public static void setBitmap(Bitmap bitmap)
+    {
+    	mBitmap = bitmap;
     }
 
 }
