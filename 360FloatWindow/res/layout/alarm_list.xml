@@ -1,0 +1,45 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+    android:layout_width="fill_parent" android:layout_height="wrap_content"> 
+    <LinearLayout android:id="@+id/linearlayout"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView android:id="@+id/array_time" 
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content" 
+        android:layout_alignParentTop="true" 
+        android:layout_alignParentRight="true" 
+        android:singleLine="true" 
+        android:ellipsize="marquee"   
+        android:textSize="20sp"  
+        android:text="定时时间" /> 
+    <TextView android:id="@+id/array_open" 
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content" 
+        android:layout_below="@+id/array_title" 
+        android:layout_alignParentBottom="true" 
+        android:layout_alignParentRight="true"   
+        android:singleLine="true" 
+        android:ellipsize="marquee"   
+        android:textSize="15sp"
+        android:text="是否开启"  />
+    </LinearLayout>
+    <Switch
+        android:id="@+id/array_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/array_button"
+        android:layout_alignBottom="@+id/array_button"
+        android:layout_toLeftOf="@+id/array_button" />   
+    <Button 
+        android:id="@+id/array_button" 
+        android:layout_width="wrap_content"   
+        android:layout_height="wrap_content" 
+        android:text="delete" 
+        android:layout_alignParentRight="true" 
+    />   
+    
+
+    
+ 
+</RelativeLayout>

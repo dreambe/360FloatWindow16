@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/relate"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" >
+
+    <ImageView
+        android:id="@+id/composer_buttons_show_hide_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/composer_sleep"
+        android:gravity="center_vertical" />
+
+    <RelativeLayout
+        android:id="@+id/composer_buttons_wrapper"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/composer_buttons_show_hide_button"
+        android:layout_marginTop="80dp"
+        android:layout_gravity="center" >
+
+        <ImageView
+            android:id="@+id/composer_button_photo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/composer_camera" 
+            android:visibility="gone"/>
+
+        <ImageView
+            android:id="@+id/composer_button_people"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/composer_button_photo"
+            android:background="@drawable/composer_with" 
+            android:visibility="gone"/>
+
+        <ImageView
+            android:id="@+id/composer_button_place"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/composer_button_people"
+            android:background="@drawable/composer_place" 
+            android:visibility="gone"/>
+
+        <ImageView
+            android:id="@+id/composer_button_music"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/composer_button_place"
+            android:background="@drawable/composer_music" 
+            android:visibility="gone"/>
+        
+        <ImageView
+            android:id="@+id/composer_button_thought"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/composer_button_music"
+            android:background="@drawable/composer_thought" 
+            android:visibility="gone"/>
+
+        <ImageView
+            android:id="@+id/composer_button_sleep"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/composer_button_thought"
+            android:background="@drawable/composer_sleep" 
+            android:visibility="gone"/>
+    </RelativeLayout>
+
+</RelativeLayout>
