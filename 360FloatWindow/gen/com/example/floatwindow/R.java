@@ -38,21 +38,21 @@ public final class R {
         public static final int red_add=0x7f02000e;
     }
     public static final class id {
-        public static final int action_settings=0x7f090026;
+        public static final int action_settings=0x7f090027;
         public static final int array_button=0x7f090007;
         public static final int array_open=0x7f090004;
         public static final int array_switch=0x7f090006;
         public static final int array_time=0x7f090003;
         public static final int array_title=0x7f090005;
-        public static final int back=0x7f090022;
-        public static final int big_window_layout=0x7f090020;
+        public static final int back=0x7f090023;
+        public static final int big_window_layout=0x7f090021;
         public static final int btn_alarm=0x7f09000a;
         public static final int btn_game_ignore=0x7f090015;
         public static final int btn_game_start=0x7f090013;
         public static final int btn_game_stop=0x7f090014;
         public static final int btn_setalarm=0x7f09000f;
         public static final int btn_stop=0x7f090009;
-        public static final int close=0x7f090021;
+        public static final int close=0x7f090022;
         public static final int composer_button_music=0x7f09001a;
         public static final int composer_button_people=0x7f090018;
         public static final int composer_button_photo=0x7f090017;
@@ -62,16 +62,17 @@ public final class R {
         public static final int composer_buttons_show_hide_button=0x7f09001d;
         public static final int composer_buttons_show_hide_button_icon=0x7f09001e;
         public static final int composer_buttons_wrapper=0x7f090016;
-        public static final int float_window_main=0x7f090023;
+        public static final int float_window_main=0x7f090024;
+        public static final int imageButton=0x7f090020;
         public static final int imageView=0x7f09001f;
         public static final int layout_button=0x7f090012;
         public static final int linearlayout=0x7f090002;
         public static final int listView1=0x7f090008;
         public static final int numberPicker1=0x7f09000b;
         public static final int numberPicker2=0x7f09000c;
-        public static final int percent=0x7f090025;
+        public static final int percent=0x7f090026;
         public static final int relate=0x7f090000;
-        public static final int small_window_layout=0x7f090024;
+        public static final int small_window_layout=0x7f090025;
         public static final int start_float_window=0x7f090001;
         public static final int switch_ring=0x7f09000e;
         public static final int switch_vibrate=0x7f09000d;

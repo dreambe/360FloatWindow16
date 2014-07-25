@@ -24,22 +24,20 @@ public class CaptureService extends Service implements OnAcquireRootPermissionCa
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		
-//		  Intent inten2t = new Intent();
-//		//  intent.putExtra("image", map);
-//		  inten2t.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK); 
-//		  inten2t.setClass(this,CapturedImageActivity.class);
-//		  startActivity(inten2t);
-//		  Log.e("dddd","dsdsd");
-//		  return super.onStartCommand(intent, flags, startId);
+		  Intent inten2t = new Intent();
+		  inten2t.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK); 
+		  inten2t.setClass(this,CapturedImageActivity.class);
+		  startActivity(inten2t);
+		  return super.onStartCommand(intent, flags, startId);
 		
-		if (ScreenshotPolicy.isCurrentAppAcquiredRoot()) {
-			Log.e("root", "already have root");
-			new CaptureThread().start();
-		}else{
-			ScreenshotPolicy.acquireRootPermission(CaptureService.this);
-		}
-		
-		return super.onStartCommand(intent, flags, startId);
+//		if (ScreenshotPolicy.isCurrentAppAcquiredRoot()) {
+//			Log.e("root", "already have root");
+//			new CaptureThread().start();
+//		}else{
+//			ScreenshotPolicy.acquireRootPermission(CaptureService.this);
+//		}
+//		
+//		return super.onStartCommand(intent, flags, startId);
 	}
 	
 	
