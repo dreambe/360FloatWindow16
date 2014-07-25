@@ -3,6 +3,7 @@ package com.example.floatwindow;
 import java.lang.reflect.Field;
 
 import com.example.alarmclock.AlarmMainActivity;
+import com.example.capture.CaptureService;
 import com.example.floatwindow.R;
 import com.example.floatwindow.MyAnimations;
 import com.example.killprocess.KillProcess;
@@ -252,12 +253,8 @@ public class FloatWindowSmallView extends LinearLayout {
 						Log.i("1", "------1-----");
 						break;
 					case 2:
-						AlertDialog.Builder builder = new Builder(FloatWindowSmallView.this.getContext());
-					builder.setMessage("确认退出吗？");
-					builder.setTitle("提示");
-					builder.setPositiveButton("确认", null);
-					builder.setNegativeButton("取消", null);
-					builder.create().show();
+						intent = new Intent(FloatWindowSmallView.this.getContext(), CaptureService.class);
+						FloatWindowSmallView.this.getContext().startService(intent);
 						Log.i("2", "------2----");
 						break;
 					case 3:

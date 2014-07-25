@@ -126,8 +126,9 @@ public class FloatWindowService extends Service {
         
 
         editor.putInt(topActivity.getPackageName(), type);
-        return topActivity.getPackageName().equals("sh.lilith.dgame.s37wan")||
-        		topActivity.getPackageName().equals("com.sina.weibo");
+//        return topActivity.getPackageName().equals("sh.lilith.dgame.s37wan")||
+//        		topActivity.getPackageName().equals("com.sina.weibo");
+        return true;
     }
     
     /**
