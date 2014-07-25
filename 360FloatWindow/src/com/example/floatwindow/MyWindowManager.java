@@ -45,10 +45,10 @@ public class MyWindowManager {
 				smallWindowParams.flags = LayoutParams.FLAG_NOT_TOUCH_MODAL
 						| LayoutParams.FLAG_NOT_FOCUSABLE;
 				smallWindowParams.gravity = Gravity.LEFT | Gravity.TOP;
-				smallWindowParams.width = FloatWindowSmallView.viewWidth;
-				smallWindowParams.height = FloatWindowSmallView.viewHeight;
-				smallWindowParams.x = screenWidth;
-				smallWindowParams.y = screenHeight / 2;
+				smallWindowParams.width = android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
+				smallWindowParams.height = android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
+				smallWindowParams.x = 100;
+				smallWindowParams.y = 100;
 			}
 			smallWindow.setParams(smallWindowParams);
 			windowManager.addView(smallWindow, smallWindowParams);
