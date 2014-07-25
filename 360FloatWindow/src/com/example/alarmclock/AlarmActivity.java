@@ -4,6 +4,7 @@ package com.example.alarmclock;
 import com.example.floatwindow.R;
 
 import android.app.Activity;
+import android.app.Service;
 //import android.app.AlertDialog;
 //import android.content.DialogInterface;
 //import android.content.Intent;
@@ -15,6 +16,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.Toast;
+import android.content.SharedPreferences;  
 //import android.app.Service;
 
 
@@ -27,14 +29,21 @@ public class AlarmActivity extends Activity {
 	private Button btn_game_stop = null;
 	private Button btn_game_start = null;
 	private Button btn_game_ignore = null;
+	
+	@Override
+    public void onBackPressed() {
+		Toast.makeText(AlarmActivity.this, "onBackPressed()",
+				Toast.LENGTH_SHORT).show();
+	}
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.alarm_timeup);
+		this.setFinishOnTouchOutside(false);
 		Bundle extras = getIntent().getExtras(); 
 		set_ring = extras.getBoolean("set_ring");
 		set_vibrator = extras.getBoolean("set_vibrator");
-		/*		
+				
 		// …Ë÷√’Ò∂Ø
 		vibrator = (Vibrator) getSystemService(Service.VIBRATOR_SERVICE);
 		hasVibrator = vibrator.hasVibrator();
@@ -49,7 +58,7 @@ public class AlarmActivity extends Activity {
 			alarmMusic.setLooping(true);
 			alarmMusic.start();
 		}
-*/
+
 		
 		btn_game_stop = (Button) findViewById(R.id.btn_game_stop);
 		btn_game_stop.setOnClickListener(new OnClickListener() {
