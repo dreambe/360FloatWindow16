@@ -49,6 +49,7 @@ public class AlarmMainActivity extends Activity {
 	protected void onResume() {
 		super.onResume();
 		try {
+			alarm_nuber=GetAlarmNumberFromSharedPreferences();
 			adapter.arr = GetAlarmDatasFromSharedPreferences(appName);
 		} catch (Throwable e) {
 			// TODO Auto-generated catch block
@@ -92,7 +93,9 @@ public class AlarmMainActivity extends Activity {
 				// startActivity(intent);
 			}
 		});
-
+		alarm_nuber=GetAlarmNumberFromSharedPreferences();
+		Toast.makeText(AlarmMainActivity.this, "onCreate()", Toast.LENGTH_LONG)
+		.show();
 	}
 
 	@Override
@@ -147,6 +150,7 @@ public class AlarmMainActivity extends Activity {
 				adapter.notifyDataSetChanged();
 
 				alarm_nuber++;
+				PutAlarmNumberToSharedPreferences(alarm_nuber);
 
 			} else if (resultCode == RESULT_CANCELED) {
 
@@ -245,7 +249,7 @@ public class AlarmMainActivity extends Activity {
 
 										Toast.LENGTH_LONG).show();
 							}
-
+							adapter.notifyDataSetChanged();
 							if (isChecked) {
 								//��Ҫ���  openMsg.setText("�ѹر�");
 								OpenAlarm(arr.get(position));
@@ -382,4 +386,17 @@ public class AlarmMainActivity extends Activity {
 
 	}
 
+public int GetAlarmNumberFromSharedPreferences()
+{
+	SharedPreferences sharedPreferences = getSharedPreferences(
+			"AlarmInfos", Activity.MODE_PRIVATE);
+	return sharedPreferences.getInt("AlarmNumber", 0);
+}
+public void PutAlarmNumberToSharedPreferences(int id){
+	SharedPreferences sharedPreferences = getSharedPreferences(
+			"AlarmInfos", Activity.MODE_PRIVATE);
+	Editor editor = sharedPreferences.edit();	
+	editor.putInt("AlarmNumber", id);
+	editor.commit();
+}
 }
