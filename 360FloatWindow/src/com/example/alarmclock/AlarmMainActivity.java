@@ -1,8 +1,12 @@
+//说明：在alarm_main.xml文件中，ListView的设置要为：
+//android:layout_width="match_parent"
+//android:layout_height="match_parent"
+//否则发生意想不的问题：如Switch联动，SharedPreferences自动改写等问题
 package com.example.alarmclock;
-
 import android.os.Bundle;
 import android.app.Activity;
 import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.ViewGroup;
@@ -50,8 +54,18 @@ public class AlarmMainActivity extends Activity {
 	protected void onResume() {
 		super.onResume();
 		try {
+			//获得SharedPreferences数据
 			alarm_nuber=GetAlarmNumberFromSharedPreferences();
-			adapter.arr = GetAlarmDatasFromSharedPreferences(appName);
+			Log.e("onResume", "alarm_nuber:"+alarm_nuber);
+			adapter.arr.clear();
+			ArrayList<MyData> list= GetAlarmDatasFromSharedPreferences(appName);
+			for(int i=0;i<list.size();i++)
+			{
+				MyData t=list.get(i);
+				Log.e("uuuuuuuuuuuuuuu", ""+t.arrAlarmNumber+"  "+t.open);
+				adapter.arr.add(t);
+			}
+			
 		} catch (Throwable e) {
 			// TODO Auto-generated catch block
 			// e.printStackTrace();
@@ -61,6 +75,7 @@ public class AlarmMainActivity extends Activity {
 		}
 		Toast.makeText(AlarmMainActivity.this, "onResume()", Toast.LENGTH_LONG)
 				.show();
+		//更新界面
 		adapter.notifyDataSetChanged();
 	}
 
@@ -84,7 +99,10 @@ public class AlarmMainActivity extends Activity {
 		adapter = new MyAdapter(this);
 		listview.setAdapter(adapter);
 		alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-		adapter.notifyDataSetChanged();
+		
+		//更新界面：OnCreate会调用OnResume，这里不再获取数据
+		//alarm_nuber=GetAlarmNumberFromSharedPreferences();
+		//adapter.notifyDataSetChanged();
 		btn_alarm = (Button) findViewById(R.id.btn_alarm);
 		btn_alarm.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
@@ -94,8 +112,7 @@ public class AlarmMainActivity extends Activity {
 				startActivityForResult(intent, SET_ALARM);
 				// startActivity(intent);
 			}
-		});
-		alarm_nuber=GetAlarmNumberFromSharedPreferences();
+		});		
 		Toast.makeText(AlarmMainActivity.this, "onCreate()", Toast.LENGTH_LONG)
 		.show();
 	}
@@ -106,7 +123,7 @@ public class AlarmMainActivity extends Activity {
 		if (requestCode == SET_ALARM) {
 			if (resultCode == RESULT_OK) {
 
-				//
+				//设置闹钟
 				Bundle bundle = intentData.getExtras();
 				int hour = bundle.getInt("hour");
 				int minute = bundle.getInt("minute");
@@ -118,9 +135,9 @@ public class AlarmMainActivity extends Activity {
 						AlarmActivity.class);
 				intent.putExtras(bundle);
 				intent.setAction("com.alarm.action_alarm_on");
+				
 				PendingIntent pi = PendingIntent.getActivity(
 						AlarmMainActivity.this, alarm_nuber, intent, 0);
-
 				alarmManager.set(AlarmManager.RTC_WAKEUP,
 						System.currentTimeMillis() + timemillis, pi);
 
@@ -129,7 +146,7 @@ public class AlarmMainActivity extends Activity {
 						"onActivityResult()  alarm_nuber=" + alarm_nuber,
 						Toast.LENGTH_SHORT).show();
 
-				//
+				//更新数据
 				MyData data = new MyData();
 				data.hour = hour;
 				data.minute = minute;
@@ -138,20 +155,23 @@ public class AlarmMainActivity extends Activity {
 				data.open = true;
 				data.arrAlarmNumber = alarm_nuber;
 				adapter.arr.add(data);
+				
 				try {
 					PutAlarmDatasToSharedPreferences(appName, adapter.arr);
 				} catch (Throwable e) {
 					// TODO Auto-generated catch block
 					// e.printStackTrace();
 					Toast.makeText(AlarmMainActivity.this,
-							"PutAlarmDatasToSharedPreferences()�쳣",
+							"PutAlarmDatasToSharedPreferences()异常",
 
 							Toast.LENGTH_LONG).show();
 				}
-				adapter.notifyDataSetChanged();
-
 				alarm_nuber++;
 				PutAlarmNumberToSharedPreferences(alarm_nuber);
+				
+				//onActivityResult()之后调用OnResume(),会重新从SharedPreferences读取
+				//数据并刷新ListView
+				//adapter.notifyDataSetChanged();		
 
 			} else if (resultCode == RESULT_CANCELED) {
 
@@ -170,8 +190,8 @@ public class AlarmMainActivity extends Activity {
 			super();
 			this.context = context;
 			inflater = LayoutInflater.from(context);
-			// arr = new ArrayList<MyData>();
-			try {
+			arr = new ArrayList<MyData>();
+			/*try {
 				arr = GetAlarmDatasFromSharedPreferences(appName);
 			} catch (Throwable e) {
 				// TODO Auto-generated catch block
@@ -180,7 +200,7 @@ public class AlarmMainActivity extends Activity {
 						"GetAlarmDatasFromSharedPreferences()异常",
 
 						Toast.LENGTH_LONG).show();
-			}
+			}*/
 
 		}
 
@@ -205,6 +225,9 @@ public class AlarmMainActivity extends Activity {
 		@Override
 		public View getView(final int position, View view, ViewGroup arg2) {
 			// TODO Auto-generated method stub
+			
+			Log.e("getView()", ""+position);
+			
 			if (view == null) {
 				view = inflater.inflate(R.layout.alarm_list, null);
 			}
@@ -219,11 +242,14 @@ public class AlarmMainActivity extends Activity {
 			openMsg = (TextView) view.findViewById(R.id.array_open);
 			button = (Button) view.findViewById(R.id.array_button);
 			MyData data = arr.get(position);
-			String msg = "倒计时";
+			String msg = "定时";
 			if (data.hour != 0) {
 				msg = msg + data.hour + "小时";
 			}
-			msg = msg + data.minute + "分钟";
+			if(data.minute!=0)
+			{
+				msg = msg + data.minute + "分钟";
+			}			
 			timeMsg.setText(msg);
 			if (data.open) {
 				openMsg.setText("已开启");
@@ -239,9 +265,27 @@ public class AlarmMainActivity extends Activity {
 						public void onCheckedChanged(CompoundButton buttonView,
 								boolean isChecked) {
 							// TODO Auto-generated method stub
+							
+							for(int i=0;i<arr.size();i++)
+							{
+								MyData t=arr.get(i);
+								Log.e("Switch更改前数据", ""+t.arrAlarmNumber+"  "+t.open);
+								//adapter.arr.add(t);
+							}							
+							
 							arr.get(position).open = isChecked;
+							
+							System.out.println(arr.get(position));
 							try {
 								PutAlarmDatasToSharedPreferences(appName, arr);
+								ArrayList<MyData> l=GetAlarmDatasFromSharedPreferences(appName);
+								for(int i=0;i<l.size();i++)
+								{
+									MyData t=l.get(i);
+									Log.e("SharedPreferences", ""+t.arrAlarmNumber+"  "+t.open);
+									//adapter.arr.add(t);
+								}
+								
 							} catch (Throwable e) {
 								// TODO Auto-generated catch block
 								// e.printStackTrace();
@@ -250,11 +294,21 @@ public class AlarmMainActivity extends Activity {
 
 										Toast.LENGTH_LONG).show();
 							}
-							adapter.notifyDataSetChanged();
+							
+							//加上下面这句话会发生联动效果
+							adapter.notifyDataSetChanged();						
+							
 							if (isChecked) {
 								OpenAlarm(arr.get(position));
 							} else {
 								CloseAlarm(arr.get(position));
+							}
+							
+							for(int i=0;i<arr.size();i++)
+							{
+								MyData t=arr.get(i);
+								Log.e("Switch更改后数据", ""+t.arrAlarmNumber+"  "+t.open);
+								//adapter.arr.add(t);
 							}
 						}
 					});
@@ -264,6 +318,8 @@ public class AlarmMainActivity extends Activity {
 				public void onClick(View arg0) {
 					// TODO Auto-generated method stub
 					//
+					System.out.println(position);
+					System.out.println(arr);
 					CloseAlarm(arr.get(position));
 					arr.remove(position);
 					try {
@@ -276,6 +332,8 @@ public class AlarmMainActivity extends Activity {
 
 								Toast.LENGTH_LONG).show();
 					}
+					
+					System.out.println(arr);
 					adapter.notifyDataSetChanged();
 
 				}
@@ -364,8 +422,8 @@ public class AlarmMainActivity extends Activity {
 			ArrayList<MyData> list) throws Throwable {
 
 		for (int i = 0; i < list.size(); i++) {
-			System.out.println(list.get(i).hour);
-			System.out.println(list.get(i).minute);
+			Log.i("PutAlarmDatasToSharedPreferences()","hour:"+list.get(i).hour);
+			Log.i("PutAlarmDatasToSharedPreferences()","minute"+list.get(i).minute);
 		}
 
 		ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
