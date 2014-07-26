@@ -5,65 +5,54 @@
     android:layout_height="wrap_content" >
 
     <ImageView
-        android:id="@+id/composer_buttons_show_hide_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/composer_sleep"
+        android:id="@+id/float_main_button"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/float_main"
         android:gravity="center_vertical" />
 
     <RelativeLayout
-        android:id="@+id/composer_buttons_wrapper"
+        android:id="@+id/button_Group"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/composer_buttons_show_hide_button"
+        android:layout_toRightOf="@+id/float_main_button"
+        android:layout_marginLeft="10dp"
         android:layout_gravity="center" >
 
         <ImageView
-            android:id="@+id/composer_button_photo"
+            android:id="@+id/float_accelerate_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/composer_camera" 
+            android:background="@drawable/float_accelerate" 
             android:visibility="gone"/>
 
         <ImageView
-            android:id="@+id/composer_button_people"
+            android:id="@+id/float_alarm_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/composer_button_photo"
-            android:background="@drawable/composer_with" 
+            android:layout_toRightOf="@+id/float_accelerate_button"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/float_alarm" 
             android:visibility="gone"/>
 
         <ImageView
-            android:id="@+id/composer_button_place"
+            android:id="@+id/float_commit_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/composer_button_people"
-            android:background="@drawable/composer_place" 
+            android:layout_toRightOf="@+id/float_alarm_button"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/float_commit" 
             android:visibility="gone"/>
 
         <ImageView
-            android:id="@+id/composer_button_music"
+            android:id="@+id/float_capture_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/composer_button_place"
-            android:background="@drawable/composer_music" 
+            android:layout_toRightOf="@+id/float_commit_button"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/float_capture" 
             android:visibility="gone"/>
         
-        <ImageView
-            android:id="@+id/composer_button_thought"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/composer_button_music"
-            android:background="@drawable/composer_thought" 
-            android:visibility="gone"/>
-
-        <ImageView
-            android:id="@+id/composer_button_sleep"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/composer_button_thought"
-            android:background="@drawable/composer_sleep" 
-            android:visibility="gone"/>
     </RelativeLayout>
 
 </RelativeLayout>

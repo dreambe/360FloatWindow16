@@ -65,8 +65,7 @@ public class FloatWindowService extends Service {
 				handler.post(new Runnable() {
 					@Override
 					public void run() {
-						MyWindowManager.createSmallWindow(getApplicationContext());
-//						MyWindowManager.createMainWindow(getApplicationContext());
+						MyWindowManager.createMainWindow(getApplicationContext());
 					}
 				});
 			}
@@ -75,9 +74,7 @@ public class FloatWindowService extends Service {
 				handler.post(new Runnable() {
 					@Override
 					public void run() {
-//						MyWindowManager.removeMainWindow(getApplicationContext());
-
-						MyWindowManager.removeSmallWindow(getApplicationContext());
+						MyWindowManager.removeMainWindow(getApplicationContext());
 					}
 				});
 			}
@@ -93,9 +90,6 @@ public class FloatWindowService extends Service {
         ActivityManager am = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
         List<RunningTaskInfo> tasks = am.getRunningTasks(1);
         ComponentName topActivity = tasks.get(0).topActivity;
-//        ComponentName cn = am.getRunningTasks(2).get(0).topActivity;
-//        Log.i("-----name-------", cn.getPackageName());
-//        Log.i("-----name-------", getRunningPackageName());
         
         // TODO: 接入助手接口
         int type = TYPE_GAME;
