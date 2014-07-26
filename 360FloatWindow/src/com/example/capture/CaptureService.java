@@ -67,7 +67,7 @@ public class CaptureService extends Service implements OnAcquireRootPermissionCa
         if (!mFile.exists()) {
             mFile.mkdirs();
         }
-        imageFile = imageFile + "/" + System.currentTimeMillis() + ".jpg";
+        imageFile = BASE_PATH + "/" + System.currentTimeMillis() + ".jpg";
         return imageFile;
     }
 	

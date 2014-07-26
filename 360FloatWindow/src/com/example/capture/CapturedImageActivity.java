@@ -19,32 +19,42 @@ public class CapturedImageActivity extends Activity{
 	private static Bitmap mBitmap;
    
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-    	
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.capture_image);
-                     
-        ImageView imgView = (ImageView)findViewById(R.id.imageView);
-        imgView.setImageBitmap(mBitmap);
-
-        ImageButton imgBtn = (ImageButton)findViewById(R.id.imageButton);
-        imgBtn.setOnClickListener(new View.OnClickListener() {
+        
+        ImageView shareImage = (ImageView)findViewById(R.id.imageView);
+        shareImage.setImageBitmap(mBitmap);
+        
+        ImageView bottomImgae = (ImageView)findViewById(R.id.imageBottom);
+        bottomImgae.getBackground().setAlpha(180);
+        
+        ImageButton btnOk = (ImageButton)findViewById(R.id.imageOK);
+        btnOk.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View arg0) {
-				
 				Intent intent=new Intent(Intent.ACTION_SEND);   
                 intent.setType("image/*");   
-                intent.putExtra(Intent.EXTRA_SUBJECT, "·ÖÏí");  
+                intent.putExtra(Intent.EXTRA_SUBJECT, "åˆ†äº«");  
                 File file = new File(CaptureService.imageFile); 
                 intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));              
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);   
                 startActivity(Intent.createChooser(intent, getTitle()));  
-
+			}
+		});
+        
+        ImageButton btnCancel = (ImageButton)findViewById(R.id.imageCancel);
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				CapturedImageActivity.this.finish();
 			}
 		});
     }
-    
+	
+
     public static void setBitmap(Bitmap bitmap)
     {
     	mBitmap = bitmap;
