@@ -16,19 +16,27 @@
         android:layout_below="@id/title" >
     </ListView>
 
-    <Button
-        android:id="@+id/btn_stop"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:text="取消闹钟" />
+        android:orientation="horizontal" >
 
-    <Button
-        android:id="@+id/btn_alarm"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/btn_stop"
-        android:text="添加闹钟" />
+        <Button
+            android:id="@+id/btn_stop"
+            style="@style/blue_btn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="取消闹钟" />
+
+        <Button
+            android:id="@+id/btn_alarm"
+            style="@style/blue_btn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="添加闹钟" />
+    </LinearLayout>
 
 </RelativeLayout>
