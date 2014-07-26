@@ -40,50 +40,49 @@ public class AlarmMainActivity extends Activity {
 	private Button btn_alarm = null;
 
 	private AlarmManager alarmManager = null;
-	final int DIALOG_TIME = 0; // ï¿½ï¿½ï¿½Ã¶Ô»ï¿½ï¿½ï¿½id
+	final int DIALOG_TIME = 0;
 	boolean hasAlarm = false;
 
-	String appName="weibo";
+	String appName = "weibo";
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		try {
+			adapter.arr = GetAlarmDatasFromSharedPreferences(appName);
+		} catch (Throwable e) {
+			// TODO Auto-generated catch block
+			// e.printStackTrace();
+			Toast.makeText(AlarmMainActivity.this,
+					"GetAlarmDatasFromSharedPreferences()Òì³£", Toast.LENGTH_LONG)
+					.show();
+		}
+		Toast.makeText(AlarmMainActivity.this, "onResume()", Toast.LENGTH_LONG)
+				.show();
+		adapter.notifyDataSetChanged();
+	}
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.alarm_main);
 
 		TextView titleText = (TextView) findViewById(R.id.title_text);
-		titleText.setText("é—¹é’Ÿè®¾å®š");
+		titleText.setText("ÕâÀï²»ÖªµÀÊÇÊ²Ã´");
 		View titleClose = findViewById(R.id.title_close_btn);
 		titleClose.setOnClickListener(new View.OnClickListener() {
-            
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+
+			@Override
+			public void onClick(View v) {
+				finish();
+			}
+		});
 
 		listview = (ListView) findViewById(R.id.listView1);
 		adapter = new MyAdapter(this);
 		listview.setAdapter(adapter);
 		alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 		adapter.notifyDataSetChanged();
-		/*/ É¾ï¿½ï¿½Å¥ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½Ã£ï¿½ï¿½ï¿½ÒªÉ¾ï¿½ï¿½
-		btn_stop = (Button) findViewById(R.id.btn_stop);
-		btn_stop.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View view) {
-
-				Intent intent = new Intent(AlarmMainActivity.this,
-						AlarmActivity.class);
-				intent.setAction("com.alarm.action_alarm_on");
-				PendingIntent pi = PendingIntent.getActivity(
-						AlarmMainActivity.this, 0, intent, 0);
-
-				alarmManager.cancel(pi);
-				Toast.makeText(AlarmMainActivity.this, "Alarm Stop",
-						Toast.LENGTH_SHORT).show();
-
-			}
-		});*/
-
-		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		btn_alarm = (Button) findViewById(R.id.btn_alarm);
 		btn_alarm.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
@@ -102,14 +101,14 @@ public class AlarmMainActivity extends Activity {
 		if (requestCode == SET_ALARM) {
 			if (resultCode == RESULT_OK) {
 
-				// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+				//
 				Bundle bundle = intentData.getExtras();
 				int hour = bundle.getInt("hour");
 				int minute = bundle.getInt("minute");
 				boolean set_vibrator = bundle.getBoolean("set_vibrator");
 				boolean set_ring = bundle.getBoolean("set_ring");
 				long timemillis = 60 * 1000 * (hour * 60 + minute);
-
+				bundle.putInt("alarmID", alarm_nuber);
 				Intent intent = new Intent(AlarmMainActivity.this,
 						AlarmActivity.class);
 				intent.putExtras(bundle);
@@ -126,7 +125,7 @@ public class AlarmMainActivity extends Activity {
 								+ set_vibrator + ",ring=" + set_ring,
 						Toast.LENGTH_SHORT).show();
 
-				// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½
+				//
 				MyData data = new MyData();
 				data.hour = hour;
 				data.minute = minute;
@@ -139,9 +138,11 @@ public class AlarmMainActivity extends Activity {
 					PutAlarmDatasToSharedPreferences(appName, adapter.arr);
 				} catch (Throwable e) {
 					// TODO Auto-generated catch block
-					//e.printStackTrace();
+					// e.printStackTrace();
 					Toast.makeText(AlarmMainActivity.this,
-							"PutAlarmDatasToSharedPreferences()ï¿½ì³£", Toast.LENGTH_LONG).show();
+							"PutAlarmDatasToSharedPreferences()Òì³£",
+
+							Toast.LENGTH_LONG).show();
 				}
 				adapter.notifyDataSetChanged();
 
@@ -164,21 +165,18 @@ public class AlarmMainActivity extends Activity {
 			super();
 			this.context = context;
 			inflater = LayoutInflater.from(context);
-			//arr = new ArrayList<MyData>();		
-			
-						try {
-							arr = GetAlarmDatasFromSharedPreferences(appName);
-						} catch (Throwable e) {
-							// TODO Auto-generated catch block
-							//e.printStackTrace();
-							Toast.makeText(AlarmMainActivity.this,
-									"GetAlarmDatasFromSharedPreferences()ï¿½ì³£", Toast.LENGTH_LONG).show();
-						}	
-			// arr2 = new ArrayList<String>();
-			// for(int i=0;i<3;i++){ //listviewï¿½ï¿½Ê¼ï¿½ï¿½3ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-			// arr.add("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç£ï¿½"+i*i);
-			// arr2.add("ï¿½ï¿½ï¿½ï¿½ï¿½Ä±ï¿½ï¿½ï¿½Ç£ï¿½"+i);
-			// }
+			// arr = new ArrayList<MyData>();
+			try {
+				arr = GetAlarmDatasFromSharedPreferences(appName);
+			} catch (Throwable e) {
+				// TODO Auto-generated catch block
+				// e.printStackTrace();
+				Toast.makeText(AlarmMainActivity.this,
+						"GetAlarmDatasFromSharedPreferences()Òì³£",
+
+						Toast.LENGTH_LONG).show();
+			}
+
 		}
 
 		@Override
@@ -216,17 +214,17 @@ public class AlarmMainActivity extends Activity {
 			openMsg = (TextView) view.findViewById(R.id.array_open);
 			button = (Button) view.findViewById(R.id.array_button);
 			MyData data = arr.get(position);
-			String msg = "ï¿½ï¿½Ê±";
+			String msg = "µ¹¼ÆÊ±";
 			if (data.hour != 0) {
-				msg = msg + data.hour + "Ê±";
+				msg = msg + data.hour + "Ð¡Ê±";
 			}
-			msg = msg + data.minute + "ï¿½ï¿½";
+			msg = msg + data.minute + "·ÖÖÓ";
 			timeMsg.setText(msg);
 			if (data.open) {
-				openMsg.setText("ï¿½Ñ¿ï¿½ï¿½ï¿½");
+				openMsg.setText("ÒÑ¿ªÆô");
 
 			} else {
-				openMsg.setText("ï¿½Ñ¹Ø±ï¿½");
+				openMsg.setText("ÒÑ¹Ø±Õ");
 			}
 			switch_open.setChecked(data.open);
 			switch_open
@@ -241,13 +239,18 @@ public class AlarmMainActivity extends Activity {
 								PutAlarmDatasToSharedPreferences(appName, arr);
 							} catch (Throwable e) {
 								// TODO Auto-generated catch block
-								//e.printStackTrace();
+								// e.printStackTrace();
 								Toast.makeText(AlarmMainActivity.this,
-										"PutAlarmDatasToSharedPreferences()ï¿½ì³£", Toast.LENGTH_LONG).show();
+										"PutAlarmDatasToSharedPreferences()Òì³£",
+
+										Toast.LENGTH_LONG).show();
 							}
+
 							if (isChecked) {
+								//ÐèÒªÌí¼Ó  openMsg.setText("ÒÑ¹Ø±Õ");
 								OpenAlarm(arr.get(position));
 							} else {
+								//ÐèÒªÌí¼Ó  openMsg.setText("ÒÑ¹Ø±Õ");
 								CloseAlarm(arr.get(position));
 							}
 						}
@@ -255,18 +258,20 @@ public class AlarmMainActivity extends Activity {
 
 			button.setOnClickListener(new OnClickListener() {
 				@Override
-				public void onClick(View arg0) {					
+				public void onClick(View arg0) {
 					// TODO Auto-generated method stub
-					// ï¿½Ó¼ï¿½ï¿½ï¿½ï¿½ï¿½É¾ï¿½ï¿½ï¿½ï¿½É¾ï¿½ï¿½ï¿½ï¿½ï¿½EditTextï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+					//
 					CloseAlarm(arr.get(position));
 					arr.remove(position);
 					try {
 						PutAlarmDatasToSharedPreferences(appName, arr);
 					} catch (Throwable e) {
 						// TODO Auto-generated catch block
-						//e.printStackTrace();
+						// e.printStackTrace();
 						Toast.makeText(AlarmMainActivity.this,
-								"PutAlarmDatasToSharedPreferences()ï¿½ì³£", Toast.LENGTH_LONG).show();
+								"PutAlarmDatasToSharedPreferences()Òì³£",
+
+								Toast.LENGTH_LONG).show();
 					}
 					adapter.notifyDataSetChanged();
 
@@ -279,15 +284,14 @@ public class AlarmMainActivity extends Activity {
 		}
 	}
 
-	
-	// ï¿½ï¿½Ý±ï¿½Å¹Ø±ï¿½ï¿½ï¿½ï¿½ï¿½
+	//
 	public void CloseAlarm(MyData data) {
 		Bundle bundle = new Bundle();
 		bundle.putBoolean("set_vibrator", data.vibrator);
 		bundle.putBoolean("set_ring", data.ring);
 		bundle.putInt("hour", data.hour);
 		bundle.putInt("minute", data.minute);
-
+		bundle.putInt("alarmID", data.arrAlarmNumber);
 		Intent intent = new Intent(AlarmMainActivity.this, AlarmActivity.class);
 		intent.setAction("com.alarm.action_alarm_on");
 		intent.putExtras(bundle);
@@ -298,7 +302,7 @@ public class AlarmMainActivity extends Activity {
 				.show();
 	}
 
-	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	//
 	public void OpenAlarm(MyData data) {
 
 		Bundle bundle = new Bundle();
@@ -306,6 +310,7 @@ public class AlarmMainActivity extends Activity {
 		bundle.putBoolean("set_ring", data.ring);
 		bundle.putInt("hour", data.hour);
 		bundle.putInt("minute", data.minute);
+		bundle.putInt("alarmID", data.arrAlarmNumber);
 		Intent intent = new Intent(AlarmMainActivity.this, AlarmActivity.class);
 		intent.setAction("com.alarm.action_alarm_on");
 		intent.putExtras(bundle);
@@ -331,15 +336,15 @@ public class AlarmMainActivity extends Activity {
 	}
 
 	@SuppressWarnings("unchecked")
-	public ArrayList<MyData> GetAlarmDatasFromSharedPreferences(String appName) throws Throwable
-	{
+	public ArrayList<MyData> GetAlarmDatasFromSharedPreferences(String appName)
+			throws Throwable {
 		ArrayList<MyData> list = new ArrayList<MyData>();
 		SharedPreferences sharedPreferences = getSharedPreferences(
 				"AlarmInfos", Activity.MODE_PRIVATE);
 		String info = sharedPreferences.getString(appName, "");
 		if (info != "") {
 			byte[] infoBytes = Base64.decode(info.getBytes(), Base64.DEFAULT);
-			//byte[] infoBytes = info.getBytes();
+			// byte[] infoBytes = info.getBytes();
 			ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(
 					infoBytes);
 			ObjectInputStream objectInputStream = new ObjectInputStream(
@@ -352,21 +357,20 @@ public class AlarmMainActivity extends Activity {
 
 	}
 
-	public void PutAlarmDatasToSharedPreferences(String appName, ArrayList<MyData> list)
-			throws Throwable {
-		
-		for(int i = 0; i < list.size(); i++)
-		{
+	public void PutAlarmDatasToSharedPreferences(String appName,
+			ArrayList<MyData> list) throws Throwable {
+
+		for (int i = 0; i < list.size(); i++) {
 			System.out.println(list.get(i).hour);
 			System.out.println(list.get(i).minute);
 		}
-		
+
 		ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 		ObjectOutputStream objectOutputStream = new ObjectOutputStream(
 				byteArrayOutputStream);
 		objectOutputStream.writeObject(list);
-		objectOutputStream.flush();		
-		
+		objectOutputStream.flush();
+
 		SharedPreferences sharedPreferences = getSharedPreferences(
 				"AlarmInfos", Activity.MODE_PRIVATE);
 		Editor editor = sharedPreferences.edit();

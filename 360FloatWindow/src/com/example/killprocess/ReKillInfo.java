@@ -1,6 +1,3 @@
-//-----���ߣ�������
-//-----����:ɱ���
-
 package com.example.killprocess;
 
 public class ReKillInfo {

@@ -1,6 +1,12 @@
 package com.example.alarmclock;
 
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+
 import com.example.floatwindow.R;
 
 import android.app.Activity;
@@ -12,12 +18,14 @@ import android.app.Service;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.util.Base64;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.Toast;
 import android.content.SharedPreferences;  
 //import android.app.Service;
+import android.content.SharedPreferences.Editor;
 
 
 public class AlarmActivity extends Activity {
@@ -29,6 +37,8 @@ public class AlarmActivity extends Activity {
 	private Button btn_game_stop = null;
 	private Button btn_game_start = null;
 	private Button btn_game_ignore = null;
+	int alarmID;
+	public String appName="weibo";
 	
 	@Override
     public void onBackPressed() {
@@ -43,7 +53,7 @@ public class AlarmActivity extends Activity {
 		Bundle extras = getIntent().getExtras(); 
 		set_ring = extras.getBoolean("set_ring");
 		set_vibrator = extras.getBoolean("set_vibrator");
-				
+		alarmID=extras.getInt("alarmID");		
 		// 设置振动
 		vibrator = (Vibrator) getSystemService(Service.VIBRATOR_SERVICE);
 		hasVibrator = vibrator.hasVibrator();
@@ -55,7 +65,7 @@ public class AlarmActivity extends Activity {
 		// 设置铃声
 		if (set_ring) {
 			alarmMusic = MediaPlayer.create(this, R.raw.alarm);
-			alarmMusic.setLooping(true);
+			//alarmMusic.setLooping(true);
 			alarmMusic.start();
 		}
 
@@ -85,25 +95,6 @@ public class AlarmActivity extends Activity {
 		Toast.makeText(AlarmActivity.this, "vibrator="+set_vibrator+",ring="+set_ring,
 				Toast.LENGTH_SHORT).show();
 
-		// 显示对话框
-		/*new AlertDialog.Builder(AlarmActivity.this).setTitle("闹钟").// 设置标题
-				setMessage("时间到了！\tvibrator="+set_vibrator+",ring="+set_ring).// 设置内容
-				setPositiveButton("知道了", new OnClickListener() {// 设置按钮
-							public void onClick(DialogInterface dialog,
-									int which) {
-								if (hasVibrator && set_vibrator) {
-									vibrator.cancel();
-									set_vibrator=false;
-								}
-								if (set_ring)
-								{
-									alarmMusic.stop();
-									set_ring=false;
-								}
-								AlarmActivity.this.finish();// 关闭Activity
-							}
-						}).create().show();*/
-
 	}
 	public void CloseAlarm()
 	{
@@ -115,7 +106,59 @@ public class AlarmActivity extends Activity {
 		{
 			alarmMusic.stop();
 		}
+		try {
+			UpdateAlarmDatasToSharedPreferences(appName,alarmID);
+		} catch (Throwable e) {
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
+			Toast.makeText(AlarmActivity.this, "UpdateAlarmDatasToSharedPreferences()",
+					Toast.LENGTH_SHORT).show();
+		}
 		AlarmActivity.this.finish();// 关闭Activity
+	}
+	
+	public void UpdateAlarmDatasToSharedPreferences(String appName,int alarmID)throws Throwable
+	{
+		//更新SharedPreferences文件，设置闹钟为关闭
+		//获得SharedPreferences中时间信息
+		ArrayList<MyData> list = new ArrayList<MyData>();
+		SharedPreferences sharedPreferences = getSharedPreferences(
+				"AlarmInfos", Activity.MODE_PRIVATE);
+		String info = sharedPreferences.getString(appName, "");
+		if (info != "") {
+			byte[] infoBytes = Base64.decode(info.getBytes(), Base64.DEFAULT);
+			//byte[] infoBytes = info.getBytes();
+			ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(
+					infoBytes);
+			ObjectInputStream objectInputStream = new ObjectInputStream(
+					byteArrayInputStream);
+			list = (ArrayList<MyData>) objectInputStream.readObject();
+			objectInputStream.close();
+		
+			//根据alarmID查找闹钟，设置状态为关闭
+			for(int i=0;i<list.size();i++)
+			{
+				if(list.get(i).arrAlarmNumber==alarmID)
+				{
+					list.get(i).open=false;
+					break;
+				}
+			}			
+			//更新SharedPreferences闹钟信息
+			ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+			ObjectOutputStream objectOutputStream = new ObjectOutputStream(
+					byteArrayOutputStream);
+			objectOutputStream.writeObject(list);
+			objectOutputStream.flush();			
+			
+			Editor editor = sharedPreferences.edit();
+			String info2 = new String(Base64.encode(
+					byteArrayOutputStream.toByteArray(), Base64.DEFAULT));
+			editor.putString(appName, info2);
+			editor.commit();
+			objectOutputStream.close();
+
+		}
 	}
 
 }

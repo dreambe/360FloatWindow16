@@ -23,6 +23,7 @@ public class SetAlarmActivity extends Activity {
 	private AlarmManager alarmManager = null;
 	private Switch switch_vibrate=null;
 	private Switch switch_ring=null;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -64,6 +65,8 @@ public class SetAlarmActivity extends Activity {
 						System.currentTimeMillis()+timemillis, pi);
 				Toast.makeText(SetAlarmActivity.this,"定时提醒设置成功！",
 						Toast.LENGTH_LONG).show();*/
+				if(numberPicker1.getValue()+numberPicker2.getValue()!=0)
+				{
 				Bundle bundle = new  Bundle();
 	        	bundle.putInt("hour",numberPicker1.getValue());
 	        	bundle.putInt("minute",numberPicker2.getValue());
@@ -71,6 +74,12 @@ public class SetAlarmActivity extends Activity {
 	        	bundle.putBoolean("set_ring",switch_ring.isChecked());
 	        	SetAlarmActivity.this.setResult(RESULT_OK, SetAlarmActivity.this.getIntent().putExtras(bundle));
 				SetAlarmActivity.this.finish();
+				}
+				else
+				{
+					Toast.makeText(SetAlarmActivity.this,"无效的输入，不能设置闹钟为当前时间！",
+							Toast.LENGTH_LONG).show();
+				}
 			}
 		});
 		  
