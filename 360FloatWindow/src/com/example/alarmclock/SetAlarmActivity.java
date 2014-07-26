@@ -2,10 +2,17 @@ package com.example.alarmclock;
 
 import android.app.Activity;
 import android.app.AlarmManager;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
+import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.NumberPicker;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -14,6 +21,7 @@ import android.widget.Toast;
 
 import com.example.floatwindow.R;
 public class SetAlarmActivity extends Activity {
+    public static final String EXTRA_STRING_TARGET_PKG_NAME = "target_pkgname";
 	private NumberPicker numberPicker1=null;
 	private NumberPicker numberPicker2=null;
 	private TimePicker tp=null;
@@ -21,6 +29,9 @@ public class SetAlarmActivity extends Activity {
 	private AlarmManager alarmManager = null;
 	private Switch switch_vibrate=null;
 	private Switch switch_ring=null;
+	private ImageView mAppIconImage = null;
+	private AsyncTask<String, Void, Drawable> mLoadIconTask;
+	private Animation mExpandAlphaInAnim;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -39,6 +50,8 @@ public class SetAlarmActivity extends Activity {
             }
         });
 		
+		mAppIconImage = (ImageView) findViewById(R.id.app_icon);
+		
 		//NumberPicker �ؼ�����
 		numberPicker1=(NumberPicker)findViewById(R.id.numberPicker1);
 		numberPicker1.setMaxValue(23);
@@ -55,6 +68,7 @@ public class SetAlarmActivity extends Activity {
 		switch_ring=(Switch)findViewById(R.id.switch_ring);
 		switch_ring.setChecked(true);
 		
+		mExpandAlphaInAnim = AnimationUtils.loadAnimation(this, R.anim.expand_alpha_in);
 		
 		btn_setalarm=(Button)findViewById(R.id.btn_setalarm);
 		btn_setalarm.setOnClickListener(new OnClickListener() {
@@ -91,8 +105,46 @@ public class SetAlarmActivity extends Activity {
 				}
 			}
 		});
-		  
+		mLoadIconTask = new AsyncTask<String, Void, Drawable>() {
+
+            @Override
+            protected Drawable doInBackground(String... arg0) {
+                PackageManager pm = getPackageManager();
+                String pkgName = arg0[0];
+                try {
+                    Drawable icon = pm.getApplicationIcon(pkgName);
+                    return icon;
+                } catch (NameNotFoundException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+                
+                return null;
+            }
+            
+            @Override
+            protected void onPostExecute(Drawable result) {
+                if (isFinishing()) {
+                    return;
+                }
+                if (result == null) {
+                    mAppIconImage.setImageResource(R.drawable.icon_other_app_default);
+                } else {
+                    mAppIconImage.setImageDrawable(result);
+                }
+                mAppIconImage.startAnimation(mExpandAlphaInAnim);
+                mLoadIconTask = null;
+            }
+		};
+		mLoadIconTask.execute(getIntent().getStringExtra(EXTRA_STRING_TARGET_PKG_NAME));
 	}
 
-
+	@Override
+	protected void onDestroy() {
+	    super.onDestroy();
+	    if (mLoadIconTask != null) {
+	        mLoadIconTask.cancel(true);
+	        mLoadIconTask = null;
+	    }
+	}
 }

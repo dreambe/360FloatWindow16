@@ -10,14 +10,23 @@
         android:id="@+id/title"
         layout="@layout/title_bar" />
 
-    <TimePicker
-        android:id="@+id/time_picker"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp" >
+
+        <ImageView
+            android:id="@+id/app_icon"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center_vertical"
+            android:scaleType="fitXY" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -54,7 +63,8 @@
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:padding="10dp" >
 
         <Switch
             android:id="@+id/switch_vibrate"
@@ -62,6 +72,11 @@
             android:layout_height="wrap_content"
             android:checked="true"
             android:text="振动" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
 
         <Switch
             android:id="@+id/switch_ring"

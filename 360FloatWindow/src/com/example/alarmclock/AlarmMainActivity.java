@@ -31,6 +31,7 @@ import android.widget.Toast;
 import android.content.SharedPreferences;
 
 public class AlarmMainActivity extends Activity {
+    public static final String EXTRA_STRING_TARGET_PKG_NAME = "target_pkgname";
 	static final int SET_ALARM = 0;
 	static final int CALL_REQUEST = 1;
 	static private int alarm_nuber = 0;
@@ -89,6 +90,7 @@ public class AlarmMainActivity extends Activity {
 			public void onClick(View v) {
 				Intent intent = new Intent(AlarmMainActivity.this,
 						SetAlarmActivity.class);
+				intent.putExtra(SetAlarmActivity.EXTRA_STRING_TARGET_PKG_NAME, getIntent().getStringExtra(EXTRA_STRING_TARGET_PKG_NAME));
 				startActivityForResult(intent, SET_ALARM);
 				// startActivity(intent);
 			}
