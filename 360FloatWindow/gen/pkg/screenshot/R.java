@@ -14,7 +14,7 @@ public final class R {
 		public static final int main = 0x7003000b;
 	}
 	public static final class string {
-		public static final int app_name = 0x70050001;
-		public static final int hello = 0x70050000;
+		public static final int app_name = 0x70060001;
+		public static final int hello = 0x70060000;
 	}
 }

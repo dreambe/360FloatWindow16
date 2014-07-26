@@ -8,10 +8,15 @@
 package com.example.floatwindow;
 
 public final class R {
+    public static final class anim {
+        public static final int common_loading_rotate=0x70040000;
+        public static final int expand_alpha_in=0x70040001;
+        public static final int shrink_alpha_out=0x70040002;
+    }
     public static final class attr {
     }
     public static final class color {
-        public static final int common_bg_color=0x70060000;
+        public static final int common_bg_color=0x70070000;
     }
     public static final class dimen {
         /**  Default screen margins, per the Android Design guidelines. 
@@ -20,8 +25,8 @@ public final class R {
          screen margins) for sw720dp devices (e.g. 10" tablets) in landscape here.
     
          */
-        public static final int activity_horizontal_margin=0x70070000;
-        public static final int activity_vertical_margin=0x70070001;
+        public static final int activity_horizontal_margin=0x70080000;
+        public static final int activity_vertical_margin=0x70080001;
     }
     public static final class drawable {
         public static final int bg_big=0x70020000;
@@ -40,57 +45,57 @@ public final class R {
         public static final int composer_with=0x7002000d;
         public static final int gray_btn=0x7002000e;
         public static final int ic_launcher=0x7002000f;
-        public static final int ll_camera_assistant_float_bk=0x70020010;
-        public static final int pageid=0x70020011;
-        public static final int red_add=0x70020012;
-        public static final int selector_btn_blue=0x70020013;
-        public static final int selector_btn_close=0x70020014;
+        public static final int icon_other_app_default=0x70020010;
+        public static final int ll_camera_assistant_float_bk=0x70020011;
+        public static final int pageid=0x70020012;
+        public static final int red_add=0x70020013;
+        public static final int selector_btn_blue=0x70020014;
+        public static final int selector_btn_close=0x70020015;
     }
     public static final class id {
-        public static final int action_settings=0x700a002b;
-        public static final int array_button=0x700a0007;
-        public static final int array_open=0x700a0004;
-        public static final int array_switch=0x700a0006;
-        public static final int array_time=0x700a0003;
-        public static final int array_title=0x700a0005;
-        public static final int back=0x700a0025;
-        public static final int big_window_layout=0x700a0023;
-        public static final int btn_alarm=0x700a000b;
-        public static final int btn_game_ignore=0x700a0017;
-        public static final int btn_game_start=0x700a0015;
-        public static final int btn_game_stop=0x700a0016;
-        public static final int btn_setalarm=0x700a0011;
-        public static final int btn_stop=0x700a000a;
-        public static final int close=0x700a0024;
-        public static final int composer_button_music=0x700a001c;
-        public static final int composer_button_people=0x700a001a;
-        public static final int composer_button_photo=0x700a0019;
-        public static final int composer_button_place=0x700a001b;
-        public static final int composer_button_sleep=0x700a001e;
-        public static final int composer_button_thought=0x700a001d;
-        public static final int composer_buttons_show_hide_button=0x700a001f;
-        public static final int composer_buttons_show_hide_button_icon=0x700a0020;
-        public static final int composer_buttons_wrapper=0x700a0018;
-        public static final int float_window_main=0x700a0026;
-        public static final int imageButton=0x700a0022;
-        public static final int imageView=0x700a0021;
-        public static final int layout_button=0x700a0014;
-        public static final int linearlayout=0x700a0002;
-        public static final int listView1=0x700a0009;
-        public static final int numberPicker1=0x700a000d;
-        public static final int numberPicker2=0x700a000e;
-        public static final int percent=0x700a0028;
-        public static final int relate=0x700a0000;
-        public static final int small_window_layout=0x700a0027;
-        public static final int start_float_window=0x700a0001;
-        public static final int switch_ring=0x700a0010;
-        public static final int switch_vibrate=0x700a000f;
-        public static final int textView_gameName=0x700a0012;
-        public static final int textView_timeUp=0x700a0013;
-        public static final int time_picker=0x700a000c;
-        public static final int title=0x700a0008;
-        public static final int title_close_btn=0x700a002a;
-        public static final int title_text=0x700a0029;
+        public static final int action_settings=0x700b002a;
+        public static final int app_icon=0x700b000b;
+        public static final int array_button=0x700b0007;
+        public static final int array_open=0x700b0004;
+        public static final int array_switch=0x700b0006;
+        public static final int array_time=0x700b0003;
+        public static final int array_title=0x700b0005;
+        public static final int back=0x700b0024;
+        public static final int big_window_layout=0x700b0022;
+        public static final int btn_alarm=0x700b000a;
+        public static final int btn_game_ignore=0x700b0016;
+        public static final int btn_game_start=0x700b0014;
+        public static final int btn_game_stop=0x700b0015;
+        public static final int btn_setalarm=0x700b0010;
+        public static final int close=0x700b0023;
+        public static final int composer_button_music=0x700b001b;
+        public static final int composer_button_people=0x700b0019;
+        public static final int composer_button_photo=0x700b0018;
+        public static final int composer_button_place=0x700b001a;
+        public static final int composer_button_sleep=0x700b001d;
+        public static final int composer_button_thought=0x700b001c;
+        public static final int composer_buttons_show_hide_button=0x700b001e;
+        public static final int composer_buttons_show_hide_button_icon=0x700b001f;
+        public static final int composer_buttons_wrapper=0x700b0017;
+        public static final int float_window_main=0x700b0025;
+        public static final int imageButton=0x700b0021;
+        public static final int imageView=0x700b0020;
+        public static final int layout_button=0x700b0013;
+        public static final int linearlayout=0x700b0002;
+        public static final int listView1=0x700b0009;
+        public static final int numberPicker1=0x700b000c;
+        public static final int numberPicker2=0x700b000d;
+        public static final int percent=0x700b0027;
+        public static final int relate=0x700b0000;
+        public static final int small_window_layout=0x700b0026;
+        public static final int start_float_window=0x700b0001;
+        public static final int switch_ring=0x700b000f;
+        public static final int switch_vibrate=0x700b000e;
+        public static final int textView_gameName=0x700b0011;
+        public static final int textView_timeUp=0x700b0012;
+        public static final int title=0x700b0008;
+        public static final int title_close_btn=0x700b0029;
+        public static final int title_text=0x700b0028;
     }
     public static final class layout {
         public static final int activity_main=0x70030000;
@@ -109,16 +114,16 @@ public final class R {
         public static final int title_bar=0x7003000d;
     }
     public static final class menu {
-        public static final int main=0x70090000;
+        public static final int main=0x700a0000;
     }
     public static final class raw {
-        public static final int alarm=0x70040000;
+        public static final int alarm=0x70050000;
     }
     public static final class string {
-        public static final int action_settings=0x70050002;
-        public static final int app_name=0x70050001;
-        public static final int hello=0x70050000;
-        public static final int hello_world=0x70050003;
+        public static final int action_settings=0x70060002;
+        public static final int app_name=0x70060001;
+        public static final int hello=0x70060000;
+        public static final int hello_world=0x70060003;
     }
     public static final class style {
         /** 
@@ -142,11 +147,11 @@ public final class R {
     
  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x70080000;
+        public static final int AppBaseTheme=0x70090000;
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x70080001;
-        public static final int blue_btn=0x70080002;
+        public static final int AppTheme=0x70090001;
+        public static final int blue_btn=0x70090002;
     }
 }
