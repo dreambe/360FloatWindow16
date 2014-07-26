@@ -54,7 +54,7 @@ public class AlarmMainActivity extends Activity {
 			// TODO Auto-generated catch block
 			// e.printStackTrace();
 			Toast.makeText(AlarmMainActivity.this,
-					"GetAlarmDatasFromSharedPreferences()Òì³£", Toast.LENGTH_LONG)
+					"GetAlarmDatasFromSharedPreferences()ï¿½ì³£", Toast.LENGTH_LONG)
 					.show();
 		}
 		Toast.makeText(AlarmMainActivity.this, "onResume()", Toast.LENGTH_LONG)
@@ -68,7 +68,7 @@ public class AlarmMainActivity extends Activity {
 		setContentView(R.layout.alarm_main);
 
 		TextView titleText = (TextView) findViewById(R.id.title_text);
-		titleText.setText("ÕâÀï²»ÖªµÀÊÇÊ²Ã´");
+		titleText.setText("é—¹é’Ÿè®¾ç½®");
 		View titleClose = findViewById(R.id.title_close_btn);
 		titleClose.setOnClickListener(new View.OnClickListener() {
 
@@ -140,7 +140,7 @@ public class AlarmMainActivity extends Activity {
 					// TODO Auto-generated catch block
 					// e.printStackTrace();
 					Toast.makeText(AlarmMainActivity.this,
-							"PutAlarmDatasToSharedPreferences()Òì³£",
+							"PutAlarmDatasToSharedPreferences()ï¿½ì³£",
 
 							Toast.LENGTH_LONG).show();
 				}
@@ -172,7 +172,7 @@ public class AlarmMainActivity extends Activity {
 				// TODO Auto-generated catch block
 				// e.printStackTrace();
 				Toast.makeText(AlarmMainActivity.this,
-						"GetAlarmDatasFromSharedPreferences()Òì³£",
+						"GetAlarmDatasFromSharedPreferences()ï¿½ì³£",
 
 						Toast.LENGTH_LONG).show();
 			}
@@ -214,17 +214,17 @@ public class AlarmMainActivity extends Activity {
 			openMsg = (TextView) view.findViewById(R.id.array_open);
 			button = (Button) view.findViewById(R.id.array_button);
 			MyData data = arr.get(position);
-			String msg = "µ¹¼ÆÊ±";
+			String msg = "ï¿½ï¿½ï¿½ï¿½Ê±";
 			if (data.hour != 0) {
 				msg = msg + data.hour + "Ð¡Ê±";
 			}
-			msg = msg + data.minute + "·ÖÖÓ";
+			msg = msg + data.minute + "ï¿½ï¿½ï¿½ï¿½";
 			timeMsg.setText(msg);
 			if (data.open) {
-				openMsg.setText("ÒÑ¿ªÆô");
+				openMsg.setText("ï¿½Ñ¿ï¿½ï¿½ï¿½");
 
 			} else {
-				openMsg.setText("ÒÑ¹Ø±Õ");
+				openMsg.setText("ï¿½Ñ¹Ø±ï¿½");
 			}
 			switch_open.setChecked(data.open);
 			switch_open
@@ -241,16 +241,16 @@ public class AlarmMainActivity extends Activity {
 								// TODO Auto-generated catch block
 								// e.printStackTrace();
 								Toast.makeText(AlarmMainActivity.this,
-										"PutAlarmDatasToSharedPreferences()Òì³£",
+										"PutAlarmDatasToSharedPreferences()ï¿½ì³£",
 
 										Toast.LENGTH_LONG).show();
 							}
 
 							if (isChecked) {
-								//ÐèÒªÌí¼Ó  openMsg.setText("ÒÑ¹Ø±Õ");
+								//ï¿½ï¿½Òªï¿½ï¿½ï¿½  openMsg.setText("ï¿½Ñ¹Ø±ï¿½");
 								OpenAlarm(arr.get(position));
 							} else {
-								//ÐèÒªÌí¼Ó  openMsg.setText("ÒÑ¹Ø±Õ");
+								//ï¿½ï¿½Òªï¿½ï¿½ï¿½  openMsg.setText("ï¿½Ñ¹Ø±ï¿½");
 								CloseAlarm(arr.get(position));
 							}
 						}
@@ -269,7 +269,7 @@ public class AlarmMainActivity extends Activity {
 						// TODO Auto-generated catch block
 						// e.printStackTrace();
 						Toast.makeText(AlarmMainActivity.this,
-								"PutAlarmDatasToSharedPreferences()Òì³£",
+								"PutAlarmDatasToSharedPreferences()ï¿½ì³£",
 
 								Toast.LENGTH_LONG).show();
 					}

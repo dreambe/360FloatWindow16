@@ -1,20 +1,18 @@
 package com.example.alarmclock;
 
-import com.example.floatwindow.R;
-
 import android.app.Activity;
 import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.Switch;
-import android.widget.TimePicker;
 import android.widget.NumberPicker;
+import android.widget.Switch;
+import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
+
+import com.example.floatwindow.R;
 public class SetAlarmActivity extends Activity {
 	private NumberPicker numberPicker1=null;
 	private NumberPicker numberPicker2=null;
@@ -30,7 +28,18 @@ public class SetAlarmActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.alarm_setting);
 		
-		//NumberPicker ¿Ø¼þÉèÖÃ
+		TextView title = (TextView) findViewById(R.id.title_text);
+		title.setText("è®¾ç½®é—¹é’Ÿ");
+		View closeBtn = findViewById(R.id.title_close_btn);
+		closeBtn.setOnClickListener(new View.OnClickListener() {
+            
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+		
+		//NumberPicker ï¿½Ø¼ï¿½ï¿½ï¿½ï¿½ï¿½
 		numberPicker1=(NumberPicker)findViewById(R.id.numberPicker1);
 		numberPicker1.setMaxValue(23);
 		numberPicker1.setMinValue(0);
@@ -40,7 +49,7 @@ public class SetAlarmActivity extends Activity {
 		numberPicker2.setMinValue(0);
 		numberPicker2.setValue(0);
 
-		//Switch¿Ø¼þÉèÖÃ
+		//Switchï¿½Ø¼ï¿½ï¿½ï¿½ï¿½ï¿½
 		switch_vibrate=(Switch)findViewById(R.id.switch_vibrate);
 		switch_vibrate.setChecked(true);		
 		switch_ring=(Switch)findViewById(R.id.switch_ring);
@@ -63,7 +72,7 @@ public class SetAlarmActivity extends Activity {
 				
 				alarmManager.set(AlarmManager.RTC_WAKEUP,
 						System.currentTimeMillis()+timemillis, pi);
-				Toast.makeText(SetAlarmActivity.this,"¶¨Ê±ÌáÐÑÉèÖÃ³É¹¦£¡",
+				Toast.makeText(SetAlarmActivity.this,"ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã³É¹ï¿½ï¿½ï¿½",
 						Toast.LENGTH_LONG).show();*/
 				if(numberPicker1.getValue()+numberPicker2.getValue()!=0)
 				{
@@ -77,7 +86,7 @@ public class SetAlarmActivity extends Activity {
 				}
 				else
 				{
-					Toast.makeText(SetAlarmActivity.this,"ÎÞÐ§µÄÊäÈë£¬²»ÄÜÉèÖÃÄÖÖÓÎªµ±Ç°Ê±¼ä£¡",
+					Toast.makeText(SetAlarmActivity.this,"ï¿½ï¿½Ð§ï¿½ï¿½ï¿½ï¿½ï¿½ë£¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½Ç°Ê±ï¿½ä£¡",
 							Toast.LENGTH_LONG).show();
 				}
 			}

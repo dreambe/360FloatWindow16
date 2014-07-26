@@ -1,99 +1,86 @@
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="top"
+    android:background="@color/common_bg_color"
     android:orientation="vertical"
     tools:context=".SetAlarmActivity" >
-<!-- 
-    <TableRow android:gravity="center_horizontal" >
+
+    <include
+        android:id="@+id/title"
+        layout="@layout/title_bar" />
+
+    <TimePicker
+        android:id="@+id/time_picker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
 
         <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:text="倒计时（时：分）"
-            android:textColor="#0000FF"
-            android:textSize="30sp" />
-    </TableRow>
- -->
-    <TableRow android:gravity="center_horizontal" >
-
-        <!--
-        <TimePicker
-            android:id="@+id/timePicker1"
-            android:focusable="true"
-        android:focusableInTouchMode="true"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        -->
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="倒计时" />
 
-        <LinearLayout>
+        <NumberPicker
+            android:id="@+id/numberPicker1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:focusableInTouchMode="true" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:text="倒计时" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="时" />
 
-            <NumberPicker
-                android:id="@+id/numberPicker1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:focusable="true"
-                android:focusableInTouchMode="true" />
+        <NumberPicker
+            android:id="@+id/numberPicker2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:focusableInTouchMode="true" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:text="时" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="分" />
+    </LinearLayout>
 
-            <NumberPicker
-                android:id="@+id/numberPicker2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:focusable="true"
-                android:focusableInTouchMode="true" />
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:text="分" />
-        </LinearLayout>
-    </TableRow>
+        <Switch
+            android:id="@+id/switch_vibrate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="振动" />
 
-    <TableRow
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="10dp"
-        android:gravity="center_horizontal" >
-
-        <LinearLayout>
-             <Switch
-                android:id="@+id/switch_vibrate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="振动" />
-            <Switch
+        <Switch
             android:id="@+id/switch_ring"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="响铃"
-            android:checked="true" />
+            android:checked="true"
+            android:text="响铃" />
+    </LinearLayout>
 
-        </LinearLayout>
-        
+    <View
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
-    </TableRow>
+    <Button
+        android:id="@+id/btn_setalarm"
+        style="@style/blue_btn"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="确定" />
 
-    <TableRow android:gravity="center_horizontal" >
-
-        <Button
-            android:id="@+id/btn_setalarm"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="确定" />
-    </TableRow>
-
-</TableLayout>
+</LinearLayout>
