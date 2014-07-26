@@ -36,9 +36,9 @@ public class WinFloatUtils
 	 * @param url
 	 * @return
 	 */
-	public static String download(String url)
+	public static String download(String packageName)
 	{
-		String temp = ZHUSHOU + url;
+		String temp = ZHUSHOU + packageName;
 		HttpGet httpGet = new HttpGet(temp);
 		HttpClient client = new DefaultHttpClient();
 		InputStream is = null;
@@ -86,7 +86,7 @@ public class WinFloatUtils
 	
 		
 	/**
-	 * 
+	 * 获取攻略
 	 */
 	@SuppressLint("NewApi")
 	@SuppressWarnings("all")
@@ -121,8 +121,61 @@ public class WinFloatUtils
     	   Guide guide = new Guide();
     	   guide.setGuideTitle(elementTitle.getAsString());
     	   guide.setUrl(elementURL.getAsString());
+    	   
     	   list.add(guide);
      	}
         return list;
+	}
+	
+	/**
+	 * 判断当前的应用是否是游戏 
+	 */
+	public static boolean isGame(String jsonStr)
+	{
+		Gson gson = new Gson();
+		
+		/**
+		 * 检测packageName
+		 */
+		//..........
+
+		
+        JsonObject rootObj = new JsonParser().parse(jsonStr).getAsJsonObject();
+        JsonElement dataElement = rootObj.get("data");
+        JsonArray dataArray = dataElement.getAsJsonArray();
+        JsonElement typeElement = dataArray.get(0).getAsJsonObject().get("type");
+        
+        String type = typeElement.getAsString();
+        if(type.equalsIgnoreCase("game"))
+        {
+        	return true;
+        }
+		return false;
+	}
+	
+	
+	/**
+	 * 判断当前的应用是否有广告 
+	 */
+	public static boolean isAd(String jsonStr)
+	{
+		Gson gson = new Gson();
+		
+		/**
+		 * 检测packageName
+		 */
+		//..........
+
+        JsonObject rootObj = new JsonParser().parse(jsonStr).getAsJsonObject();
+        JsonElement dataElement = rootObj.get("data");
+        JsonArray dataArray = dataElement.getAsJsonArray();
+        JsonElement typeElement = dataArray.get(0).getAsJsonObject().get("is_ad");
+        
+        String is_ad = typeElement.getAsString();
+        if(Integer.valueOf(is_ad) <= 0)
+        {
+        	return false;
+        }
+		return true;
 	}
 }
