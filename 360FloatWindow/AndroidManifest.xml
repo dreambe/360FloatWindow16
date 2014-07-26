@@ -68,6 +68,11 @@
         <service android:name="com.example.capture.CaptureService" >
         </service>
         <!-- 周子江 -->
+        
+        <activity
+            android:name="com.example.gameguide.ViewGameGuideActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:theme="@android:style/Theme.NoTitleBar" />
 
     </application>
 
