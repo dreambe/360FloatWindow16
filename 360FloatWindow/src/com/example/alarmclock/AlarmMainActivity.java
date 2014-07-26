@@ -34,7 +34,7 @@ public class AlarmMainActivity extends Activity {
     public static final String EXTRA_STRING_TARGET_PKG_NAME = "target_pkgname";
 	static final int SET_ALARM = 0;
 	static final int CALL_REQUEST = 1;
-	static private int alarm_nuber = 0;
+	private int alarm_nuber = 0;
 	private ListView listview;
 	public MyAdapter adapter;
 	private Button btn_stop = null;
@@ -70,7 +70,7 @@ public class AlarmMainActivity extends Activity {
 		setContentView(R.layout.alarm_main);
 
 		TextView titleText = (TextView) findViewById(R.id.title_text);
-		titleText.setText("闹钟设置");
+		titleText.setText("闹钟列表");
 		View titleClose = findViewById(R.id.title_close_btn);
 		titleClose.setOnClickListener(new View.OnClickListener() {
 
@@ -126,8 +126,7 @@ public class AlarmMainActivity extends Activity {
 
 				Toast.makeText(
 						AlarmMainActivity.this,
-						"alarm_nuber=" + alarm_nuber + ",vibrator="
-								+ set_vibrator + ",ring=" + set_ring,
+						"onActivityResult()  alarm_nuber=" + alarm_nuber,
 						Toast.LENGTH_SHORT).show();
 
 				//
