@@ -140,10 +140,10 @@ public class AlarmActivity extends Activity {
 				if(list.get(i).arrAlarmNumber==alarmID)
 				{
 					list.get(i).open=false;					
-					//break;
+					break;
 				}
 				//用于显示闹钟信息
-				a+="  第"+list.get(i).arrAlarmNumber+"个"+list.get(i).open;
+				//a+="  第"+list.get(i).arrAlarmNumber+"个"+list.get(i).open;
 			}
 			Toast.makeText(AlarmActivity.this, a,
 					Toast.LENGTH_SHORT).show();
