@@ -42,8 +42,8 @@ public class AlarmActivity extends Activity {
 	
 	@Override
     public void onBackPressed() {
-		Toast.makeText(AlarmActivity.this, "onBackPressed()",
-				Toast.LENGTH_SHORT).show();
+		//Toast.makeText(AlarmActivity.this, "onBackPressed()",
+		//		Toast.LENGTH_SHORT).show();
 	}
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -134,16 +134,21 @@ public class AlarmActivity extends Activity {
 					byteArrayInputStream);
 			list = (ArrayList<MyData>) objectInputStream.readObject();
 			objectInputStream.close();
-		
+			String a="";
+			a+=alarmID;
 			//根据alarmID查找闹钟，设置状态为关闭
 			for(int i=0;i<list.size();i++)
-			{
+			{				
 				if(list.get(i).arrAlarmNumber==alarmID)
 				{
-					list.get(i).open=false;
-					break;
+					list.get(i).open=false;					
+					//break;
 				}
-			}			
+				a+="  第"+list.get(i).arrAlarmNumber+"个："+list.get(i).open;
+			}
+			Toast.makeText(AlarmActivity.this, a,
+					Toast.LENGTH_SHORT).show();
+			
 			//更新SharedPreferences闹钟信息
 			ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 			ObjectOutputStream objectOutputStream = new ObjectOutputStream(
