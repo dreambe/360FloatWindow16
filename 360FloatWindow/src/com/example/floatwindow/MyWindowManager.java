@@ -11,13 +11,13 @@ public class MyWindowManager {
 	/**
 	 * 悬浮窗View的实例
 	 */
-	private static FloatWindowSmallView smallWindow;
+	private static FloatWindowMainView mainWindow;
 
 
 	/**
 	 * 小悬浮窗View的参数
 	 */
-	private static LayoutParams smallWindowParams;
+	private static LayoutParams mainWindowParams;
 
 
 	/**
@@ -32,26 +32,24 @@ public class MyWindowManager {
 	 * @param context
 	 *            必须为应用程序的Context.
 	 */
-	public static void createSmallWindow(Context context) {
+	public static void createMainWindow(Context context) {
 		WindowManager windowManager = getWindowManager(context);
-		int screenWidth = windowManager.getDefaultDisplay().getWidth();
-		int screenHeight = windowManager.getDefaultDisplay().getHeight();
-		if (smallWindow == null) {
-			smallWindow = new FloatWindowSmallView(context);
-			if (smallWindowParams == null) {
-				smallWindowParams = new LayoutParams();
-				smallWindowParams.type = LayoutParams.TYPE_PHONE;
-				smallWindowParams.format = PixelFormat.RGBA_8888;
-				smallWindowParams.flags = LayoutParams.FLAG_NOT_TOUCH_MODAL
+		if (mainWindow == null) {
+			mainWindow = new FloatWindowMainView(context);
+			if (mainWindowParams == null) {
+				mainWindowParams = new LayoutParams();
+				mainWindowParams.type = LayoutParams.TYPE_PHONE;
+				mainWindowParams.format = PixelFormat.RGBA_8888;
+				mainWindowParams.flags = LayoutParams.FLAG_NOT_TOUCH_MODAL
 						| LayoutParams.FLAG_NOT_FOCUSABLE;
-				smallWindowParams.gravity = Gravity.LEFT | Gravity.TOP;
-				smallWindowParams.width = android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
-				smallWindowParams.height = android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
-				smallWindowParams.x = 100;
-				smallWindowParams.y = 100;
+				mainWindowParams.gravity = Gravity.LEFT | Gravity.TOP;
+				mainWindowParams.width = android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
+				mainWindowParams.height = android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
+				mainWindowParams.x = 50;
+				mainWindowParams.y = 60;
 			}
-			smallWindow.setParams(smallWindowParams);
-			windowManager.addView(smallWindow, smallWindowParams);
+			mainWindow.setParams(mainWindowParams);
+			windowManager.addView(mainWindow, mainWindowParams);
 		}
 	}
 
@@ -62,11 +60,11 @@ public class MyWindowManager {
 	 * @param context
 	 *            必须为应用程序的Context.
 	 */
-	public static void removeSmallWindow(Context context) {
-		if (smallWindow != null) {
+	public static void removeMainWindow(Context context) {
+		if (mainWindow != null) {
 			WindowManager windowManager = getWindowManager(context);
-			windowManager.removeView(smallWindow);
-			smallWindow = null;
+			windowManager.removeView(mainWindow);
+			mainWindow = null;
 		}
 	}
 
@@ -77,7 +75,7 @@ public class MyWindowManager {
 	 * @return 有悬浮窗显示在桌面上返回true，没有的话返回false。
 	 */
 	public static boolean isWindowShowing() {
-		return smallWindow != null;
+		return mainWindow != null;
 	}
 
 	/**
