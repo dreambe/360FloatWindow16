@@ -16,7 +16,6 @@
         android:layout_below="@id/title" >
     </ListView>
 
-<<<<<<< HEAD
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -39,13 +38,4 @@
             android:layout_weight="1"
             android:text="添加闹钟" />
     </LinearLayout>
-=======
-    <Button
-        android:id="@+id/btn_alarm"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:text="添加闹钟" />
->>>>>>> 1ab34a692df047cb7e0b95e59b73a30476226230
-
 </RelativeLayout>

@@ -21,13 +21,12 @@
         <item name="android:background">@drawable/selector_btn_blue</item>
         <item name="android:textColor">#ffffff</item>
         <item name="android:textSize">16sp</item>
-        <item name="android:shadowColor">#3f3f3f</item>
+        <item name="android:shadowColor">#3d3d3d</item>
         <item name="android:layout_margin">5.0dip</item>
         <item name="android:padding">5.0dip</item>
         <item name="android:gravity">center</item>
         <item name="android:singleLine">true</item>
-        <item name="android:shadowDy">-2</item>
-        <item name="android:shadowRadius">0.5</item>
+        <item name="android:shadowDy">2</item>
     </style>
 
 </resources>
