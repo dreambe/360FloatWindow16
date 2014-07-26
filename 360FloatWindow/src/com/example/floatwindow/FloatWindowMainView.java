@@ -6,6 +6,7 @@ import com.example.capture.CaptureService;
 import com.example.capture.CapturedImageActivity;
 import com.example.floatwindow.R;
 import com.example.floatwindow.MyAnimations;
+import com.example.gameguide.ViewGameGuideActivity;
 import com.example.killprocess.KillProcess;
 
 import android.content.Context;
@@ -144,10 +145,15 @@ public class FloatWindowMainView extends LinearLayout {
                             FloatWindowMainView.this.getContext().startActivity(intent);//开始界面的跳转函数  
                             Log.i("1", "------1-----");
                             break;
-                        case 2:
-                            
+                        case 2: {
+                            buttonGroup.setVisibility(8);
+                            Intent intent2 = new Intent();
+                            intent2.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            intent2.setClass(FloatWindowMainView.this.getContext(), ViewGameGuideActivity.class);//前面一个是一个Activity后面一个是要跳转的Activity  
+                            FloatWindowMainView.this.getContext().startActivity(intent2);//开始界面的跳转函数  
                             Log.i("2", "------2----");
                             break;
+                        }
                         case 3:
                         	buttonGroup.setVisibility(8);
                         	Intent intent2 = new Intent(FloatWindowMainView.this.getContext(), CaptureService.class);
