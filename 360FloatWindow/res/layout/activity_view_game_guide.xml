@@ -31,6 +31,27 @@
             android:layout_height="fill_parent"
             android:layout_weight="1"
             android:divider="@null" />
+
+        <LinearLayout
+            android:id="@+id/empty_view"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/empty_text_view"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/edittext_bg" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="0dp"
+                android:layout_weight="3" />
+        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>

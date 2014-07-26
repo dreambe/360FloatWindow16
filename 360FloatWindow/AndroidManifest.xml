@@ -73,6 +73,10 @@
             android:name="com.example.gameguide.ViewGameGuideActivity"
             android:configChanges="orientation|keyboardHidden"
             android:theme="@android:style/Theme.NoTitleBar" />
+        <activity
+            android:name="com.example.gameguide.GameGuideWebViewActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:theme="@android:style/Theme.NoTitleBar" />
 
     </application>
 

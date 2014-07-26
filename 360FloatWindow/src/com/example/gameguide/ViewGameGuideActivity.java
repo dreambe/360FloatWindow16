@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.drawable.Drawable;
@@ -13,6 +14,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
@@ -56,6 +58,10 @@ public class ViewGameGuideActivity extends Activity implements OnItemClickListen
 
     private String EXTRA_STRING_TARGET_PKG_NAME;
 
+    private TextView mEmptyTextView;
+
+    private ViewGroup mEmtpyView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,8 +85,12 @@ public class ViewGameGuideActivity extends Activity implements OnItemClickListen
         }, new int[] {
             R.id.text
         });
+        mEmtpyView = (ViewGroup) findViewById(R.id.empty_view);
+        mEmptyTextView = (TextView) findViewById(R.id.empty_text_view);
+        mEmptyTextView.setText("正在加载..."); //没有加载完成前， 替代ListView显示的EmptyView文案是这个
         mListView.setOnItemClickListener(this);
         mListView.setAdapter(mAdapter);
+        mListView.setEmptyView(mEmtpyView);
 
         loadData();
         mLoadIconTask = new AsyncTask<String, Void, Drawable>() {
@@ -120,6 +130,10 @@ public class ViewGameGuideActivity extends Activity implements OnItemClickListen
     private void loadData() {
         if (mLoadDataTask == null) {
             mLoadDataTask = new AsyncTask<String, Void, Void>() {
+                @Override
+                protected void onPreExecute() {
+                    mEmptyTextView.setText("正在加载...");
+                }
 
                 @Override
                 protected Void doInBackground(String... arg0) {
@@ -129,7 +143,7 @@ public class ViewGameGuideActivity extends Activity implements OnItemClickListen
                     for (int i = 0; i < 3; ++i) {
                         GuideItem item = new GuideItem();
                         item.guideTip = "游戏攻略条目" + i;
-                        item.url = "http://360.cn";
+                        item.url = "http://www.so.com";
                         mGuideLists.add(item);
                     }
                     // 转化为SimpleAdapter可用的数据
@@ -147,6 +161,7 @@ public class ViewGameGuideActivity extends Activity implements OnItemClickListen
                     if (isFinishing()) {
                         return;
                     }
+                    mEmptyTextView.setText("哎哟，介个游戏暂时还没有提供攻略呢...");
                     mAdapter.notifyDataSetChanged();
                     mLoadDataTask = null;
                 }
@@ -174,6 +189,9 @@ public class ViewGameGuideActivity extends Activity implements OnItemClickListen
             GuideItem item = mGuideLists.get(arg2);
             Log.d(TAG, "item.guideTip:" + item.guideTip);
             Log.d(TAG, "item.url:" + item.url);
+            Intent intent = new Intent(this, GameGuideWebViewActivity.class);
+            intent.putExtra(GameGuideWebViewActivity.EXTRA_STRING_URL, item.url);
+            startActivity(intent);
         }
     }
 
