@@ -39,7 +39,7 @@ public class SetAlarmActivity extends Activity {
             }
         });
 		
-		//NumberPicker �ؼ�����
+		//NumberPicker
 		numberPicker1=(NumberPicker)findViewById(R.id.numberPicker1);
 		numberPicker1.setMaxValue(23);
 		numberPicker1.setMinValue(0);
@@ -49,7 +49,7 @@ public class SetAlarmActivity extends Activity {
 		numberPicker2.setMinValue(0);
 		numberPicker2.setValue(0);
 
-		//Switch�ؼ�����
+		//Switch
 		switch_vibrate=(Switch)findViewById(R.id.switch_vibrate);
 		switch_vibrate.setChecked(true);		
 		switch_ring=(Switch)findViewById(R.id.switch_ring);
@@ -59,21 +59,6 @@ public class SetAlarmActivity extends Activity {
 		btn_setalarm=(Button)findViewById(R.id.btn_setalarm);
 		btn_setalarm.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {		
-					        	
-	        /*
-				int hour=numberPicker1.getValue();
-				int minute=numberPicker2.getValue();
-				long timemillis=60*1000*(hour*60+minute);
-				alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);			
-				
-				Intent intent = new Intent(SetAlarmActivity.this,AlarmActivity.class);
-				intent.setAction("com.alarm.action_alarm_on");
-				PendingIntent pi=PendingIntent.getActivity(SetAlarmActivity.this, 0, intent, 0);				
-				
-				alarmManager.set(AlarmManager.RTC_WAKEUP,
-						System.currentTimeMillis()+timemillis, pi);
-				Toast.makeText(SetAlarmActivity.this,"��ʱ�������óɹ���",
-						Toast.LENGTH_LONG).show();*/
 				if(numberPicker1.getValue()+numberPicker2.getValue()!=0)
 				{
 				Bundle bundle = new  Bundle();
@@ -86,7 +71,7 @@ public class SetAlarmActivity extends Activity {
 				}
 				else
 				{
-					Toast.makeText(SetAlarmActivity.this,"��Ч�����룬������������Ϊ��ǰʱ�䣡",
+					Toast.makeText(SetAlarmActivity.this,"闹钟不能设置为当前时间！",
 							Toast.LENGTH_LONG).show();
 				}
 			}

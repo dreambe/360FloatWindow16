@@ -55,7 +55,7 @@ public class AlarmMainActivity extends Activity {
 			// TODO Auto-generated catch block
 			// e.printStackTrace();
 			Toast.makeText(AlarmMainActivity.this,
-					"GetAlarmDatasFromSharedPreferences()�쳣", Toast.LENGTH_LONG)
+					"GetAlarmDatasFromSharedPreferences()异常", Toast.LENGTH_LONG)
 					.show();
 		}
 		Toast.makeText(AlarmMainActivity.this, "onResume()", Toast.LENGTH_LONG)
@@ -176,7 +176,7 @@ public class AlarmMainActivity extends Activity {
 				// TODO Auto-generated catch block
 				// e.printStackTrace();
 				Toast.makeText(AlarmMainActivity.this,
-						"GetAlarmDatasFromSharedPreferences()�쳣",
+						"GetAlarmDatasFromSharedPreferences()异常",
 
 						Toast.LENGTH_LONG).show();
 			}
@@ -218,17 +218,17 @@ public class AlarmMainActivity extends Activity {
 			openMsg = (TextView) view.findViewById(R.id.array_open);
 			button = (Button) view.findViewById(R.id.array_button);
 			MyData data = arr.get(position);
-			String msg = "����ʱ";
+			String msg = "倒计时";
 			if (data.hour != 0) {
-				msg = msg + data.hour + "Сʱ";
+				msg = msg + data.hour + "小时";
 			}
-			msg = msg + data.minute + "����";
+			msg = msg + data.minute + "分钟";
 			timeMsg.setText(msg);
 			if (data.open) {
-				openMsg.setText("�ѿ���");
+				openMsg.setText("已开启");
 
 			} else {
-				openMsg.setText("�ѹر�");
+				openMsg.setText("已关闭");
 			}
 			switch_open.setChecked(data.open);
 			switch_open
@@ -245,16 +245,14 @@ public class AlarmMainActivity extends Activity {
 								// TODO Auto-generated catch block
 								// e.printStackTrace();
 								Toast.makeText(AlarmMainActivity.this,
-										"PutAlarmDatasToSharedPreferences()�쳣",
+										"PutAlarmDatasToSharedPreferences()异常",
 
 										Toast.LENGTH_LONG).show();
 							}
 							adapter.notifyDataSetChanged();
 							if (isChecked) {
-								//��Ҫ���  openMsg.setText("�ѹر�");
 								OpenAlarm(arr.get(position));
 							} else {
-								//��Ҫ���  openMsg.setText("�ѹر�");
 								CloseAlarm(arr.get(position));
 							}
 						}
@@ -273,7 +271,7 @@ public class AlarmMainActivity extends Activity {
 						// TODO Auto-generated catch block
 						// e.printStackTrace();
 						Toast.makeText(AlarmMainActivity.this,
-								"PutAlarmDatasToSharedPreferences()�쳣",
+								"PutAlarmDatasToSharedPreferences()异常",
 
 								Toast.LENGTH_LONG).show();
 					}

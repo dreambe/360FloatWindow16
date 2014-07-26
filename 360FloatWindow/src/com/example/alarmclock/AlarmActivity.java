@@ -54,7 +54,7 @@ public class AlarmActivity extends Activity {
 		set_ring = extras.getBoolean("set_ring");
 		set_vibrator = extras.getBoolean("set_vibrator");
 		alarmID=extras.getInt("alarmID");		
-		// ÉèÖÃÕñ¶¯
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		vibrator = (Vibrator) getSystemService(Service.VIBRATOR_SERVICE);
 		hasVibrator = vibrator.hasVibrator();
 		if (hasVibrator && set_vibrator) {
@@ -62,7 +62,7 @@ public class AlarmActivity extends Activity {
 					-1);
 		}
 
-		// ÉèÖÃÁåÉù
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		if (set_ring) {
 			alarmMusic = MediaPlayer.create(this, R.raw.alarm);
 			//alarmMusic.setLooping(true);
@@ -114,13 +114,11 @@ public class AlarmActivity extends Activity {
 			Toast.makeText(AlarmActivity.this, "UpdateAlarmDatasToSharedPreferences()",
 					Toast.LENGTH_SHORT).show();
 		}
-		AlarmActivity.this.finish();// ¹Ø±ÕActivity
+		AlarmActivity.this.finish();// ï¿½Ø±ï¿½Activity
 	}
 	
 	public void UpdateAlarmDatasToSharedPreferences(String appName,int alarmID)throws Throwable
 	{
-		//¸üĞÂSharedPreferencesÎÄ¼ş£¬ÉèÖÃÄÖÖÓÎª¹Ø±Õ
-		//»ñµÃSharedPreferencesÖĞÊ±¼äĞÅÏ¢
 		ArrayList<MyData> list = new ArrayList<MyData>();
 		SharedPreferences sharedPreferences = getSharedPreferences(
 				"AlarmInfos", Activity.MODE_PRIVATE);
@@ -136,7 +134,7 @@ public class AlarmActivity extends Activity {
 			objectInputStream.close();
 			String a="";
 			a+=alarmID;
-			//¸ù¾İalarmID²éÕÒÄÖÖÓ£¬ÉèÖÃ×´Ì¬Îª¹Ø±Õ
+			
 			for(int i=0;i<list.size();i++)
 			{				
 				if(list.get(i).arrAlarmNumber==alarmID)
@@ -144,12 +142,13 @@ public class AlarmActivity extends Activity {
 					list.get(i).open=false;					
 					//break;
 				}
-				a+="  µÚ"+list.get(i).arrAlarmNumber+"¸ö£º"+list.get(i).open;
+				//ç”¨äºæ˜¾ç¤ºé—¹é’Ÿä¿¡æ¯
+				a+="  ç¬¬"+list.get(i).arrAlarmNumber+"ä¸ª"+list.get(i).open;
 			}
 			Toast.makeText(AlarmActivity.this, a,
 					Toast.LENGTH_SHORT).show();
 			
-			//¸üĞÂSharedPreferencesÄÖÖÓĞÅÏ¢
+			
 			ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 			ObjectOutputStream objectOutputStream = new ObjectOutputStream(
 					byteArrayOutputStream);
