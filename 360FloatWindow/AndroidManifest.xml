@@ -15,7 +15,7 @@
 
     <uses-sdk
         android:minSdkVersion="14"
-        android:targetSdkVersion="19" />
+        android:targetSdkVersion="16" />
 
     <application
         android:name="com.example.capture.ScreenshotApplication"
@@ -49,7 +49,7 @@
         <activity
             android:name="com.example.alarmclock.SetAlarmActivity"
             android:label="设置闹钟"
-            android:theme="@android:style/Theme.NoTitleBar" />
+            android:theme="@android:style/Theme.Holo.Light.NoActionBar" />
         <activity
             android:name="com.example.alarmclock.AlarmActivity"
             android:theme="@android:style/Theme.Dialog" />
