@@ -141,6 +141,8 @@ public class FloatWindowMainView extends LinearLayout {
                         	buttonGroup.setVisibility(8);
                             Intent intent = new Intent();
                             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            //需要传入游戏的package name
+                            intent.putExtra("target_pkgname", "com.UCMobile");
                             intent.setClass(FloatWindowMainView.this.getContext(), AlarmMainActivity.class);//前面一个是一个Activity后面一个是要跳转的Activity  
                             FloatWindowMainView.this.getContext().startActivity(intent);//开始界面的跳转函数  
                             Log.i("1", "------1-----");

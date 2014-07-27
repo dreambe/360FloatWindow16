@@ -43,22 +43,35 @@ public class AlarmMainActivity extends Activity {
 	public MyAdapter adapter;
 	private Button btn_stop = null;
 	private Button btn_alarm = null;
-
+	private TextView titleText=null;
 	private AlarmManager alarmManager = null;
 	final int DIALOG_TIME = 0;
 	boolean hasAlarm = false;
-
-	String appName = "weibo";
-
+	String packageName;
+	String appName;
+	//String appName = "weibo";
+	
 	@Override
 	protected void onResume() {
 		super.onResume();
+		packageName=getIntent().getStringExtra(EXTRA_STRING_TARGET_PKG_NAME);
+		if(packageName==null||packageName=="")
+		{
+			packageName="我的游戏";
+		}
+		appName=MyProgramPackage.getProgramNameByPackageName(this, 
+				packageName);
+		if(appName==null||appName=="")
+		{
+			appName="我的游戏";
+		}
+		titleText.setText(appName+"闹钟列表");
 		try {
 			//获得SharedPreferences数据
 			alarm_nuber=GetAlarmNumberFromSharedPreferences();
 			Log.e("onResume", "alarm_nuber:"+alarm_nuber);
 			adapter.arr.clear();
-			ArrayList<MyData> list= GetAlarmDatasFromSharedPreferences(appName);
+			ArrayList<MyData> list= GetAlarmDatasFromSharedPreferences(packageName);
 			for(int i=0;i<list.size();i++)
 			{
 				MyData t=list.get(i);
@@ -83,8 +96,7 @@ public class AlarmMainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.alarm_main);
-
-		TextView titleText = (TextView) findViewById(R.id.title_text);
+		titleText = (TextView) findViewById(R.id.title_text);
 		titleText.setText("闹钟列表");
 		View titleClose = findViewById(R.id.title_close_btn);
 		titleClose.setOnClickListener(new View.OnClickListener() {
@@ -134,6 +146,7 @@ public class AlarmMainActivity extends Activity {
 				Intent intent = new Intent(AlarmMainActivity.this,
 						AlarmActivity.class);
 				intent.putExtras(bundle);
+				intent.putExtra(AlarmActivity.EXTRA_STRING_TARGET_PKG_NAME, getIntent().getStringExtra(EXTRA_STRING_TARGET_PKG_NAME));
 				intent.setAction("com.alarm.action_alarm_on");
 				
 				PendingIntent pi = PendingIntent.getActivity(
@@ -157,7 +170,7 @@ public class AlarmMainActivity extends Activity {
 				adapter.arr.add(data);
 				
 				try {
-					PutAlarmDatasToSharedPreferences(appName, adapter.arr);
+					PutAlarmDatasToSharedPreferences(packageName, adapter.arr);
 				} catch (Throwable e) {
 					// TODO Auto-generated catch block
 					// e.printStackTrace();
@@ -277,8 +290,8 @@ public class AlarmMainActivity extends Activity {
 							
 							System.out.println(arr.get(position));
 							try {
-								PutAlarmDatasToSharedPreferences(appName, arr);
-								ArrayList<MyData> l=GetAlarmDatasFromSharedPreferences(appName);
+								PutAlarmDatasToSharedPreferences(packageName, arr);
+								ArrayList<MyData> l=GetAlarmDatasFromSharedPreferences(packageName);
 								for(int i=0;i<l.size();i++)
 								{
 									MyData t=l.get(i);
@@ -323,7 +336,7 @@ public class AlarmMainActivity extends Activity {
 					CloseAlarm(arr.get(position));
 					arr.remove(position);
 					try {
-						PutAlarmDatasToSharedPreferences(appName, arr);
+						PutAlarmDatasToSharedPreferences(packageName, arr);
 					} catch (Throwable e) {
 						// TODO Auto-generated catch block
 						// e.printStackTrace();
@@ -356,6 +369,8 @@ public class AlarmMainActivity extends Activity {
 		Intent intent = new Intent(AlarmMainActivity.this, AlarmActivity.class);
 		intent.setAction("com.alarm.action_alarm_on");
 		intent.putExtras(bundle);
+		intent.putExtra(AlarmActivity.EXTRA_STRING_TARGET_PKG_NAME, getIntent().getStringExtra(EXTRA_STRING_TARGET_PKG_NAME));
+		
 		PendingIntent pi = PendingIntent.getActivity(AlarmMainActivity.this,
 				data.arrAlarmNumber, intent, 0);
 		alarmManager.cancel(pi);
@@ -375,7 +390,7 @@ public class AlarmMainActivity extends Activity {
 		Intent intent = new Intent(AlarmMainActivity.this, AlarmActivity.class);
 		intent.setAction("com.alarm.action_alarm_on");
 		intent.putExtras(bundle);
-
+		intent.putExtra(AlarmActivity.EXTRA_STRING_TARGET_PKG_NAME, getIntent().getStringExtra(EXTRA_STRING_TARGET_PKG_NAME));
 		long timemillis = 60 * 1000 * (data.hour * 60 + data.minute);
 		PendingIntent pi = PendingIntent.getActivity(AlarmMainActivity.this,
 				data.arrAlarmNumber, intent, 0);
@@ -397,12 +412,12 @@ public class AlarmMainActivity extends Activity {
 	}
 
 	@SuppressWarnings("unchecked")
-	public ArrayList<MyData> GetAlarmDatasFromSharedPreferences(String appName)
+	public ArrayList<MyData> GetAlarmDatasFromSharedPreferences(String packageName)
 			throws Throwable {
 		ArrayList<MyData> list = new ArrayList<MyData>();
 		SharedPreferences sharedPreferences = getSharedPreferences(
 				"AlarmInfos", Activity.MODE_PRIVATE);
-		String info = sharedPreferences.getString(appName, "");
+		String info = sharedPreferences.getString(packageName, "");
 		if (info != "") {
 			byte[] infoBytes = Base64.decode(info.getBytes(), Base64.DEFAULT);
 			// byte[] infoBytes = info.getBytes();
@@ -418,13 +433,13 @@ public class AlarmMainActivity extends Activity {
 
 	}
 
-	public void PutAlarmDatasToSharedPreferences(String appName,
+	public void PutAlarmDatasToSharedPreferences(String packageName,
 			ArrayList<MyData> list) throws Throwable {
 
-		for (int i = 0; i < list.size(); i++) {
+		/*for (int i = 0; i < list.size(); i++) {
 			Log.i("PutAlarmDatasToSharedPreferences()","hour:"+list.get(i).hour);
 			Log.i("PutAlarmDatasToSharedPreferences()","minute"+list.get(i).minute);
-		}
+		}*/
 
 		ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 		ObjectOutputStream objectOutputStream = new ObjectOutputStream(
@@ -437,7 +452,7 @@ public class AlarmMainActivity extends Activity {
 		Editor editor = sharedPreferences.edit();
 		String info = new String(Base64.encode(
 				byteArrayOutputStream.toByteArray(), Base64.DEFAULT));
-		editor.putString(appName, info);
+		editor.putString(packageName, info);
 		editor.commit();
 		objectOutputStream.close();
 
