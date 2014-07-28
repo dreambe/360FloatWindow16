@@ -98,13 +98,13 @@ public class AlarmActivity extends Activity {
 		}
 
 		//结束游戏
-		btn_game_stop = (Button) findViewById(R.id.btn_game_stop);
+/*		btn_game_stop = (Button) findViewById(R.id.btn_game_stop);
 		btn_game_stop.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				MyProgramPackage.CloseProgramByPackageName(AlarmActivity.this, packageName);
 				CloseAlarm();
 			}
-		});
+		});*/
 		
 		//进入游戏
 		btn_game_start = (Button) findViewById(R.id.btn_game_start);

@@ -72,6 +72,7 @@ public class AlarmMainActivity extends Activity {
 			Log.e("onResume", "alarm_nuber:"+alarm_nuber);
 			adapter.arr.clear();
 			ArrayList<MyData> list= GetAlarmDatasFromSharedPreferences(packageName);
+			Log.e("ArrayList<MyData>",""+list.size());
 			for(int i=0;i<list.size();i++)
 			{
 				MyData t=list.get(i);
@@ -88,8 +89,19 @@ public class AlarmMainActivity extends Activity {
 		}
 		Toast.makeText(AlarmMainActivity.this, "onResume()", Toast.LENGTH_LONG)
 				.show();
-		//更新界面
-		adapter.notifyDataSetChanged();
+		
+		if(adapter.arr.size()==0)
+		{
+			Intent intent = new Intent(AlarmMainActivity.this,
+					SetAlarmActivity.class);
+			intent.putExtra(SetAlarmActivity.EXTRA_STRING_TARGET_PKG_NAME, getIntent().getStringExtra(EXTRA_STRING_TARGET_PKG_NAME));
+			startActivityForResult(intent, SET_ALARM);
+		}
+		else
+		{
+			//更新界面
+			adapter.notifyDataSetChanged();
+		}		
 	}
 
 	@Override
