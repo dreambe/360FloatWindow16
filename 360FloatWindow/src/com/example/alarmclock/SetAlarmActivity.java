@@ -2,6 +2,7 @@ package com.example.alarmclock;
 
 import android.app.Activity;
 import android.app.AlarmManager;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.drawable.Drawable;
@@ -32,7 +33,7 @@ public class SetAlarmActivity extends Activity {
 	private ImageView mAppIconImage = null;
 	private AsyncTask<String, Void, Drawable> mLoadIconTask;
 	private Animation mExpandAlphaInAnim;
-	
+	private int currentAlarmNumber;
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -50,22 +51,28 @@ public class SetAlarmActivity extends Activity {
             }
         });
 		
-		mAppIconImage = (ImageView) findViewById(R.id.app_icon);
+		Bundle bundle = getIntent().getExtras();		
+		currentAlarmNumber= bundle.getInt("alarmID");
+		int hour = bundle.getInt("hour");
+		int minute = bundle.getInt("minute");
+		boolean set_vibrator = bundle.getBoolean("set_vibrator");
+		boolean set_ring = bundle.getBoolean("set_ring");		
 		
+		mAppIconImage = (ImageView) findViewById(R.id.app_icon);		
 		numberPicker1=(NumberPicker)findViewById(R.id.numberPicker1);
 		numberPicker1.setMaxValue(23);
 		numberPicker1.setMinValue(0);
-		numberPicker1.setValue(0);
+		numberPicker1.setValue(hour);
 		numberPicker2=(NumberPicker)findViewById(R.id.numberPicker2);
 		numberPicker2.setMaxValue(59);
 		numberPicker2.setMinValue(0);
-		numberPicker2.setValue(0);
+		numberPicker2.setValue(minute);
 
 		//Switch
 		switch_vibrate=(Switch)findViewById(R.id.switch_vibrate);
-		switch_vibrate.setChecked(true);		
+		switch_vibrate.setChecked(set_vibrator);		
 		switch_ring=(Switch)findViewById(R.id.switch_ring);
-		switch_ring.setChecked(true);
+		switch_ring.setChecked(set_ring);
 		
 		mExpandAlphaInAnim = AnimationUtils.loadAnimation(this, R.anim.expand_alpha_in);
 		
@@ -79,7 +86,9 @@ public class SetAlarmActivity extends Activity {
 	        	bundle.putInt("minute",numberPicker2.getValue());
 	        	bundle.putBoolean("set_vibrator",switch_vibrate.isChecked());
 	        	bundle.putBoolean("set_ring",switch_ring.isChecked());
-	        	SetAlarmActivity.this.setResult(RESULT_OK, SetAlarmActivity.this.getIntent().putExtras(bundle));
+	        	bundle.putInt("alarmID",currentAlarmNumber);
+	        	Intent newIntent=SetAlarmActivity.this.getIntent().putExtras(bundle);
+	        	SetAlarmActivity.this.setResult(RESULT_OK, newIntent);
 				SetAlarmActivity.this.finish();
 				}
 				else

@@ -13,15 +13,20 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.AsyncTask;
 import android.os.Handler;
+import android.os.HandlerThread;
 import android.os.IBinder;
 import android.os.Message;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 public class FloatWindowService extends Service {
+    private static final String TAG = FloatWindowService.class.getSimpleName();
 
 	private static final int TYPE_GAME = 0;
 
     private static final int TYPE_UNKNOWN = 0;
+    
+    private static String lastPackageName = null;
 
     /**
 	 * 用于在线程中创建或移除悬浮窗。
@@ -39,6 +44,9 @@ public class FloatWindowService extends Service {
 	 */
 	private Timer timer;
 
+    private HandlerThread mHandlerThread;
+    private Handler mWorkHandler;
+
 	@Override
 	public IBinder onBind(Intent intent) {
 		return null;
@@ -47,7 +55,53 @@ public class FloatWindowService extends Service {
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {		
 		handler.post(thread);
+		mWorkHandler.post(new Runnable() {
+            
+            @Override
+            public void run() {
+                
+                ActivityManager am = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+                List<RunningTaskInfo> tasks = am.getRunningTasks(1);
+                ComponentName topActivity = tasks.get(0).topActivity;
+                
+                // TODO: 接入助手接口
+                int type = TYPE_GAME;
+        
+                SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                sp.getInt(topActivity.getPackageName(), TYPE_UNKNOWN);
+                Editor editor = sp.edit();
+                try {
+                    Thread.sleep(100);
+                    type = TYPE_GAME;
+                    Log.d(TAG, "get type :" + type + " in thread " + Thread.currentThread().getId());
+                } catch (InterruptedException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+                editor.putInt(topActivity.getPackageName(), type);
+                if (type == TYPE_GAME) {
+                    final int ftype = type;
+                    handler.post(new Runnable() {
+                        
+                        @Override
+                        public void run() {
+                            Log.d(TAG, "send type to ui thread:" + ftype + " in thread " + Thread.currentThread().getId());
+                        }
+                    });
+                }
+                
+                mWorkHandler.postDelayed(this, 500);
+            }
+        });
 		return super.onStartCommand(intent, flags, startId);
+	}
+	
+	@Override
+	public void onCreate() {
+	    super.onCreate();
+	    mHandlerThread = new HandlerThread("handlerThread");
+	    mHandlerThread.start();
+	    mWorkHandler = new Handler(mHandlerThread.getLooper());
 	}
 
 	@Override
@@ -56,6 +110,7 @@ public class FloatWindowService extends Service {
 		// Service被终止的同时也停止定时器
 		timer.cancel();
 		timer = null;
+		mHandlerThread.quit();
 	}
 
 	Runnable thread = new Runnable(){
@@ -122,6 +177,10 @@ public class FloatWindowService extends Service {
         editor.putInt(topActivity.getPackageName(), type);
 //        return topActivity.getPackageName().equals("sh.lilith.dgame.s37wan")||
 //        		topActivity.getPackageName().equals("com.sina.weibo");
+        if(lastPackageName != null && lastPackageName != topActivity.getPackageName()){
+        	return false;
+        }
+        
         return true;
     }
     
