@@ -11,19 +11,20 @@ import android.widget.TextView;
 import com.example.floatwindow.R;
 
 public class GameGuideWebViewActivity extends Activity {
+	
     public static final String EXTRA_STRING_URL = "url";
-
     private WebView mWebView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_guide_webview);
+        
         TextView title = (TextView) findViewById(R.id.title_text);
         title.setText("游戏攻略");
+        
         View titleCloseBtn = findViewById(R.id.title_close_btn);
         titleCloseBtn.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 finish();

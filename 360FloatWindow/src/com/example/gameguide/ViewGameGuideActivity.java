@@ -28,11 +28,10 @@ import android.widget.TextView;
 import com.example.floatwindow.R;
 
 public class ViewGameGuideActivity extends Activity implements OnItemClickListener {
-    public static final String EXTRA_KEY_STRING_TARGET_PKG_NAME = "target_pkg";
+	
+    public static final String EXTRA_KEY_STRING_TARGET_PKG_NAME = "target_pkgname";
 
     private static final String TAG = "ViewGameGuideActivity";
-
-    private ImageView mAppIconImageView;
 
     private ListView mListView;
 
@@ -56,21 +55,24 @@ public class ViewGameGuideActivity extends Activity implements OnItemClickListen
 
     private Animation mExpandAlphaInAnim;
 
-    private String EXTRA_STRING_TARGET_PKG_NAME;
+    //private String EXTRA_STRING_TARGET_PKG_NAME;
 
     private TextView mEmptyTextView;
 
     private ViewGroup mEmtpyView;
+    
+    private String jsonStr = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_game_guide);
+        
         TextView title = (TextView) findViewById(R.id.title_text);
         title.setText("游戏攻略");
+        
         View titleClose = findViewById(R.id.title_close_btn);
         titleClose.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 finish();
@@ -85,6 +87,7 @@ public class ViewGameGuideActivity extends Activity implements OnItemClickListen
         }, new int[] {
             R.id.text
         });
+        
         mEmtpyView = (ViewGroup) findViewById(R.id.empty_view);
         mEmptyTextView = (TextView) findViewById(R.id.empty_text_view);
         mEmptyTextView.setText("正在加载..."); //没有加载完成前， 替代ListView显示的EmptyView文案是这个
@@ -93,20 +96,20 @@ public class ViewGameGuideActivity extends Activity implements OnItemClickListen
         mListView.setEmptyView(mEmtpyView);
 
         loadData();
+        
         mLoadIconTask = new AsyncTask<String, Void, Drawable>() {
 
             @Override
             protected Drawable doInBackground(String... arg0) {
                 PackageManager pm = getPackageManager();
                 String pkgName = arg0[0];
+                Drawable icon = null;
                 try {
-                    Drawable icon = pm.getApplicationIcon(pkgName);
+                	icon = pm.getApplicationIcon(pkgName);
                     return icon;
                 } catch (NameNotFoundException e) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
-
                 return null;
             }
 
@@ -124,7 +127,7 @@ public class ViewGameGuideActivity extends Activity implements OnItemClickListen
                 mLoadIconTask = null;
             }
         };
-        mLoadIconTask.execute(getIntent().getStringExtra(EXTRA_STRING_TARGET_PKG_NAME));
+        mLoadIconTask.execute(getIntent().getStringExtra(EXTRA_KEY_STRING_TARGET_PKG_NAME));
     }
 
     private void loadData() {
@@ -137,13 +140,27 @@ public class ViewGameGuideActivity extends Activity implements OnItemClickListen
 
                 @Override
                 protected Void doInBackground(String... arg0) {
-                    String pkgName = arg0[0];
-                    // TODO: 添加真实获取数据的流程 
-
-                    for (int i = 0; i < 3; ++i) {
+                    String packageName = arg0[0];
+                    //String packageName = "com.gameloft.android.ANMP.GloftDMHM";
+                    
+                    if(jsonStr == null)
+                    {
+                    	jsonStr = WinFloatUtils.download(packageName);
+                    }
+                    List<Guide> guides = WinFloatUtils.getGuide(jsonStr);
+                    
+                    if(guides == null || guides.size() <= 0)
+                    {
+                    	return null;
+                    }
+                    for (int i = 0; i < guides.size(); ++i) {
                         GuideItem item = new GuideItem();
-                        item.guideTip = "游戏攻略条目" + i;
-                        item.url = "http://www.so.com";
+                        
+                        item.guideTip = guides.get(i).getGuideTitle();
+                        item.url = guides.get(i).getUrl();
+                        
+                        //item.guideTip = "游戏攻略条目" + i;
+                        //item.url = "http://www.so.com";
                         mGuideLists.add(item);
                     }
                     // 转化为SimpleAdapter可用的数据
@@ -152,7 +169,6 @@ public class ViewGameGuideActivity extends Activity implements OnItemClickListen
                         map.put("GUIDE_TEXT", item.guideTip);
                         mGuideListItemMap.add(map);
                     }
-
                     return null;
                 }
 
@@ -165,7 +181,6 @@ public class ViewGameGuideActivity extends Activity implements OnItemClickListen
                     mAdapter.notifyDataSetChanged();
                     mLoadDataTask = null;
                 }
-
             };
             mLoadDataTask.execute(getIntent().getStringExtra(EXTRA_KEY_STRING_TARGET_PKG_NAME));
         }
@@ -194,5 +209,4 @@ public class ViewGameGuideActivity extends Activity implements OnItemClickListen
             startActivity(intent);
         }
     }
-
 }
