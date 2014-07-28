@@ -5,16 +5,20 @@
     android:layout_height="fill_parent"
     tools:context=".AlarmMainActivity"
     android:id="@+id/relate"
-    android:background="#FFFFFF" >
+    android:background="@color/common_bg_color"
+    android:orientation="vertical" >
     
 
+    <include
+        android:id="@+id/title"
+        layout="@layout/title_bar" />
+    
     <Button
         android:id="@+id/start_float_window"
+        style="@style/blue_btn"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_marginBottom="180dp"
-        android:text="悬浮窗" />
-    
+        android:layout_height="50dp"
+        android:layout_centerInParent="true"
+        android:text="开启游戏小助手" />
+
 </RelativeLayout>
