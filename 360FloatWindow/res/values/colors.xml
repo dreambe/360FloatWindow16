@@ -2,5 +2,6 @@
 <resources>
 
     <color name="common_bg_color">#f0f0f0</color>
+    <color name="transparent">#0000</color>
 
 </resources>

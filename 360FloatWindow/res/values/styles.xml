@@ -29,10 +29,11 @@
         <item name="android:shadowDy">2</item>
     </style>
     
-         <!-- 定义一个样式，继承android系统的对话框样式 android:style/Theme.Dialog-->  
     <style name="Theme.FloatActivity" parent="android:style/Theme.Dialog">  
-        <!-- float_box为我们定义的窗口背景-->  
-        <item name="android:windowBackground">@drawable/jiasu</item>  
+        <!--   <item name="android:windowBackground">@drawable/jiasu</item>   -->
+        <item name="android:windowBackground">@color/transparent</item>
+　　                  <item name="android:windowIsTranslucent">true</item>
+　　                  <item name="android:windowAnimationStyle">@+android:style/Animation.Translucent</item>  
     </style>  
 
 </resources>
