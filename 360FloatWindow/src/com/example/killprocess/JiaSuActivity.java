@@ -66,7 +66,7 @@ public class JiaSuActivity extends Activity {
         LinearInterpolator lin = new LinearInterpolator();  
         operatingAnim.setInterpolator(lin);  
         image.startAnimation(operatingAnim); 
-        handler.postDelayed(new KillThread(), 3000);
+        handler.postDelayed(new KillThread(), 2000);
         
     }
     
