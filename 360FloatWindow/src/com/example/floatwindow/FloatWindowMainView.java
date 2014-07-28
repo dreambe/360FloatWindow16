@@ -8,6 +8,7 @@ import com.example.floatwindow.R;
 import com.example.floatwindow.MyAnimations;
 import com.example.gameguide.ViewGameGuideActivity;
 import com.example.killprocess.KillProcess;
+import com.example.floatwindow.MyPackageName;
 
 import android.content.Context;
 import android.content.Intent;
@@ -138,31 +139,37 @@ public class FloatWindowMainView extends LinearLayout {
                             Log.i("0", "------0-----");
                             break;
                         case 1:
+                        	//闹钟
                         	buttonGroup.setVisibility(8);
                             Intent intent = new Intent();
                             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             //需要传入游戏的package name
-                            intent.putExtra("target_pkgname", "com.UCMobile");
+                            String packageName = MyPackageName.getRunningPackageName(FloatWindowMainView.this.getContext());
+                            intent.putExtra("target_pkgname", packageName);
                             intent.setClass(FloatWindowMainView.this.getContext(), AlarmMainActivity.class);//前面一个是一个Activity后面一个是要跳转的Activity  
                             FloatWindowMainView.this.getContext().startActivity(intent);//开始界面的跳转函数  
                             Log.i("1", "------1-----");
                             break;
-                        case 2: {
-                            buttonGroup.setVisibility(8);
-                            Intent intent2 = new Intent();
-                            intent2.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                            intent2.setClass(FloatWindowMainView.this.getContext(), ViewGameGuideActivity.class);//前面一个是一个Activity后面一个是要跳转的Activity  
-                            FloatWindowMainView.this.getContext().startActivity(intent2);//开始界面的跳转函数  
+                        case 2: 
+                        	//吐槽
+                            
                             Log.i("2", "------2----");
                             break;
-                        }
+                        
                         case 3:
+                        	//截屏分享
                         	buttonGroup.setVisibility(8);
                         	Intent intent2 = new Intent(FloatWindowMainView.this.getContext(), CaptureService.class);
                             FloatWindowMainView.this.getContext().startService(intent2);
                             Log.i("3", "------3----");
                             break;
                         case 4:
+                        	//攻略
+                        	buttonGroup.setVisibility(8);
+                            Intent intent4 = new Intent();
+                            intent4.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            intent4.setClass(FloatWindowMainView.this.getContext(), ViewGameGuideActivity.class);//前面一个是一个Activity后面一个是要跳转的Activity  
+                            FloatWindowMainView.this.getContext().startActivity(intent4);//开始界面的跳转函数  
                             Log.i("4", "------4-----");
                             break;
                         case 5:
