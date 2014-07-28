@@ -8,6 +8,7 @@ import com.example.alarmclock.AlarmMainActivity;
 import com.example.capture.CaptureService;
 import com.example.capture.CapturedImageActivity;
 import com.example.commit.CommitActivity;
+import com.example.cutInternet.CutInternet;
 import com.example.floatwindow.R;
 import com.example.floatwindow.MyAnimations;
 import com.example.gameguide.ViewGameGuideActivity;
@@ -37,6 +38,8 @@ public class FloatWindowMainView extends LinearLayout {
     private RelativeLayout buttonGroup;
 
     private ImageView floatMainButton;
+    
+    private CutInternet cut;
 
     ImageButton btn_skin;
 
@@ -180,6 +183,7 @@ public class FloatWindowMainView extends LinearLayout {
                         case 4:
                         	//攻略
                         	buttonGroup.setVisibility(8);
+                        	areButtonsShowing = !areButtonsShowing;
                         	Intent intent4 = new Intent();
                             packageName = MyPackageName.getRunningPackageName(FloatWindowMainView.this.getContext());
                             intent4.putExtra("target_pkgname", packageName);
@@ -189,6 +193,11 @@ public class FloatWindowMainView extends LinearLayout {
                             Log.i("4", "------4-----");
                             break;
                         case 5:
+                        	buttonGroup.setVisibility(8);
+                        	areButtonsShowing = !areButtonsShowing;
+                        	cut = new CutInternet();
+                        	cut.toggleMobileData(FloatWindowMainView.this.getContext(), false);
+//                        	cut.toggleWiFi(FloatWindowMainView.this.getContext(), false);
                             Log.i("5", "------5-----");
                             break;
                     }
