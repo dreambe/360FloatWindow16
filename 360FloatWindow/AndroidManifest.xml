@@ -53,7 +53,8 @@
         <activity
             android:label="时间到了"
             android:name="com.example.alarmclock.AlarmActivity"
-            android:theme="@android:style/Theme.Dialog" />
+            android:theme="@style/Theme.CustomDialog"
+             />
         <!--
         android:process=":remote": 新开一个进程 
         <receiver android:name="com.example.alarmclock.AlarmReceiver" />

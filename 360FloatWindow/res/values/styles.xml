@@ -29,11 +29,28 @@
         <item name="android:shadowDy">2</item>
     </style>
     
+    <style name="grey_btn">
+        <item name="android:background">@drawable/selector_btn_grey</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:shadowColor">#3d3d3d</item>
+        <item name="android:layout_margin">5.0dip</item>
+        <item name="android:padding">5.0dip</item>
+        <item name="android:gravity">center</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:shadowDy">2</item>
+    </style>
+    
     <style name="Theme.FloatActivity" parent="android:style/Theme.Dialog">  
         <!--   <item name="android:windowBackground">@drawable/jiasu</item>   -->
         <item name="android:windowBackground">@color/transparent</item>
 　　                  <item name="android:windowIsTranslucent">true</item>
 　　                  <item name="android:windowAnimationStyle">@+android:style/Animation.Translucent</item>  
     </style>  
+
+    <style name="Theme.AlarmActivity" parent="android:style/Theme.Dialog">  
+        <item name="android:windowBackground">@drawable/jiasu</item>
+    </style> 
+
 
 </resources>
