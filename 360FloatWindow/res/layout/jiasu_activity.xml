@@ -12,10 +12,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/accelerating1" />
+        android:src="@drawable/accelerating" />
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/jiasuTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
