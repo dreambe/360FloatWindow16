@@ -4,6 +4,7 @@ package com.example.floatwindow;
 import com.example.alarmclock.AlarmMainActivity;
 import com.example.capture.CaptureService;
 import com.example.capture.CapturedImageActivity;
+import com.example.commit.CommitActivity;
 import com.example.floatwindow.R;
 import com.example.floatwindow.MyAnimations;
 import com.example.gameguide.ViewGameGuideActivity;
@@ -112,10 +113,8 @@ public class FloatWindowMainView extends LinearLayout {
             @Override
             public void onClick(View v) {
                 if (areButtonsShowing == true) {
-//                	buttonGroup.setVisibility(8);
                     floatMainButton.startAnimation(MyAnimations.getRotateAnimation(0, -360, 300));
                     MyAnimations.startAnimationsIn(buttonGroup, 1000);
-//                    buttonGroup.setVisibility(8);
                 } 
                 else if(areButtonsShowing == false || buttonGroup.getVisibility() == 8) {
                 	buttonGroup.setVisibility(0);
@@ -135,6 +134,7 @@ public class FloatWindowMainView extends LinearLayout {
                     switch (position) {
                         case 0:
                         	buttonGroup.setVisibility(8);
+                        	areButtonsShowing = !areButtonsShowing;
                             Intent jiasuIntent = new Intent();
                             jiasuIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             jiasuIntent.setClass(FloatWindowMainView.this.getContext(), JiaSuActivity.class);//前面一个是一个Activity后面一个是要跳转的Activity  
@@ -144,6 +144,7 @@ public class FloatWindowMainView extends LinearLayout {
                         case 1:
                         	//闹钟
                         	buttonGroup.setVisibility(8);
+                        	areButtonsShowing = !areButtonsShowing;
                             Intent intent = new Intent();
                             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             //需要传入游戏的package name
@@ -155,13 +156,17 @@ public class FloatWindowMainView extends LinearLayout {
                             break;
                         case 2: 
                         	//吐槽
-                            
+                        	Intent intent5 = new Intent();
+                            intent5.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            intent5.setClass(FloatWindowMainView.this.getContext(), CommitActivity.class);
+                            FloatWindowMainView.this.getContext().startActivity(intent5);
                             Log.i("2", "------2----");
                             break;
                         
                         case 3:
                         	//截屏分享
                         	buttonGroup.setVisibility(8);
+                        	areButtonsShowing = !areButtonsShowing;
                         	Intent intent2 = new Intent(FloatWindowMainView.this.getContext(), CaptureService.class);
                             FloatWindowMainView.this.getContext().startService(intent2);
                             Log.i("3", "------3----");
@@ -169,6 +174,7 @@ public class FloatWindowMainView extends LinearLayout {
                         case 4:
                         	//攻略
                         	buttonGroup.setVisibility(8);
+                        	areButtonsShowing = !areButtonsShowing;
                             Intent intent4 = new Intent();
                             intent4.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             intent4.setClass(FloatWindowMainView.this.getContext(), ViewGameGuideActivity.class);//前面一个是一个Activity后面一个是要跳转的Activity  
