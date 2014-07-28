@@ -23,12 +23,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
             android:text="游戏名称"
             android:textSize="20sp" />
     </LinearLayout>
 
     <LinearLayout
+        android:layout_marginTop="20dp"
         android:id="@+id/layout_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -40,9 +41,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
+            style="@style/blue_btn"
             android:text="进入游戏" />
 
         <Button
+            style="@style/grey_btn"
             android:id="@+id/btn_game_ignore"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
