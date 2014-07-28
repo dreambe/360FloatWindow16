@@ -79,6 +79,11 @@
             android:configChanges="orientation|keyboardHidden"
             android:theme="@android:style/Theme.NoTitleBar" />
 
+        <!-- 赵晓彪 -->
+        <activity
+            android:name="com.example.commit.CommitActivity"
+            />
+        <service android:enabled="true" android:name="com.example.commint.MyService" />
     </application>
 
 </manifest>
