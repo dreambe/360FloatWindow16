@@ -4,52 +4,50 @@
     android:layout_height="wrap_content"
     android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/textView_gameName"
+    <LinearLayout
+        android:id="@+id/layout_gameInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:text="游戏名称"
-        android:textSize="20sp" />
-    
-    <TextView
-        android:id="@+id/textView_timeUp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView_gameName"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:text="时间到了"
-        android:textSize="20sp" />
+        android:layout_centerHorizontal="true" >
 
-<LinearLayout
-    android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/layout_button" 
-        android:layout_below="@+id/textView_timeUp"         
-        android:layout_centerHorizontal="true">
-     <Button
-        android:id="@+id/btn_game_start"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="进入游戏" 
-        android:layout_alignParentBottom="true"/>
-     <!-- 
-     <Button
-        android:id="@+id/btn_game_stop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="退出游戏"
-        android:layout_alignParentBottom="true" />
-      -->     
+        <ImageView
+            android:id="@+id/imageView_gameIcon"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_vertical"
+            android:scaleType="fitXY" />
 
-    <Button
-        android:id="@+id/btn_game_ignore"
+        <TextView
+            android:id="@+id/textView_gameName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:text="游戏名称"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="忽略提醒" 
-        android:layout_alignParentBottom="true"/>
-</LinearLayout>
+        android:layout_below="@+id/layout_gameInfo"
+        android:layout_centerHorizontal="true" >
+
+        <Button
+            android:id="@+id/btn_game_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:text="进入游戏" />
+
+        <Button
+            android:id="@+id/btn_game_ignore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:text="忽略提醒" />
+    </LinearLayout>
+
 </RelativeLayout>
-
