@@ -201,10 +201,11 @@ public class CommitActivity extends Activity
         {
 	        public void onClick(View v)
 	        {
-	        	onClose();
-	        	stopService(intent);
-	        	unbindService(mConnection);
-	        	m_mMyService.onDestroy();
+//	        	onClose();
+//	        	stopService(intent);
+//	        	unbindService(mConnection);
+//	        	m_mMyService.onDestroy();
+	        	m_mMyService.removeallview();
 	            finish();
 	        }
         });
