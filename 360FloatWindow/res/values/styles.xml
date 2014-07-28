@@ -35,5 +35,8 @@
 　　                  <item name="android:windowIsTranslucent">true</item>
 　　                  <item name="android:windowAnimationStyle">@+android:style/Animation.Translucent</item>  
     </style>  
+    <style name="Theme.AlarmActivity" parent="android:style/Theme.Dialog">  
+        <item name="android:windowBackground">@drawable/jiasu</item>
+    </style> 
 
 </resources>

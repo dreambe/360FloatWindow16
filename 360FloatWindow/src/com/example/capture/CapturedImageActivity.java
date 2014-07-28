@@ -31,7 +31,7 @@ public class CapturedImageActivity extends Activity{
         
         ImageButton btnOk = (ImageButton)findViewById(R.id.imageOK);
         btnOk.setOnClickListener(new View.OnClickListener() {
-			
+			 
 			@Override
 			public void onClick(View arg0) {
 				Intent intent=new Intent(Intent.ACTION_SEND);   
