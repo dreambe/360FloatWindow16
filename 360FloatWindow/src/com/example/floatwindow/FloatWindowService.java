@@ -25,6 +25,8 @@ public class FloatWindowService extends Service {
 	private static final int TYPE_GAME = 0;
 
     private static final int TYPE_UNKNOWN = 0;
+    
+    private static String lastPackageName = null;
 
     /**
 	 * 用于在线程中创建或移除悬浮窗。
@@ -175,16 +177,11 @@ public class FloatWindowService extends Service {
         editor.putInt(topActivity.getPackageName(), type);
 //        return topActivity.getPackageName().equals("sh.lilith.dgame.s37wan")||
 //        		topActivity.getPackageName().equals("com.sina.weibo");
+        if(lastPackageName != null && lastPackageName != topActivity.getPackageName()){
+        	return false;
+        }
+        
         return true;
     }
     
-    /**
-     *返回当前应用的包名
-     */
-    public String getRunningPackageName() {
-        ActivityManager am = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
-        ComponentName cn = am.getRunningTasks(2).get(0).topActivity;
-        
-        return cn.getPackageName();
-    }
 }

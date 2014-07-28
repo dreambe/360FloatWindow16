@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <!-- android:updatePeriodMillis="10000"> -->
+
+    <com.jzby.AutoScroll xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/TextViewNotice2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#0000ff"
+        android:inputType="text"
+        android:text=""
+        android:textColor="#00ff00"
+        android:textSize="25sp" />
