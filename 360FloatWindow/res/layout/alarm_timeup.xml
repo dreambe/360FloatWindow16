@@ -27,8 +27,7 @@
     android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/layout_button" 
-        android:layout_below="@+id/textView_timeUp" 
-        android:layout_alignParentBottom="true" 
+        android:layout_below="@+id/textView_timeUp"         
         android:layout_centerHorizontal="true">
      <Button
         android:id="@+id/btn_game_start"

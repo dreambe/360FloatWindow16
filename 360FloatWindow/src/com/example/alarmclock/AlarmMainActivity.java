@@ -90,18 +90,8 @@ public class AlarmMainActivity extends Activity {
 		Toast.makeText(AlarmMainActivity.this, "onResume()", Toast.LENGTH_LONG)
 				.show();
 		
-		if(adapter.arr.size()==0)
-		{
-			Intent intent = new Intent(AlarmMainActivity.this,
-					SetAlarmActivity.class);
-			intent.putExtra(SetAlarmActivity.EXTRA_STRING_TARGET_PKG_NAME, getIntent().getStringExtra(EXTRA_STRING_TARGET_PKG_NAME));
-			startActivityForResult(intent, SET_ALARM);
-		}
-		else
-		{
-			//更新界面
-			adapter.notifyDataSetChanged();
-		}		
+		//更新界面
+			adapter.notifyDataSetChanged();	
 	}
 
 	@Override
@@ -122,7 +112,7 @@ public class AlarmMainActivity extends Activity {
 		listview = (ListView) findViewById(R.id.listView1);
 		adapter = new MyAdapter(this);
 		listview.setAdapter(adapter);
-		alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+		alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);		
 		
 		//更新界面：OnCreate会调用OnResume，这里不再获取数据
 		//alarm_nuber=GetAlarmNumberFromSharedPreferences();
@@ -139,6 +129,22 @@ public class AlarmMainActivity extends Activity {
 		});		
 		Toast.makeText(AlarmMainActivity.this, "onCreate()", Toast.LENGTH_LONG)
 		.show();
+		
+		//如果原来没有闹钟数据，直接跳到闹钟设置页面
+				try {
+					ArrayList<MyData> list=GetAlarmDatasFromSharedPreferences(
+							getIntent().getStringExtra(EXTRA_STRING_TARGET_PKG_NAME));
+					if(list.size()==0)
+					{
+						Intent intent = new Intent(AlarmMainActivity.this,
+								SetAlarmActivity.class);
+						intent.putExtra(SetAlarmActivity.EXTRA_STRING_TARGET_PKG_NAME, getIntent().getStringExtra(EXTRA_STRING_TARGET_PKG_NAME));
+						startActivityForResult(intent, SET_ALARM);
+					}
+				} catch (Throwable e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 	}
 
 	@Override
@@ -199,6 +205,19 @@ public class AlarmMainActivity extends Activity {
 				//adapter.notifyDataSetChanged();		
 
 			} else if (resultCode == RESULT_CANCELED) {
+				
+				//闹钟设置中如果没有设置闹钟，判断原来有没有闹钟数据，没有的话推出
+				try {
+					ArrayList<MyData> list=GetAlarmDatasFromSharedPreferences(
+							getIntent().getStringExtra(EXTRA_STRING_TARGET_PKG_NAME));
+					if(list.size()==0)
+					{
+						finish();
+					}
+				} catch (Throwable e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 
 			}
 		} else if (requestCode == CALL_REQUEST) {
