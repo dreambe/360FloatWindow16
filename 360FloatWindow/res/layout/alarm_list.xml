@@ -1,9 +1,11 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+    android:descendantFocusability="blocksDescendants"
     android:layout_width="fill_parent" android:layout_height="wrap_content"> 
     <LinearLayout android:id="@+id/linearlayout"
         android:orientation="vertical"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp">
         <TextView android:id="@+id/array_time" 
         android:layout_width="fill_parent" 
         android:layout_height="wrap_content" 
@@ -26,16 +28,19 @@
     </LinearLayout>
     <Switch
         android:id="@+id/array_switch"
+        android:focusable="false"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/array_button"
         android:layout_alignBottom="@+id/array_button"
         android:layout_toLeftOf="@+id/array_button" />   
     <Button 
+        android:focusable="false"
+        style="@style/blue_btn"
         android:id="@+id/array_button" 
-        android:layout_width="wrap_content"   
+        android:layout_width="50dp"   
         android:layout_height="wrap_content" 
-        android:text="delete" 
+        android:text="删除" 
         android:layout_alignParentRight="true" 
     />   
     

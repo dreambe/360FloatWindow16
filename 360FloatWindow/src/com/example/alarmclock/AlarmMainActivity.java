@@ -82,13 +82,13 @@ public class AlarmMainActivity extends Activity {
 			
 		} catch (Throwable e) {
 			// TODO Auto-generated catch block
-			// e.printStackTrace();
-			Toast.makeText(AlarmMainActivity.this,
+			 e.printStackTrace();
+			/*Toast.makeText(AlarmMainActivity.this,
 					"GetAlarmDatasFromSharedPreferences()异常", Toast.LENGTH_LONG)
-					.show();
+					.show();*/
 		}
-		Toast.makeText(AlarmMainActivity.this, "onResume()", Toast.LENGTH_LONG)
-				.show();
+		/*Toast.makeText(AlarmMainActivity.this, "onResume()", Toast.LENGTH_LONG)
+				.show();*/
 		
 		//更新界面
 			adapter.notifyDataSetChanged();	
@@ -127,8 +127,8 @@ public class AlarmMainActivity extends Activity {
 				// startActivity(intent);
 			}
 		});		
-		Toast.makeText(AlarmMainActivity.this, "onCreate()", Toast.LENGTH_LONG)
-		.show();
+		/*Toast.makeText(AlarmMainActivity.this, "onCreate()", Toast.LENGTH_LONG)
+		.show();*/
 		
 		//如果原来没有闹钟数据，直接跳到闹钟设置页面
 				try {
@@ -172,10 +172,10 @@ public class AlarmMainActivity extends Activity {
 				alarmManager.set(AlarmManager.RTC_WAKEUP,
 						System.currentTimeMillis() + timemillis, pi);
 
-				Toast.makeText(
+				/*Toast.makeText(
 						AlarmMainActivity.this,
 						"onActivityResult()  alarm_nuber=" + alarm_nuber,
-						Toast.LENGTH_SHORT).show();
+						Toast.LENGTH_SHORT).show();*/
 
 				//更新数据
 				MyData data = new MyData();
@@ -191,11 +191,11 @@ public class AlarmMainActivity extends Activity {
 					PutAlarmDatasToSharedPreferences(packageName, adapter.arr);
 				} catch (Throwable e) {
 					// TODO Auto-generated catch block
-					// e.printStackTrace();
-					Toast.makeText(AlarmMainActivity.this,
+					 e.printStackTrace();
+					/*Toast.makeText(AlarmMainActivity.this,
 							"PutAlarmDatasToSharedPreferences()异常",
 
-							Toast.LENGTH_LONG).show();
+							Toast.LENGTH_LONG).show();*/
 				}
 				alarm_nuber++;
 				PutAlarmNumberToSharedPreferences(alarm_nuber);
@@ -288,11 +288,11 @@ public class AlarmMainActivity extends Activity {
 			MyData data = arr.get(position);
 			String msg = "定时";
 			if (data.hour != 0) {
-				msg = msg + data.hour + "小时";
+				msg = msg + data.hour + "时";
 			}
 			if(data.minute!=0)
 			{
-				msg = msg + data.minute + "分钟";
+				msg = msg + data.minute + "分";
 			}			
 			timeMsg.setText(msg);
 			if (data.open) {
@@ -332,14 +332,13 @@ public class AlarmMainActivity extends Activity {
 								
 							} catch (Throwable e) {
 								// TODO Auto-generated catch block
-								// e.printStackTrace();
-								Toast.makeText(AlarmMainActivity.this,
+								 e.printStackTrace();
+								/*Toast.makeText(AlarmMainActivity.this,
 										"PutAlarmDatasToSharedPreferences()异常",
-
-										Toast.LENGTH_LONG).show();
+										Toast.LENGTH_LONG).show();*/
 							}
 							
-							//加上下面这句话会发生联动效果
+							//加上下面这句话会发生联动效果，要想不联动需要改动布局文件的属性
 							adapter.notifyDataSetChanged();						
 							
 							if (isChecked) {
@@ -370,15 +369,20 @@ public class AlarmMainActivity extends Activity {
 						PutAlarmDatasToSharedPreferences(packageName, arr);
 					} catch (Throwable e) {
 						// TODO Auto-generated catch block
-						// e.printStackTrace();
-						Toast.makeText(AlarmMainActivity.this,
+						e.printStackTrace();
+						/*Toast.makeText(AlarmMainActivity.this,
 								"PutAlarmDatasToSharedPreferences()异常",
 
-								Toast.LENGTH_LONG).show();
+								Toast.LENGTH_LONG).show();*/
 					}
 					
-					System.out.println(arr);
+					System.out.println(arr);					
 					adapter.notifyDataSetChanged();
+					//如果没有了闹钟，则退出界面
+					if(arr.size()==0)
+					{
+						AlarmMainActivity.this.finish();
+					}
 
 				}
 			});
@@ -405,8 +409,8 @@ public class AlarmMainActivity extends Activity {
 		PendingIntent pi = PendingIntent.getActivity(AlarmMainActivity.this,
 				data.arrAlarmNumber, intent, 0);
 		alarmManager.cancel(pi);
-		Toast.makeText(AlarmMainActivity.this, "Alarm Stop", Toast.LENGTH_SHORT)
-				.show();
+		/*Toast.makeText(AlarmMainActivity.this, "闹钟停止！", Toast.LENGTH_SHORT)
+				.show();*/
 	}
 
 	//
@@ -429,10 +433,10 @@ public class AlarmMainActivity extends Activity {
 		alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()
 				+ timemillis, pi);
 
-		Toast.makeText(
+		/*Toast.makeText(
 				AlarmMainActivity.this,
 				"alarm_nuber=" + alarm_nuber + ",vibrator=" + data.vibrator
-						+ ",ring=" + data.ring, Toast.LENGTH_SHORT).show();
+						+ ",ring=" + data.ring, Toast.LENGTH_SHORT).show();*/
 	}
 
 	@Override
