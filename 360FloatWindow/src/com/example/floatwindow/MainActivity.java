@@ -13,11 +13,21 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		Button startFloatWindow = (Button) findViewById(R.id.start_float_window);
+		
 		startFloatWindow.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
 				Intent intent = new Intent(MainActivity.this, FloatWindowService.class);
 				startService(intent);
+				finish();
+			}
+		});
+		
+		View titleClose = findViewById(R.id.title_close_btn);
+		titleClose.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
 				finish();
 			}
 		});

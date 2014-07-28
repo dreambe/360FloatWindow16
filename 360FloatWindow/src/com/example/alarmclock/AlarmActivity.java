@@ -22,6 +22,7 @@ import android.util.Base64;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.content.Context;
@@ -42,6 +43,7 @@ public class AlarmActivity extends Activity {
 	private Button btn_game_start = null;
 	private Button btn_game_ignore = null;
 	private TextView textView_gameName=null;
+	private ImageView imageView_gameIcon=null;
 	int alarmID;
 	
 	public String appName;
@@ -75,12 +77,14 @@ public class AlarmActivity extends Activity {
 		appName=MyProgramPackage.getProgramNameByPackageName(this, packageName);
 		
 		//设置Activity显示内容		
-		textView_gameName=(TextView) findViewById(R.id.textView_gameName);
+		textView_gameName=(TextView)findViewById(R.id.textView_gameName);
 		if(appName==""||appName==null)
 		{
 			appName="我的游戏";
 		}
 		textView_gameName.setText(appName);
+		imageView_gameIcon=(ImageView)findViewById(R.id.imageView_gameIcon);
+		imageView_gameIcon.setImageDrawable(MyProgramPackage.getProgramIconByPackageName(this, packageName));
 		
 		// 设置振动
 		vibrator = (Vibrator) getSystemService(Service.VIBRATOR_SERVICE);
@@ -98,13 +102,13 @@ public class AlarmActivity extends Activity {
 		}
 
 		//结束游戏
-		btn_game_stop = (Button) findViewById(R.id.btn_game_stop);
+/*		btn_game_stop = (Button) findViewById(R.id.btn_game_stop);
 		btn_game_stop.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				MyProgramPackage.CloseProgramByPackageName(AlarmActivity.this, packageName);
 				CloseAlarm();
 			}
-		});
+		});*/
 		
 		//进入游戏
 		btn_game_start = (Button) findViewById(R.id.btn_game_start);

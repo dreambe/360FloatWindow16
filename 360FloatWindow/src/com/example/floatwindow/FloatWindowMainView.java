@@ -1,17 +1,24 @@
 
 package com.example.floatwindow;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import com.example.alarmclock.AlarmMainActivity;
 import com.example.capture.CaptureService;
 import com.example.capture.CapturedImageActivity;
+import com.example.commit.CommitActivity;
 import com.example.floatwindow.R;
 import com.example.floatwindow.MyAnimations;
 import com.example.gameguide.ViewGameGuideActivity;
+import com.example.killprocess.JiaSuActivity;
 import com.example.killprocess.KillProcess;
+import com.example.floatwindow.MyPackageName;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -110,16 +117,28 @@ public class FloatWindowMainView extends LinearLayout {
             @Override
             public void onClick(View v) {
                 if (areButtonsShowing == true) {
-//                	buttonGroup.setVisibility(8);
                     floatMainButton.startAnimation(MyAnimations.getRotateAnimation(0, -360, 300));
                     MyAnimations.startAnimationsIn(buttonGroup, 1000);
-//                    buttonGroup.setVisibility(8);
                 } 
                 else if(areButtonsShowing == false || buttonGroup.getVisibility() == 8) {
                 	buttonGroup.setVisibility(0);
                     floatMainButton.startAnimation(MyAnimations.getRotateAnimation(-360, 0, 300));
                     MyAnimations.startAnimationsOut(buttonGroup, 300);
-                }
+                    
+//                    TimerTask task = new TimerTask(){  
+//                        public void run() {  
+//                        Message message = new Message();      
+//                        message.what = 1;      
+////                        handler.sendMessage(message);    
+//                     }  
+//                  };
+//                  
+//                  Timer timer = new Timer(true);
+//                  timer.schedule(task,1000, 1000); //延时1000ms后执行，1000ms执行一次
+//                  timer.schedule(task, 3000);
+//                  buttonGroup.setVisibility(8);
+//                  timer.cancel(); //退出计时器
+//                }
                 areButtonsShowing = !areButtonsShowing;
             }
         });
@@ -133,30 +152,41 @@ public class FloatWindowMainView extends LinearLayout {
                     switch (position) {
                         case 0:
                         	buttonGroup.setVisibility(8);
-                            KillProcess mykill = new KillProcess();
-                            mykill.killAll(getContext());
+                        	areButtonsShowing = !areButtonsShowing;
+                            Intent jiasuIntent = new Intent();
+                            jiasuIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            jiasuIntent.setClass(FloatWindowMainView.this.getContext(), JiaSuActivity.class);//前面一个是一个Activity后面一个是要跳转的Activity  
+                            FloatWindowMainView.this.getContext().startActivity(jiasuIntent);//开始界面的跳转函数  
                             Log.i("0", "------0-----");
                             break;
                         case 1:
                         	//闹钟
                         	buttonGroup.setVisibility(8);
+                        	areButtonsShowing = !areButtonsShowing;
                             Intent intent = new Intent();
                             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             //需要传入游戏的package name
-                            intent.putExtra("target_pkgname", "com.UCMobile");
+                            String packageName = MyPackageName.getRunningPackageName(FloatWindowMainView.this.getContext());
+                            intent.putExtra("target_pkgname", packageName);
                             intent.setClass(FloatWindowMainView.this.getContext(), AlarmMainActivity.class);//前面一个是一个Activity后面一个是要跳转的Activity  
                             FloatWindowMainView.this.getContext().startActivity(intent);//开始界面的跳转函数  
                             Log.i("1", "------1-----");
                             break;
                         case 2: 
                         	//吐槽
-                            
+                        	buttonGroup.setVisibility(8);
+                        	areButtonsShowing = !areButtonsShowing;
+                        	Intent intent5 = new Intent();
+                            intent5.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            intent5.setClass(FloatWindowMainView.this.getContext(), CommitActivity.class);
+                            FloatWindowMainView.this.getContext().startActivity(intent5);
                             Log.i("2", "------2----");
                             break;
                         
                         case 3:
                         	//截屏分享
                         	buttonGroup.setVisibility(8);
+                        	areButtonsShowing = !areButtonsShowing;
                         	Intent intent2 = new Intent(FloatWindowMainView.this.getContext(), CaptureService.class);
                             FloatWindowMainView.this.getContext().startService(intent2);
                             Log.i("3", "------3----");
@@ -164,6 +194,7 @@ public class FloatWindowMainView extends LinearLayout {
                         case 4:
                         	//攻略
                         	buttonGroup.setVisibility(8);
+                        	areButtonsShowing = !areButtonsShowing;
                             Intent intent4 = new Intent();
                             intent4.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             intent4.setClass(FloatWindowMainView.this.getContext(), ViewGameGuideActivity.class);//前面一个是一个Activity后面一个是要跳转的Activity  
