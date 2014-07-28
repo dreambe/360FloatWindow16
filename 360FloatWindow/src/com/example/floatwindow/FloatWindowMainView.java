@@ -18,6 +18,7 @@ import com.example.floatwindow.MyPackageName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -61,8 +62,7 @@ public class FloatWindowMainView extends LinearLayout {
      * 悬浮窗的参数
      */
     private WindowManager.LayoutParams mParams;
-
-
+   
     public FloatWindowMainView(Context context) {
         super(context);
         windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
@@ -124,21 +124,7 @@ public class FloatWindowMainView extends LinearLayout {
                 	buttonGroup.setVisibility(0);
                     floatMainButton.startAnimation(MyAnimations.getRotateAnimation(-360, 0, 300));
                     MyAnimations.startAnimationsOut(buttonGroup, 300);
-                    
-//                    TimerTask task = new TimerTask(){  
-//                        public void run() {  
-//                        Message message = new Message();      
-//                        message.what = 1;      
-////                        handler.sendMessage(message);    
-//                     }  
-//                  };
-//                  
-//                  Timer timer = new Timer(true);
-//                  timer.schedule(task,1000, 1000); //延时1000ms后执行，1000ms执行一次
-//                  timer.schedule(task, 3000);
-//                  buttonGroup.setVisibility(8);
-//                  timer.cancel(); //退出计时器
-//                }
+                }
                 areButtonsShowing = !areButtonsShowing;
             }
         });
@@ -194,8 +180,9 @@ public class FloatWindowMainView extends LinearLayout {
                         case 4:
                         	//攻略
                         	buttonGroup.setVisibility(8);
-                        	areButtonsShowing = !areButtonsShowing;
-                            Intent intent4 = new Intent();
+                        	Intent intent4 = new Intent();
+                            packageName = MyPackageName.getRunningPackageName(FloatWindowMainView.this.getContext());
+                            intent4.putExtra("target_pkgname", packageName);
                             intent4.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             intent4.setClass(FloatWindowMainView.this.getContext(), ViewGameGuideActivity.class);//前面一个是一个Activity后面一个是要跳转的Activity  
                             FloatWindowMainView.this.getContext().startActivity(intent4);//开始界面的跳转函数  
@@ -207,7 +194,7 @@ public class FloatWindowMainView extends LinearLayout {
                     }
                 }
             });
-        }
+        }        
     }
 
     /**

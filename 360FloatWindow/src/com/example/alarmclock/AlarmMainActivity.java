@@ -465,9 +465,9 @@ public class AlarmMainActivity extends Activity {
 					System.out.println(arr);
 					adapter.notifyDataSetChanged();
 					// 如果没有了闹钟，则退出界面
-					if (arr.size() == 0) {
-						AlarmMainActivity.this.finish();
-					}
+//					if (arr.size() == 0) {
+//						AlarmMainActivity.this.finish();
+//					}
 
 				}
 			});

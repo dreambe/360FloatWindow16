@@ -27,7 +27,7 @@
             android:id="@+id/btn_alarm"
             style="@style/blue_btn"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="52dp"
             android:layout_weight="1"
             android:text="添加闹钟" />
     </LinearLayout>

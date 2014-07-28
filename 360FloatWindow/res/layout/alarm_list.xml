@@ -1,48 +1,60 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" 
     android:descendantFocusability="blocksDescendants"
-    android:layout_width="fill_parent" android:layout_height="wrap_content"> 
+    android:layout_width="fill_parent"
+    android:gravity="center_vertical"
+    android:layout_height="62dp"> 
+    
     <LinearLayout android:id="@+id/linearlayout"
         android:orientation="vertical"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp">
-        <TextView android:id="@+id/array_time" 
+        android:layout_height="62dp"
+        android:gravity="center_vertical"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
+        
+    <TextView android:id="@+id/array_time" 
         android:layout_width="fill_parent" 
         android:layout_height="wrap_content" 
-        android:layout_alignParentTop="true" 
-        android:layout_alignParentRight="true" 
         android:singleLine="true" 
         android:ellipsize="marquee"   
+        android:textColor="#2BADF1"        
         android:textSize="20sp"  
         android:text="定时时间" /> 
+        
     <TextView android:id="@+id/array_open" 
         android:layout_width="fill_parent" 
         android:layout_height="wrap_content" 
-        android:layout_below="@+id/array_title" 
-        android:layout_alignParentBottom="true" 
-        android:layout_alignParentRight="true"   
         android:singleLine="true" 
         android:ellipsize="marquee"   
         android:textSize="15sp"
+        android:textColor="#2BADF1"
         android:text="是否开启"  />
+    
     </LinearLayout>
+    
+    <LinearLayout android:id="@+id/linearlayout2"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="62dp"
+        android:gravity="center_vertical"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp">
     <Switch
         android:id="@+id/array_switch"
         android:focusable="false"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/array_button"
-        android:layout_alignBottom="@+id/array_button"
-        android:layout_toLeftOf="@+id/array_button" />   
+        android:layout_marginRight="20dp" />   
+        
     <Button 
         android:focusable="false"
         style="@style/blue_btn"
         android:id="@+id/array_button" 
-        android:layout_width="50dp"   
+        android:layout_width="70dp"   
         android:layout_height="wrap_content" 
         android:text="删除" 
-        android:layout_alignParentRight="true" 
-    />   
+        android:layout_marginRight="60dp" />   
+    </LinearLayout>
     
 
     
