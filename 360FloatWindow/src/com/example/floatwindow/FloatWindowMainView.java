@@ -7,6 +7,7 @@ import com.example.capture.CapturedImageActivity;
 import com.example.floatwindow.R;
 import com.example.floatwindow.MyAnimations;
 import com.example.gameguide.ViewGameGuideActivity;
+import com.example.killprocess.JiaSuActivity;
 import com.example.killprocess.KillProcess;
 import com.example.floatwindow.MyPackageName;
 
@@ -134,8 +135,10 @@ public class FloatWindowMainView extends LinearLayout {
                     switch (position) {
                         case 0:
                         	buttonGroup.setVisibility(8);
-                            KillProcess mykill = new KillProcess();
-                            mykill.killAll(getContext());
+                            Intent jiasuIntent = new Intent();
+                            jiasuIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            jiasuIntent.setClass(FloatWindowMainView.this.getContext(), JiaSuActivity.class);//前面一个是一个Activity后面一个是要跳转的Activity  
+                            FloatWindowMainView.this.getContext().startActivity(jiasuIntent);//开始界面的跳转函数  
                             Log.i("0", "------0-----");
                             break;
                         case 1:

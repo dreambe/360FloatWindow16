@@ -68,6 +68,10 @@
 
         <service android:name="com.example.capture.CaptureService" >
         </service>
+        
+        <activity android:theme="@style/Theme.FloatActivity" android:name="com.example.killprocess.JiaSuActivity" />
+        
+        
         <!-- 周子江 -->
         
         <activity
