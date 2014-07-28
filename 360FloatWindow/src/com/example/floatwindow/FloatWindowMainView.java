@@ -8,6 +8,7 @@ import com.example.floatwindow.R;
 import com.example.floatwindow.MyAnimations;
 import com.example.gameguide.ViewGameGuideActivity;
 import com.example.killprocess.KillProcess;
+import com.example.floatwindow.MyPackageName;
 
 import android.content.Context;
 import android.content.Intent;
@@ -143,7 +144,8 @@ public class FloatWindowMainView extends LinearLayout {
                             Intent intent = new Intent();
                             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             //需要传入游戏的package name
-                            intent.putExtra("target_pkgname", "com.UCMobile");
+                            String packageName = MyPackageName.getRunningPackageName(FloatWindowMainView.this.getContext());
+                            intent.putExtra("target_pkgname", packageName);
                             intent.setClass(FloatWindowMainView.this.getContext(), AlarmMainActivity.class);//前面一个是一个Activity后面一个是要跳转的Activity  
                             FloatWindowMainView.this.getContext().startActivity(intent);//开始界面的跳转函数  
                             Log.i("1", "------1-----");

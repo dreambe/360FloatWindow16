@@ -125,13 +125,4 @@ public class FloatWindowService extends Service {
         return true;
     }
     
-    /**
-     *返回当前应用的包名
-     */
-    public String getRunningPackageName() {
-        ActivityManager am = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
-        ComponentName cn = am.getRunningTasks(2).get(0).topActivity;
-        
-        return cn.getPackageName();
-    }
 }
