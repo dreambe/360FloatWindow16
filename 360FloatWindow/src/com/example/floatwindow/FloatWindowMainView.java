@@ -1,6 +1,9 @@
 
 package com.example.floatwindow;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import com.example.alarmclock.AlarmMainActivity;
 import com.example.capture.CaptureService;
 import com.example.capture.CapturedImageActivity;
@@ -15,6 +18,7 @@ import com.example.floatwindow.MyPackageName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -120,7 +124,21 @@ public class FloatWindowMainView extends LinearLayout {
                 	buttonGroup.setVisibility(0);
                     floatMainButton.startAnimation(MyAnimations.getRotateAnimation(-360, 0, 300));
                     MyAnimations.startAnimationsOut(buttonGroup, 300);
-                }
+                    
+//                    TimerTask task = new TimerTask(){  
+//                        public void run() {  
+//                        Message message = new Message();      
+//                        message.what = 1;      
+////                        handler.sendMessage(message);    
+//                     }  
+//                  };
+//                  
+//                  Timer timer = new Timer(true);
+//                  timer.schedule(task,1000, 1000); //延时1000ms后执行，1000ms执行一次
+//                  timer.schedule(task, 3000);
+//                  buttonGroup.setVisibility(8);
+//                  timer.cancel(); //退出计时器
+//                }
                 areButtonsShowing = !areButtonsShowing;
             }
         });
@@ -156,6 +174,8 @@ public class FloatWindowMainView extends LinearLayout {
                             break;
                         case 2: 
                         	//吐槽
+                        	buttonGroup.setVisibility(8);
+                        	areButtonsShowing = !areButtonsShowing;
                         	Intent intent5 = new Intent();
                             intent5.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             intent5.setClass(FloatWindowMainView.this.getContext(), CommitActivity.class);

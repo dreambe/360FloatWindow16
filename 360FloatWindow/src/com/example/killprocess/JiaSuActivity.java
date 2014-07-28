@@ -17,8 +17,9 @@ import android.widget.TextView;
 public class JiaSuActivity extends Activity {
 
 	ImageView image;
-	TextView jiasuTV;
+	TextView jiasuTV, processTV, memoryTV;
 	Handler handler;
+	ReKillInfo info;
 	private static final int MSG_JIASU_END = 1;  // 加速结束
 	private static final int MSG_DESTROY = 2;    // 加速完成图画显示1秒钟结束
 
@@ -31,6 +32,9 @@ public class JiaSuActivity extends Activity {
         setContentView(R.layout.jiasu_activity); 
         image=(ImageView)findViewById(R.id.imageView);
         jiasuTV=(TextView)findViewById(R.id.jiasuTV);
+        processTV=(TextView)findViewById(R.id.processTV);
+        memoryTV=(TextView)findViewById(R.id.memoryTV);
+
        
         handler = new Handler(){
         	 @Override
@@ -41,6 +45,12 @@ public class JiaSuActivity extends Activity {
         			 image.clearAnimation();
             		 image.setImageDrawable(getResources().getDrawable(R.drawable.accelerate_end));
             		 jiasuTV.setVisibility(View.INVISIBLE);
+            		 processTV.setText("结束进程"+ info.m_killpronum +"个");
+            		 processTV.setVisibility(View.VISIBLE);
+            		 memoryTV.setText("释放内存"+ info.m_freememsize +"M");
+            		 memoryTV.setVisibility(View.VISIBLE);
+            		 
+            		 
             		 handler.postDelayed(new FinishThread(), 1500);
         			 break;
         		 case MSG_DESTROY:
@@ -71,7 +81,7 @@ public class JiaSuActivity extends Activity {
     class KillThread extends Thread{
     	public void run(){
             KillProcess mykill = new KillProcess();
-            mykill.killAll(JiaSuActivity.this);
+            info = mykill.killAll(JiaSuActivity.this);
             handler.sendEmptyMessage(MSG_JIASU_END);
         }	
     }
