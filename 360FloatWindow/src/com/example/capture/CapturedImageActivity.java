@@ -27,7 +27,7 @@ public class CapturedImageActivity extends Activity{
         shareImage.setImageBitmap(mBitmap);
         
         ImageView bottomImgae = (ImageView)findViewById(R.id.imageBottom);
-        bottomImgae.getBackground().setAlpha(60);
+        bottomImgae.getBackground().setAlpha(150);
         
         ImageButton btnOk = (ImageButton)findViewById(R.id.imageOK);
         btnOk.setOnClickListener(new View.OnClickListener() {

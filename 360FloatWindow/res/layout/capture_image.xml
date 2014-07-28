@@ -2,14 +2,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#9A32CD"
-    tools:context=".MainActivity" >
+    android:background="#ff0000" >
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#CDCD00" />
+        android:scaleType="fitXY"
+        android:paddingLeft="0dp"
+        android:paddingRight="0dp"
+        android:paddingTop="0dp"
+        android:paddingBottom="0dp"
+        android:background="#CD0000" />
 
     <ImageView
         android:id="@+id/imageBottom"
@@ -25,13 +29,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignTop="@+id/imageCancel"
+        android:layout_alignParentLeft="true"
         android:layout_marginLeft="20dp"
         android:layout_marginBottom="12dp"
         android:paddingLeft="0dp"
         android:paddingTop="0dp"
         android:paddingRight="0dp"
         android:paddingBottom="0dp"
+        android:background="@android:color/transparent"
         android:src="@drawable/capture_ok" />
        
 
@@ -47,6 +52,7 @@
         android:paddingTop="0dp"
         android:paddingRight="0dp"
         android:paddingBottom="0dp"
+        android:background="@android:color/transparent"      
         android:src="@drawable/capture_cancel" />
 
 </RelativeLayout>
