@@ -16,7 +16,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/float_main_button"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="5dp"
         android:layout_gravity="center" >
 
         <ImageView
@@ -31,7 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/float_accelerate_button"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="5dp"
             android:background="@drawable/float_alarm" 
             android:visibility="gone"/>
 
@@ -40,7 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/float_alarm_button"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="5dp"
             android:background="@drawable/float_commit" 
             android:visibility="gone"/>
 
@@ -49,7 +49,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/float_commit_button"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="5dp"
             android:background="@drawable/float_capture" 
             android:visibility="gone"/>
         
@@ -58,19 +58,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/float_capture_button"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="5dp"
             android:background="@drawable/float_strategy" 
             android:visibility="gone"/>
-        
+        <!-- 
         <ImageView
             android:id="@+id/float_cutinternet_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/float_strategy_button"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="5dp"
             android:background="@drawable/float_cutinternet" 
             android:visibility="gone"/>
-        
+         -->
     </RelativeLayout>
 
 </RelativeLayout>

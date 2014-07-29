@@ -192,14 +192,14 @@ public class FloatWindowMainView extends LinearLayout {
                             FloatWindowMainView.this.getContext().startActivity(intent4);//开始界面的跳转函数  
                             Log.i("4", "------4-----");
                             break;
-                        case 5:
-                        	buttonGroup.setVisibility(8);
-                        	areButtonsShowing = !areButtonsShowing;
-                        	cut = new CutInternet();
-                        	cut.toggleMobileData(FloatWindowMainView.this.getContext(), false);
-//                        	cut.toggleWiFi(FloatWindowMainView.this.getContext(), false);
-                            Log.i("5", "------5-----");
-                            break;
+//                        case 5:
+//                        	buttonGroup.setVisibility(8);
+//                        	areButtonsShowing = !areButtonsShowing;
+//                        	cut = new CutInternet();
+//                        	cut.toggleMobileData(FloatWindowMainView.this.getContext(), false);
+////                        	cut.toggleWiFi(FloatWindowMainView.this.getContext(), false);
+//                            Log.i("5", "------5-----");
+//                            break;
                     }
                 }
             });

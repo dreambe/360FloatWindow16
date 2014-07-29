@@ -65,20 +65,10 @@ public class AlarmActivity extends Activity {
 		
 		//从intent中获得传递过来的数据
 		Bundle extras = getIntent().getExtras(); 
-//		set_ring = extras.getBoolean("set_ring");
-//		set_vibrator = extras.getBoolean("set_vibrator");
-//		alarmID=extras.getInt("alarmID");
-//		appName="";
-//		packageName=getIntent().getStringExtra(EXTRA_STRING_TARGET_PKG_NAME);
-//		if(packageName==null||packageName=="")
-//		{
-//			packageName="我的游戏";
-//		}
-//		appName=MyProgramPackage.getProgramNameByPackageName(this, packageName);
-		set_ring = false;
-		set_vibrator = false;
-		alarmID=6;
-		appName="com.example.floatwindow";
+		set_ring = extras.getBoolean("set_ring");
+		set_vibrator = extras.getBoolean("set_vibrator");
+		alarmID=extras.getInt("alarmID");
+		appName="";
 		packageName=getIntent().getStringExtra(EXTRA_STRING_TARGET_PKG_NAME);
 		if(packageName==null||packageName=="")
 		{
