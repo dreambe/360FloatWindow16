@@ -26,7 +26,7 @@
             android:id="@+id/imageView_gameIcon"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginLeft="12dp"      
+            android:layout_marginLeft="8dp"      
             android:scaleType="fitXY" />
 
         <TextView
