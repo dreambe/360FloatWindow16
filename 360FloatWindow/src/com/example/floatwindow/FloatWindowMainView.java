@@ -142,6 +142,7 @@ public class FloatWindowMainView extends LinearLayout {
                         case 0:
                         	buttonGroup.setVisibility(8);
                         	areButtonsShowing = !areButtonsShowing;
+                        	
                             Intent jiasuIntent = new Intent();
                             jiasuIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             jiasuIntent.setClass(FloatWindowMainView.this.getContext(), JiaSuActivity.class);//前面一个是一个Activity后面一个是要跳转的Activity  
@@ -152,6 +153,7 @@ public class FloatWindowMainView extends LinearLayout {
                         	//闹钟
                         	buttonGroup.setVisibility(8);
                         	areButtonsShowing = !areButtonsShowing;
+                        	
                             Intent intent = new Intent();
                             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             //需要传入游戏的package name
@@ -165,6 +167,7 @@ public class FloatWindowMainView extends LinearLayout {
                         	//吐槽
                         	buttonGroup.setVisibility(8);
                         	areButtonsShowing = !areButtonsShowing;
+                        	
                         	Intent intent5 = new Intent();
                             intent5.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             intent5.setClass(FloatWindowMainView.this.getContext(), CommitActivity.class);
@@ -176,14 +179,17 @@ public class FloatWindowMainView extends LinearLayout {
                         	//截屏分享
                         	buttonGroup.setVisibility(8);
                         	areButtonsShowing = !areButtonsShowing;
+                        	
                         	Intent intent2 = new Intent(FloatWindowMainView.this.getContext(), CaptureService.class);
                             FloatWindowMainView.this.getContext().startService(intent2);
                             Log.i("3", "------3----");
                             break;
+                            
                         case 4:
                         	//攻略
                         	buttonGroup.setVisibility(8);
                         	areButtonsShowing = !areButtonsShowing;
+                        	
                         	Intent intent4 = new Intent();
                             packageName = MyPackageName.getRunningPackageName(FloatWindowMainView.this.getContext());
                             intent4.putExtra("target_pkgname", packageName);
@@ -192,12 +198,18 @@ public class FloatWindowMainView extends LinearLayout {
                             FloatWindowMainView.this.getContext().startActivity(intent4);//开始界面的跳转函数  
                             Log.i("4", "------4-----");
                             break;
+                            
                         case 5:
                         	buttonGroup.setVisibility(8);
                         	areButtonsShowing = !areButtonsShowing;
+                        	
+                        	Intent intent55 = new Intent();
+                            intent55.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            intent55.setClass(FloatWindowMainView.this.getContext(), CutInternetActivity.class);
+                            FloatWindowMainView.this.getContext().startActivity(intent55);
                         	cut = new CutInternet();
                         	cut.toggleMobileData(FloatWindowMainView.this.getContext(), false);
-//                        	cut.toggleWiFi(FloatWindowMainView.this.getContext(), false);
+                        	cut.toggleWiFi(FloatWindowMainView.this.getContext(), false);
                             Log.i("5", "------5-----");
                             break;
                     }
