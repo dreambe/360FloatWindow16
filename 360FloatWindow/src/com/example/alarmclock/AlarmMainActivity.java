@@ -166,7 +166,6 @@ public class AlarmMainActivity extends Activity {
 				intent.putExtras(bundle);	
 				
 				startActivityForResult(intent, ADD_ALARM);
-				// startActivity(intent);
 			}
 		});
 

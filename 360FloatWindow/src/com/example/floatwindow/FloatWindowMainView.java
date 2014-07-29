@@ -212,6 +212,7 @@ public class FloatWindowMainView extends LinearLayout {
                         	cut.toggleWiFi(FloatWindowMainView.this.getContext(), false);
                             Log.i("5", "------5-----");
                             break;
+
                     }
                 }
             });

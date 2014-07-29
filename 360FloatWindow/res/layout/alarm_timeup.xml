@@ -1,46 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:paddingLeft="7dp"
+    android:paddingRight="7dp"
+    android:paddingBottom="7dp"
+    android:paddingTop="7dp"
     android:orientation="vertical" >
 
+    <TextView
+            android:id="@+id/alarmTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="主人，您设置的闹钟到啦"
+            android:textColor="#000000"
+            android:textSize="14sp" />
     <LinearLayout
         android:id="@+id/layout_gameInfo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true" >
+        android:layout_width="match_parent"
+        android:layout_marginTop="7dp"
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/imageView_gameIcon"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_centerHorizontal="true"
-            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="12dp"      
             android:scaleType="fitXY" />
 
         <TextView
             android:id="@+id/textView_gameName"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginLeft="10dp"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
             android:text="游戏名称"
+            android:textColor="#000000"
             android:textSize="20sp" />
     </LinearLayout>
 
     <LinearLayout
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="7dp"
         android:id="@+id/layout_button"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/layout_gameInfo"
-        android:layout_centerHorizontal="true" >
-
+        android:layout_height="40dp">
         <Button
             android:id="@+id/btn_game_start"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"                   
             style="@style/blue_btn"
             android:text="进入游戏" />
 
@@ -49,8 +59,9 @@
             android:id="@+id/btn_game_ignore"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"   
             android:text="忽略提醒" />
     </LinearLayout>
 
-</RelativeLayout>
+</LinearLayout>
