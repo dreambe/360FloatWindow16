@@ -99,9 +99,11 @@ public class MyService extends Service
 	        auto1=(AutoScroll)view1.findViewById(R.id.TextViewNotice1);
 	        auto2=(AutoScroll)view2.findViewById(R.id.TextViewNotice2);
 	        
-	        auto.setText("测试1测试1");
-	        auto1.setText("测试2测试2");
-	        auto2.setText("测试3测试3");
+	        auto.setText("");
+	        auto1.setText("");
+	        auto2.setText("");
+//	        auto.setFocusable(false);
+//	        auto.setFocusableInTouchMode(false);
 	        auto.setTextColor(Color.rgb(0, 255, 255));  
 	        
 	        auto.setBackgroundColor(Color.argb(0, 0, 255, 0)); //透明背景
