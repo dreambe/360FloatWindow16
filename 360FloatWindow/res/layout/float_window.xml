@@ -62,7 +62,7 @@
             android:background="@drawable/float_strategy" 
             android:visibility="gone"/>
 
-        <!-- 
+
         <ImageView
             android:id="@+id/float_cutinternet_button"
             android:layout_width="wrap_content"
@@ -73,7 +73,6 @@
             android:visibility="gone"/>
 
        
-         -->
 
     </RelativeLayout>
 
