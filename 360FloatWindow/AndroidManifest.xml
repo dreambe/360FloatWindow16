@@ -92,7 +92,7 @@
 
         <!-- 赵晓彪 -->
         <activity android:name="com.example.commit.CommitActivity"/>
-         <activity android:name="com.example.floatwindow.CutInternetActivity"/>
+         <activity android:name="com.example.floatwindow.CutInternetActivity" android:theme="@style/Theme.AlarmActivity" />
         <service android:enabled="true" android:name="com.example.commit.MyService" />
     </application>
 

@@ -10,26 +10,49 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
 public class CutInternetActivity extends Activity 
 {
+	private Handler handler = new Handler(){
+	    @Override
+        public void handleMessage(Message msg) {
+
+	    }
+	};
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		//toggleWiFi(getApplicationContext(),false);
-        toggleMobileData(getApplicationContext(),true);
+		
+        setContentView(R.layout.duanwang);
+        
+       	toggleMobileData(this, false);
+    	toggleWiFi(this, false);
+    	handler.postDelayed(new Runnable(){
+
+			@Override
+			public void run() {
+				// TODO 自动生成的方法存根
+				finish();
+			}
+    		
+    	}, 2000);
+
 	}
-	/*
+	
+	
+	
 	public void toggleWiFi(Context context, boolean enabled) 
 	{  
         WifiManager wm = (WifiManager) context  
                 .getSystemService(Context.WIFI_SERVICE);  
         wm.setWifiEnabled(enabled);  
     }  
-	*/
+	
 	public void toggleMobileData(Context context, boolean enabled)
 	{    
         ConnectivityManager conMgr = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);    

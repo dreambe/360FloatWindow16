@@ -46,23 +46,23 @@ public class FloatWindowMainView extends LinearLayout {
     SharedPreferences sp_skin;
 
     /**
-     * 记录悬浮窗的宽度
+     * 璁板綍鎮诞绐楃殑瀹藉害
      */
     public static int viewWidth;
 
     /**
-     * 记录悬浮窗的高度
+     * 璁板綍鎮诞绐楃殑楂樺害
      */
     public static int viewHeight;
 
 
     /**
-     * 用于更新悬浮窗的位置
+     * 鐢ㄤ簬鏇存柊鎮诞绐楃殑浣嶇疆
      */
     private WindowManager windowManager;
 
     /**
-     * 悬浮窗的参数
+     * 鎮诞绐楃殑鍙傛暟
      */
     private WindowManager.LayoutParams mParams;
    
@@ -80,7 +80,7 @@ public class FloatWindowMainView extends LinearLayout {
 
 
     /**
-     * 显示其他按钮
+     * 鏄剧ず鍏朵粬鎸夐挳
      */
     public void initPath() {
         MyAnimations.initOffset(FloatWindowMainView.this);
@@ -107,7 +107,7 @@ public class FloatWindowMainView extends LinearLayout {
                         int dy = (int) event.getRawY() - lastY;
                         mParams.x = paramX + dx;
                         mParams.y = paramY + dy;
-                        // 更新悬浮窗位置
+                        // 鏇存柊鎮诞绐椾綅缃�
                         updateViewPosition();
                         break;
                 }
@@ -132,7 +132,7 @@ public class FloatWindowMainView extends LinearLayout {
             }
         });
 
-        //响应各个图标的点击事件
+        //鍝嶅簲鍚勪釜鍥炬爣鐨勭偣鍑讳簨浠�
         for (int i = 0; i < buttonGroup.getChildCount(); i++) {
             final int position = i;
             buttonGroup.getChildAt(i).setOnClickListener(new View.OnClickListener() {
@@ -145,26 +145,26 @@ public class FloatWindowMainView extends LinearLayout {
                         	
                             Intent jiasuIntent = new Intent();
                             jiasuIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                            jiasuIntent.setClass(FloatWindowMainView.this.getContext(), JiaSuActivity.class);//前面一个是一个Activity后面一个是要跳转的Activity  
-                            FloatWindowMainView.this.getContext().startActivity(jiasuIntent);//开始界面的跳转函数  
+                            jiasuIntent.setClass(FloatWindowMainView.this.getContext(), JiaSuActivity.class);//鍓嶉潰涓�涓槸涓�涓狝ctivity鍚庨潰涓�涓槸瑕佽烦杞殑Activity  
+                            FloatWindowMainView.this.getContext().startActivity(jiasuIntent);//寮�濮嬬晫闈㈢殑璺宠浆鍑芥暟  
                             Log.i("0", "------0-----");
                             break;
                         case 1:
-                        	//闹钟
+                        	//闂归挓
                         	buttonGroup.setVisibility(8);
                         	areButtonsShowing = !areButtonsShowing;
                         	
                             Intent intent = new Intent();
                             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                            //需要传入游戏的package name
+                            //闇�瑕佷紶鍏ユ父鎴忕殑package name
                             String packageName = MyPackageName.getRunningPackageName(FloatWindowMainView.this.getContext());
                             intent.putExtra("target_pkgname", packageName);
-                            intent.setClass(FloatWindowMainView.this.getContext(), AlarmMainActivity.class);//前面一个是一个Activity后面一个是要跳转的Activity  
-                            FloatWindowMainView.this.getContext().startActivity(intent);//开始界面的跳转函数  
+                            intent.setClass(FloatWindowMainView.this.getContext(), AlarmMainActivity.class);//鍓嶉潰涓�涓槸涓�涓狝ctivity鍚庨潰涓�涓槸瑕佽烦杞殑Activity  
+                            FloatWindowMainView.this.getContext().startActivity(intent);//寮�濮嬬晫闈㈢殑璺宠浆鍑芥暟  
                             Log.i("1", "------1-----");
                             break;
                         case 2: 
-                        	//吐槽
+                        	//鍚愭Ы
                         	buttonGroup.setVisibility(8);
                         	areButtonsShowing = !areButtonsShowing;
                         	
@@ -176,7 +176,7 @@ public class FloatWindowMainView extends LinearLayout {
                             break;
                         
                         case 3:
-                        	//截屏分享
+                        	//鎴睆鍒嗕韩
                         	buttonGroup.setVisibility(8);
                         	areButtonsShowing = !areButtonsShowing;
                         	
@@ -186,7 +186,7 @@ public class FloatWindowMainView extends LinearLayout {
                             break;
                             
                         case 4:
-                        	//攻略
+                        	//鏀荤暐
                         	buttonGroup.setVisibility(8);
                         	areButtonsShowing = !areButtonsShowing;
                         	
@@ -194,8 +194,8 @@ public class FloatWindowMainView extends LinearLayout {
                             packageName = MyPackageName.getRunningPackageName(FloatWindowMainView.this.getContext());
                             intent4.putExtra("target_pkgname", packageName);
                             intent4.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                            intent4.setClass(FloatWindowMainView.this.getContext(), ViewGameGuideActivity.class);//前面一个是一个Activity后面一个是要跳转的Activity  
-                            FloatWindowMainView.this.getContext().startActivity(intent4);//开始界面的跳转函数  
+                            intent4.setClass(FloatWindowMainView.this.getContext(), ViewGameGuideActivity.class);//鍓嶉潰涓�涓槸涓�涓狝ctivity鍚庨潰涓�涓槸瑕佽烦杞殑Activity  
+                            FloatWindowMainView.this.getContext().startActivity(intent4);//寮�濮嬬晫闈㈢殑璺宠浆鍑芥暟  
                             Log.i("4", "------4-----");
                             break;
                             
@@ -207,9 +207,9 @@ public class FloatWindowMainView extends LinearLayout {
                             intent55.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             intent55.setClass(FloatWindowMainView.this.getContext(), CutInternetActivity.class);
                             FloatWindowMainView.this.getContext().startActivity(intent55);
-                        	cut = new CutInternet();
-                        	cut.toggleMobileData(FloatWindowMainView.this.getContext(), false);
-                        	cut.toggleWiFi(FloatWindowMainView.this.getContext(), false);
+                        	//cut = new CutInternet();
+                        	//cut.toggleMobileData(FloatWindowMainView.this.getContext(), false);
+                        	//cut.toggleWiFi(FloatWindowMainView.this.getContext(), false);
                             Log.i("5", "------5-----");
                             break;
 
@@ -220,16 +220,16 @@ public class FloatWindowMainView extends LinearLayout {
     }
 
     /**
-     * 将悬浮窗的参数传入，用于更新悬浮窗的位置。
+     * 灏嗘偓娴獥鐨勫弬鏁颁紶鍏ワ紝鐢ㄤ簬鏇存柊鎮诞绐楃殑浣嶇疆銆�
      * 
-     * @param params 悬浮窗的参数
+     * @param params 鎮诞绐楃殑鍙傛暟
      */
     public void setParams(WindowManager.LayoutParams params) {
         mParams = params;
     }
 
     /**
-     * 更新悬浮窗在屏幕中的位置。
+     * 鏇存柊鎮诞绐楀湪灞忓箷涓殑浣嶇疆銆�
      */
     private void updateViewPosition() {
         windowManager.updateViewLayout(this, mParams);
