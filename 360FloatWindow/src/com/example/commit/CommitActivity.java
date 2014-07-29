@@ -56,27 +56,29 @@ import com.jzby.AutoScroll;
 
 public class CommitActivity extends Activity 
 {
-    private Socket socket =null;
+    private static Socket socket =null;
     private Thread mThread = null;
     private byte [] recive_buffer = new byte[1024];
     private OutputStream outputStream=null;
     private InputStream inputStream=null;
     private String str_recive;
-    private EditText ip_server =null;
-    private EditText port_server =null;
+//    private EditText ip_server =null;
+//    private EditText port_server =null;
     private EditText socket_send =null;
-    private EditText socket_recive =null;
-    private MarqueeText paomadengtTextView = null;
-    private MarqueeText paomadengtTextView1 = null;
-    private boolean is_connect = false;
-
-    private Button btn_connect = null;
-    private Button btn_close=null;
+//    private EditText socket_recive =null;
+//    private MarqueeText paomadengtTextView = null;
+//    private MarqueeText paomadengtTextView1 = null;
+    private static boolean is_connect = false;
+//
+//    private Button btn_connect = null;
+//    private Button btn_close=null;
     private Button btn_send=null;
+    private Button btn_close=null;
     int temp_connect;
     private MyReadThread myReadThread = null;
     private Handler mHandler;
     public MyService m_mMyService = null;
+    public Intent intent = null;
     boolean mBound = false; 
 
     @Override
@@ -84,93 +86,105 @@ public class CommitActivity extends Activity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_commit);
-        ip_server =(EditText)findViewById(R.id.editText);
-        port_server =(EditText)findViewById(R.id.editText2);
+//        ip_server =(EditText)findViewById(R.id.editText);
+//        port_server =(EditText)findViewById(R.id.editText2);
         socket_send =(EditText)findViewById(R.id.editText3);
-        socket_recive =(EditText)findViewById(R.id.editText4);
-        paomadengtTextView1 = (MarqueeText)findViewById(R.id.textView6);
-        paomadengtTextView = (MarqueeText)findViewById(R.id.textView5);
+//        socket_recive =(EditText)findViewById(R.id.editText4);
+//        paomadengtTextView1 = (MarqueeText)findViewById(R.id.textView6);
+//        paomadengtTextView = (MarqueeText)findViewById(R.id.textView5);
         mHandler = new Handler();
-        btn_connect = (Button)findViewById(R.id.button);
-        btn_close=(Button)findViewById(R.id.buttonSTOP);
+//        btn_connect = (Button)findViewById(R.id.button);
+//        btn_close=(Button)findViewById(R.id.buttonSTOP);
         btn_send=(Button)findViewById(R.id.button3);
-        btn_connect.setEnabled(true);
-        btn_close.setEnabled(false);
-        btn_send.setEnabled(false);
-        paomadengtTextView.setBackgroundColor(Color.argb(0, 0, 255, 0));
-        paomadengtTextView1.setBackgroundColor(Color.argb(0, 0, 255, 0));
+        btn_close = (Button)findViewById(R.id.button1);
+//        btn_connect.setEnabled(true);
+//        btn_close.setEnabled(false);
+        if (is_connect) 
+        {
+        	btn_send.setEnabled(true);
+		}
+        else {
+        	btn_send.setEnabled(false);
+		}
+        
+//        paomadengtTextView.setBackgroundColor(Color.argb(0, 0, 255, 0));
+//        paomadengtTextView1.setBackgroundColor(Color.argb(0, 0, 255, 0));
         //socket_recive.setBackgroundColor(Color.argb(0, 0, 255, 0)); //锟斤拷锟斤拷透锟斤拷锟�
 //        
 //        Intent intent = new Intent(MainActivity.this, MyService.class);
 //    	//startService(intent);
 //        bindService(intent, mConnection, Context.BIND_AUTO_CREATE); 
         //杩欓噷璧蜂竴涓嚎绋嬪仛寮瑰箷锛�
-        Thread newThread = new Thread(new Runnable() {
+        Thread newThread = new Thread(new Runnable() 
+        {
             @Override
                     public void run() {
                     //锟斤拷锟斤拷写锟斤拷锟斤拷锟竭筹拷锟斤拷要锟斤拷墓锟斤拷锟�
-            	 Intent intent = new Intent(CommitActivity.this, MyService.class);
-            	//startService(intent);
+            	//Intent intent = new Intent(CommitActivity.this, MyService.class);
+            	intent = new Intent(CommitActivity.this, MyService.class);
+            	startService(intent);
                 bindService(intent, mConnection, Context.BIND_AUTO_CREATE); 
                 
                     }
                 });
-            newThread.start();
+        newThread.start();
+        onConnet();
             //debug鍒拌繖閲屽彂鐜板凡缁忓惎鍔紝浣嗘槸寮瑰箷娌℃湁鍑烘潵銆�
-        port_server.setText("1000");
-        ip_server.append("192.168.16.2");
-        btn_connect.setOnClickListener(new View.OnClickListener() 
-        {
-            public void onClick(View v) 
-            {
-                String Ip_address=ip_server.getText().toString();
-                String Ip_port=port_server.getText().toString();
-                Ip_address.trim();
-                Ip_port.trim();
-                if(Ip_address.length()==0||Ip_port.length()==0)
-                    System.out.println("ip_server edit is empty or port_server is empty!");
-                else
-                {
-                	MyConnectThread thread = new MyConnectThread();
-                	thread.start();
-                	try {
-						Thread.sleep(200);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-                	if (is_connect)
-                	{
-						btn_close.setEnabled(true);
-               	 		btn_connect.setEnabled(false);
-               	 		btn_send.setEnabled(true);
-               	 		myReadThread = new MyReadThread();
-               	 		myReadThread.start();
-					}             
-                }
-            }
-        });
-        btn_close.setOnClickListener(new View.OnClickListener()
-        {
-            public void onClick(View v) 
-            {              
-                try
-                {
-	                is_connect = false;
-	                socket.shutdownInput();
-	                socket.shutdownOutput();
-	                socket.close();
-	                btn_close.setEnabled(false);
-	                btn_connect.setEnabled(true);
-	                btn_send.setEnabled(false);
-	                socket_recive.setText("");
-	                socket_send.setText("");
-                } catch (Exception e)
-                {
-                    e.printStackTrace();
-                }
-            }
-        });
+//        port_server.setText("1000");
+//        ip_server.append("192.168.16.2");
+           
+//        btn_connect.setOnClickListener(new View.OnClickListener() 
+//        {
+//            public void onClick(View v) 
+//            {
+//                String Ip_address=ip_server.getText().toString();
+//                String Ip_port=port_server.getText().toString();
+//                Ip_address.trim();
+//                Ip_port.trim();
+//                if(Ip_address.length()==0||Ip_port.length()==0)
+//                    System.out.println("ip_server edit is empty or port_server is empty!");
+//                else
+//                {
+//                	MyConnectThread thread = new MyConnectThread();
+//                	thread.start();
+//                	try {
+//						Thread.sleep(200);
+//					} catch (InterruptedException e) {
+//						// TODO Auto-generated catch block
+//						e.printStackTrace();
+//					}
+//                	if (is_connect)
+//                	{
+//						btn_close.setEnabled(true);
+//               	 		btn_connect.setEnabled(false);
+//               	 		btn_send.setEnabled(true);
+//               	 		myReadThread = new MyReadThread();
+//               	 		myReadThread.start();
+//					}             
+//                }
+//            }
+//        });
+//        btn_close.setOnClickListener(new View.OnClickListener()
+//        {
+//            public void onClick(View v) 
+//            {              
+//                try
+//                {
+//	                is_connect = false;
+//	                socket.shutdownInput();
+//	                socket.shutdownOutput();
+//	                socket.close();
+//	                btn_close.setEnabled(false);
+//	                btn_connect.setEnabled(true);
+//	                btn_send.setEnabled(false);
+//	                socket_recive.setText("");
+//	                socket_send.setText("");
+//                } catch (Exception e)
+//                {
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
         btn_send.setOnClickListener(new View.OnClickListener()
         {
 	        public void onClick(View v)
@@ -179,7 +193,20 @@ public class CommitActivity extends Activity
 	        	sendstr +='\n';
 	           	MySendThread thread = new MySendThread(sendstr);
 	        	thread.start();
-	            socket_send.setText("");
+	            //socket_send.setText("");
+	            finish();
+	        }
+        });
+        btn_close.setOnClickListener(new View.OnClickListener()
+        {
+	        public void onClick(View v)
+	        {
+//	        	onClose();
+//	        	stopService(intent);
+//	        	unbindService(mConnection);
+//	        	m_mMyService.onDestroy();
+	        	m_mMyService.removeallview();
+	            finish();
 	        }
         });
     }
@@ -202,17 +229,59 @@ public class CommitActivity extends Activity
         }
     };
     
+    public void onClose()
+    {
+    	 try
+         {
+             is_connect = false;
+             socket.shutdownInput();
+             socket.shutdownOutput();
+             socket.close();
+//             btn_close.setEnabled(false);
+//             btn_connect.setEnabled(true);
+             btn_send.setEnabled(false);
+//             socket_recive.setText("");
+             socket_send.setText("");
+         } catch (Exception e)
+         {
+             e.printStackTrace();
+         }
+    }
+    
+    public void onConnet()
+    {
+    	if (!is_connect)
+    	{
+			MyConnectThread thread = new MyConnectThread();
+        	thread.start();
+        	try {
+				Thread.sleep(200);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        	if (is_connect)
+        	{
+				btn_send.setEnabled(true);
+       	 		myReadThread = new MyReadThread();
+       	 		myReadThread.start();
+			}   
+		}
+    	             
+        
+    }
+    
     void settext(String str_rec)
     {
-		socket_recive.setText(str_rec);
-		String str_bef = "                                                         ";
-		String str_end = "";
-		str_rec = str_bef+str_rec+str_end;
-		paomadengtTextView.setText(str_rec);
-		paomadengtTextView1.setText(str_rec);
-		//m_mMyService.resetText(str_rec);
-		paomadengtTextView.setFocusable(true);
-		paomadengtTextView.setEllipsize(TruncateAt.MARQUEE);
+//		socket_recive.setText(str_rec);
+//		String str_bef = "                                                         ";
+//		String str_end = "";
+//		str_rec = str_bef+str_rec+str_end;
+//		paomadengtTextView.setText(str_rec);
+//		paomadengtTextView1.setText(str_rec);
+		m_mMyService.resetText(str_rec);
+//		paomadengtTextView.setFocusable(true);
+//		paomadengtTextView.setEllipsize(TruncateAt.MARQUEE);
     }
     //end of onCreate;
     //锟竭筹拷:锟斤拷锟斤拷锟斤拷锟斤拷锟�锟斤拷锟斤拷息
@@ -315,9 +384,9 @@ public class CommitActivity extends Activity
     class MyConnectThread extends Thread
     {
    
-	   	private String Ip_address=ip_server.getText().toString();
-	   	private String Ip_port=port_server.getText().toString();
-    	
+	   	private String Ip_address = "192.168.16.2";//ip_server.getText().toString();
+	   	private String Ip_port = "1000";//port_server.getText().toString();
+	   	private int port = 1000;
     	public MyConnectThread()
     	{
     		
@@ -327,9 +396,10 @@ public class CommitActivity extends Activity
     		//实锟斤拷Socket  
             try 
             {
-           	 int port= Integer.parseInt(Ip_port);
+           	 //int port= Integer.parseInt(Ip_port);
            	 socket = new Socket(Ip_address, port);
            	 is_connect = true;
+           	btn_send.setEnabled(true);
              } catch (Exception e) 
     		{
     			System.out.println("connect Exception!");

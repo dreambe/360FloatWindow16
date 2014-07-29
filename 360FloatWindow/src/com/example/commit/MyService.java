@@ -75,7 +75,7 @@ public class MyService extends Service
 	                LayoutParams.WRAP_CONTENT, LayoutParams.TYPE_SYSTEM_ERROR,
 	                LayoutParams.FLAG_NOT_FOCUSABLE, PixelFormat.TRANSPARENT);
 	        layoutParams.gravity = Gravity.RIGHT | Gravity.TOP;
-	        layoutParams.y=150;
+	        layoutParams.y=200;
 	        layoutParams.x=0;
 	        
 	        windowManager1 = (WindowManager) this.getSystemService(WINDOW_SERVICE);
@@ -83,7 +83,7 @@ public class MyService extends Service
 	                LayoutParams.WRAP_CONTENT, LayoutParams.TYPE_SYSTEM_ERROR,
 	                LayoutParams.FLAG_NOT_FOCUSABLE, PixelFormat.TRANSPARENT); 
 	        layoutParams1.gravity = Gravity.RIGHT | Gravity.TOP;
-	        layoutParams1.y=250;
+	        layoutParams1.y=275;
 	        layoutParams1.x=0;
 	        
 	        windowManager2 = (WindowManager) this.getSystemService(WINDOW_SERVICE);
@@ -102,6 +102,7 @@ public class MyService extends Service
 	        auto.setText("测试1测试1");
 	        auto1.setText("测试2测试2");
 	        auto2.setText("测试3测试3");
+	        auto.setTextColor(Color.rgb(0, 255, 255));  
 	        
 	        auto.setBackgroundColor(Color.argb(0, 0, 255, 0)); //透明背景
 	        auto1.setBackgroundColor(Color.argb(0, 0, 255, 0)); //透明背景
@@ -169,41 +170,41 @@ public class MyService extends Service
 			{
 			case 0:
 				Log.e(TAG, "resetText  0");
-				windowManager.removeView(view);
+//				windowManager.removeView(view);
 				auto=(AutoScroll)view.findViewById(R.id.TextViewNotice);
 			    auto.setText(str);
 			    auto.setBackgroundColor(Color.argb(0, 0, 255, 0));
-			    windowManager.addView(view, layoutParams);
+//			    windowManager.addView(view, layoutParams);
 			    AutoScroll autoScrollTextView = (AutoScroll)view.findViewById(R.id.TextViewNotice);
 	            autoScrollTextView.init(windowManager);
 	            autoScrollTextView.startScroll();
-	            //windowManager.updateViewLayout(view, layoutParams);
+	            windowManager.updateViewLayout(view, layoutParams);
 	            Log.e(TAG, "resetText  end 0");
 				break;
 			case 1:
 				Log.e(TAG, "resetText  1");
-				windowManager1.removeView(view1);
+//				windowManager1.removeView(view1);
 				auto1=(AutoScroll)view1.findViewById(R.id.TextViewNotice1);
 			    auto1.setText(str);
 			    auto1.setBackgroundColor(Color.argb(0, 0, 255, 0));
-			    windowManager1.addView(view1, layoutParams1); 
+//			    windowManager1.addView(view1, layoutParams1); 
 			    AutoScroll autoScrollTextView1 = (AutoScroll)view1.findViewById(R.id.TextViewNotice1);
 	            autoScrollTextView1.init(windowManager1);
 	            autoScrollTextView1.startScroll();
-	            //windowManager1.updateViewLayout(view1, layoutParams1);
+	            windowManager1.updateViewLayout(view1, layoutParams1);
 	            Log.e(TAG, "resetText  end 1");
 	            break;
 			case 2:
 				Log.e(TAG, "resetText  2");
-				windowManager2.removeView(view2);
+//				windowManager2.removeView(view2);
 				auto2=(AutoScroll)view2.findViewById(R.id.TextViewNotice2);
 			    auto2.setText(str);
 			    auto2.setBackgroundColor(Color.argb(0, 0, 255, 0));
-			    windowManager2.addView(view2, layoutParams2); 
+//			    windowManager2.addView(view2, layoutParams2); 
 			    AutoScroll autoScrollTextView2 = (AutoScroll)view2.findViewById(R.id.TextViewNotice2);
 	            autoScrollTextView2.init(windowManager2);
 	            autoScrollTextView2.startScroll();
-	            //windowManager2.updateViewLayout(view2, layoutParams2);
+	            windowManager2.updateViewLayout(view2, layoutParams2);
 	            Log.e(TAG, "resetText  end 2");
 				break;
 			default:
@@ -244,17 +245,17 @@ public class MyService extends Service
 	        }
 	    }
 	    /**
-	     * 撤销全部添加的view
+	     * 撤销全部添加的view在推出游戏界面的时候调用这个函数;
 	     * **/
 	    public void removeallview() 
 	    {
 	    	windowManager.removeView(view);
             windowManager1.removeView(view1);
-            windowManager.removeView(view2);
+            windowManager2.removeView(view2);
             viewAdded = false;
 		}
 	    /**
-	     * 添加全部的view
+	     * 添加全部的view,在回到游戏界面时添加弹窗调用这个函数；
 	     * **/
 	    public void addallview() 
 	    {

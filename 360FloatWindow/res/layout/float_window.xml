@@ -62,6 +62,15 @@
             android:background="@drawable/float_strategy" 
             android:visibility="gone"/>
         
+        <ImageView
+            android:id="@+id/float_cutinternet_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/float_strategy_button"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/float_cutinternet" 
+            android:visibility="gone"/>
+        
     </RelativeLayout>
 
 </RelativeLayout>
