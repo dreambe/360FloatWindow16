@@ -12,6 +12,11 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>      
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
+    
+    
 
     <uses-sdk
         android:minSdkVersion="14"
@@ -53,7 +58,7 @@
         <activity
             android:label="时间到了"
             android:name="com.example.alarmclock.AlarmActivity"
-            android:theme="@style/Theme.CustomDialog"
+            android:theme="@android:style/Theme.Dialog"
              />
         <!--
         android:process=":remote": 新开一个进程 
@@ -85,9 +90,8 @@
             android:theme="@android:style/Theme.NoTitleBar" />
 
         <!-- 赵晓彪 -->
-        <activity
-            android:name="com.example.commit.CommitActivity"
-            />
+        <activity android:name="com.example.commit.CommitActivity"/>
+         <activity android:name="com.example.floatwindow.CutInternetActivity"/>
         <service android:enabled="true" android:name="com.example.commit.MyService" />
     </application>
 
